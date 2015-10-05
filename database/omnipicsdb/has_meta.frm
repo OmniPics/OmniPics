@@ -1,0 +1,1 @@
+/var/lib/mysql/omnipicsdb/has_meta.frm
