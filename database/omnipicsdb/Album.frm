@@ -1,1 +1,0 @@
-/var/lib/mysql/omnipicsdb/Album.frm
