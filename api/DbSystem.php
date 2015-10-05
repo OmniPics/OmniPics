@@ -3,14 +3,12 @@
 /*
     AUTHOR: thomas darvik
     Website: http://www.darvik.net
-    version: 1.0
 */
 
     /*
     TODO: add XML-functionality
 
     */
-
 class DBsystem {
 
     private $conn;
@@ -43,25 +41,33 @@ class DBsystem {
         $this->dbname = $dbname;
     }
     /*
-        TODO
+        TODO:
+        Debug functions
     */
     public function debug(){
 
     }
     /*
-        TODO
+        TODO:
+        Delete images (1 or more?) and update the database (important)
+        --> set the isDeleted flat to true (at first)
     */
     public function deleteImages() {
 
     }
     /*
-        TODO
+        TODO:
+        implement the connection between the database and the
+        API. This will take care of all the updates from the API (and client)
     */
     public function updateDb($command) {
 
-        
     }
 
+    /*
+        TODO:
+        Implement some error-detection as well as exception-handling (basic)
+    */
     public function connect() {
         $this->conn = mysqli_connect($this->link, $this->username, $this->password, $this->dbname);
     }
@@ -72,7 +78,6 @@ class DBsystem {
         // results
         if($result) {
             $array = Array();
-
             while($row = mysqli_fetch_row($result)) {
                 array_push($array, $row);
             }
@@ -85,6 +90,9 @@ class DBsystem {
         }
     }
 
+    /*
+        Handle the data given by the querys
+    */
     public function handleData($type, $data) {
         if($type == "JSON") {
             // this will return the data as JSON
