@@ -5,4 +5,4 @@
 ignoredfile.info
 # file ignoredfile.info will be ignored by git and not pushed to the remote
 # tokams
-
+setup.php
