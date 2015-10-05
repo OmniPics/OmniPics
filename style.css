@@ -1,0 +1,38 @@
+/*
+    style
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic);
+
+* {margin: 0; padding:0;}
+html {
+    background-color:#e5e5e5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+    margin:0 auto;
+    width:30%;
+    margin-top:20px;
+}
+.white {
+    margin:0 auto;
+    text-align: center;
+    padding:30px;
+    margin-bottom:20px;
+    background-color: #fff;
+    border-radius:5px;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+
+    color:#222;
+}
+
+.white h2 {
+    margin-bottom:20px;
+}
+
+
+.white img {
+    width:400px;
+
+}
