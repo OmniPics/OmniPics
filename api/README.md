@@ -4,17 +4,11 @@ Will become a heading
 Will become a sub heading
 --------------
 
-*This will be Italic*
 
-**This will be Bold**
-
-- This will be a list item
-- This will be a list item
-
-    Add a indent and this will end up as code
-
-    <div>
-    	<h1>
-    		Hello world
-    	</h1>
-    </div>
+Ex. how to get the images with:
+- id equal to 10,2 and 1
+- Sorted by ID
+- Meta data is also sent
+```
+	./api/getImages.php?selected=1,2,10&sorted=id&meta=true
+```
