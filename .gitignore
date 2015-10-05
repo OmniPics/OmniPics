@@ -1,0 +1,8 @@
+# this is gitignore
+# put files and/or folders for git to be ignored like password config files
+# example:
+
+ignoredfile.info
+# file ignoredfile.info will be ignored by git and not pushed to the remote
+# tokams
+setup.php
