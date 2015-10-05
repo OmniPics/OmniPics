@@ -13,9 +13,9 @@
 
 	$system = new DbSystem("localhost",$local_username, $local_password, "images");
 	
-	$system->connect();
-	$data = $system->query("SELECT * FROM table_images WHERE id BETWEEN $rawStartIndex AND $lastIndex");
-	$data = $system->handleData("JSON",$data);
+	//$system->connect();
+	//$data = $system->query("SELECT * FROM table_images WHERE id BETWEEN $rawStartIndex AND $lastIndex");
+	//$data = $system->handleData("JSON",$data);
 	$system->handleRequest($_GET);
 
 	//print_r($data);
