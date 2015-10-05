@@ -1,11 +1,11 @@
-Will become a heading
-==============
+#REST(ful) API
 
-Will become a sub heading
---------------
+> Code is a mess now.. will be fixed.
 
+## How to get images using the API.
 
-Ex. how to get the images with:
+How you can get images using the parameters "selected", "sorted" and "meta": 
+The parameters have the values:
 - Id equal to 10,2 and 1
 - Sorted by ID
 - Meta data is also sent
