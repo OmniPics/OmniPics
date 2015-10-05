@@ -47,6 +47,14 @@ class DBsystem {
     public function debug(){
 
     }
+
+    public function handleRequest($request) {
+        foreach($request as $key =>$value) {
+            print_r($key . ":" . $value);
+        }
+    }
+
+
     /*
         TODO:
         Delete images (1 or more?) and update the database (important)
