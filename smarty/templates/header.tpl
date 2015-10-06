@@ -12,5 +12,5 @@
 <header>
 
 </header>
-<h>SHIT</h>
+<h>THIS IS WITTEN IN /smarty/templates/<b>header.tpl</b></h>
 <main>

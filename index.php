@@ -1,15 +1,16 @@
 <?php
 
-echo "SHITHSITHSI";
+require("setup.php");
 
-//require("setup.php");
+// display errors
+error_reporting(E_ALL ^ E_DEPRECATED);
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
 
+define("PROJECT_DIR", $local_project_dir);
+define("SMARTY_DIR", PROJECT_DIR . "smarty-3.1.27/libs/");
 
-define("PROJECT_DIR", "home/tomasz/Dropbox/workspace/web/github.com/omnipics/omnipics/");
-define("SMARTY_DIR", "home/tomasz/Dropbox/workspace/web/github.com/omnipics/omnipics/smarty-3.1.27/libs/");
-
-require("home/tomasz/Dropbox/workspace/web/github.com/omnipics/omnipics/smarty-3.1.27/libs/Smarty.class.php");
-echo "TUTEJ";
+require(SMARTY_DIR . "Smarty.class.php");
 $smarty = new Smarty();
 
 $smarty->setTemplateDir(PROJECT_DIR . "smarty/templates/");
@@ -19,9 +20,7 @@ $smarty->setConfigDir(PROJECT_DIR . "smarty/config/");
 
 $smarty->testInstall();
 
-$smarty->display("index.tpl");
 
-/*
 session_start();
 
 $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
@@ -31,7 +30,7 @@ switch ($page) {
   case "picture":
     // TODO: implement bildevisning
 
-    $smarty->display("picture.tpl")
+    $smarty->display("picture.tpl");
 
   case "edit":
     // TODO: implement edit
@@ -39,6 +38,6 @@ switch ($page) {
   default:
     // TODO: implement hovedside
 
-    $smarty->display("index.tpl")
+    $smarty->display("index.tpl");
     break;
-}
+};
