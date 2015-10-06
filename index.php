@@ -19,55 +19,62 @@
         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
       </span>
     </div>
+
+    
       
-        <div class="container">  
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">Dato</a></li>
+                <li role="presentation"><a href="#">Navn</a></li>
+                <li role="presentation"><a href="#">Sted</a></li>
+            </ul>  
             <div class="row">
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>                
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>                
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>                
                 <div class="col-md-4 portfolio-item">
-                    <img class="img-responsive" src="images/ye2.jpg">
+                    <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
                 </div>
