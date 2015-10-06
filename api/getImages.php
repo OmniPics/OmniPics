@@ -9,26 +9,14 @@
 
 	$system = new DbSystem("localhost",$local_username, $local_password, "omnipicsdb");
 	$status = $system->connect();
-	print_r($status);
-	$system->
 
-	// connected or not ?
 	if($status) {
-		$sql_string = $system->handleRequest($_GET);
-		//$data = $system->query($sql_string);
-		$data = $system->query("SELECT * FROM Pictures");
-		$data = $system->handleData($data);
+
+		$method = $_SERVER['REQUEST_METHOD'];
+		$sql_string = $system->handleRequest($_REQUEST, $method);
+		print_r($sql_string);
+		//$data = $system->query("SELECT * FROM Pictures WHERE P_id BETWEEN '1' AND '20'");
+		//$formattedData = $system->formatData("JSON",$data);
+		//print_r($formattedData);
 	}
-
-
-	
-	//$system->connect();
-	//$data = $system->query("SELECT * FROM table_images WHERE id BETWEEN $rawStartIndex AND $lastIndex");
-	//$data = $system->handleData("JSON",$data);
-
-	//$system->handleRequest($_GET);
-
-
-	//print_r($data);
-
 ?>

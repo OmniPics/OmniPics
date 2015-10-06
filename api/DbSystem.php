@@ -56,7 +56,10 @@ class DBsystem {
 
     }
 
-    public function handleRequest($request) {
+    public function handleRequest($request, $method) {
+
+        $type = $request['REQUEST_METHOD'];
+        
         $param = Array();
 
         foreach($request as $key =>$value) {
@@ -64,6 +67,60 @@ class DBsystem {
             array_push($param, $current);
         }
         $sql_string = $this->findParams($param);
+        return $sql_string;
+    }
+
+
+    public function findParams($array) {
+        $sql_string = "";
+        $isFirst = true;        
+    
+        $imageIndex = "";
+        $imageOffset = "";
+        $selected = "";
+        $sorted = "";
+            
+        foreach($array as $row){
+
+            $arr = Array();
+
+
+            if($row->key == "imageIndex") {
+                $imageIndex = $row->value; 
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+                array_push($arr, $imageIndex);
+            //    print_r("ImageIndex <br>");
+            }
+
+            if($row->key == "range") {
+                $imageIndex = $row->value; 
+                $sql_string .= " BETWEEN ";
+            //    print_r("ImageIndex <br>");
+            }
+
+            if($row->key == "imageOffset") {
+                $imageOffset = $row->value;
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            //    print_r("imageOffset <br>");
+            }
+            if($row->key == "selected") {
+                $selected = $row->value;
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            //    print_r("Selected <br>");
+            }
+            if($row->key == "sorted") {
+                $sorted = $row->value; 
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            //    print_r("Sorted <br>");
+            }
+
+            /*if($isFirst == true) {
+                $sql_string .= $row->key . "=" . $row->value;
+                $isFirst = false;
+            }elseif ($isFirst == false) {
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            }*/
+        }
         return $sql_string;
     }
 
@@ -75,19 +132,8 @@ class DBsystem {
         }
     }
 
-    public function findParams($array) {
-        $sql_string = "";
-        $isFirst = true;        
-        foreach($array as $row){
-            if($isFirst == true) {
-                $sql_string .= $row->key . "=" . $row->value;
-                $isFirst = false;
-            }elseif ($isFirst == false) {
-                $sql_string .= " AND " . $row->key . "=" . $row->value;
-            }
-        }
-        return $sql_string;
-    }
+
+
 
     /*
         TODO:
@@ -95,6 +141,7 @@ class DBsystem {
     */
     public function connect() {
         $this->conn = mysqli_connect($this->link, $this->username, $this->password, $this->dbname);
+
         if($this->conn) {
             return "Connection check";
         } else {
@@ -112,7 +159,6 @@ class DBsystem {
                 array_push($array, $row);
             }
             return $array;
-
         } else {
             // error handling
             print_r("no results");
@@ -122,10 +168,11 @@ class DBsystem {
     /*
         Handle the data given by the querys
     */
-    public function handleData($type, $data) {
+    public function formatData($type, $data) {
         if($type == "JSON") {
             // this will return the data as JSON
-            return json_encode($data);
+            $data = json_encode($data);
+            return $data;
         } else if($type == "XML") {
             // this will return the data as XML
         }
