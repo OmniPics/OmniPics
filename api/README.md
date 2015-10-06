@@ -30,11 +30,11 @@ $.ajax({
 ## Tags som du kan bruke for å hente bilder:
 | Command        | Beskrivelse
 | ------------- |:-------------:|
-| imageIndex      | Hente bilder fra server etter *id* |
-| imageOffset      | Kombinert med *imageIndex* blir dette et bilderange der man kan hente mange bilder samtidig.     |
-| imageSorting | Sorter bilder etter *id*, *dato* eller *størrelse*. Akkurat nå funker bare *id*      |
-| format | Formatet dataen skal returneres i. Akkurat nå funker bare *json* |
-| selected | Velg flere bilder, f.eks. *selected=1,3,4,10* der *","* brukes for å dele opp etter *id*      |
+| `imageIndex`      | Hente bilder fra server etter `id` |
+| `imageOffset`      | Kombinert med `imageIndex` blir dette et bilderange der man kan hente mange bilder samtidig.     |
+| `imageSorting` | Sorter bilder etter `id`, `date` eller `size`. Akkurat nå funker bare `id`      |
+| `format` | Valgt returformat. Akkurat nå funker bare `json` |
+| `selected` | Velg flere bilder, f.eks. `selected=1,2,3,10,20` der `,` brukes for å dele opp etter `id`      |
 
 ## TODO
 
