@@ -9,6 +9,14 @@
     TODO: add XML-functionality
 
     */
+class Request {
+    public $value;
+    public $key;
+    public function __construct($value, $key){
+        $this->value = $value;
+        $this->key = $key;
+    }
+}
 class DBsystem {
 
     private $conn;
@@ -49,27 +57,36 @@ class DBsystem {
     }
 
     public function handleRequest($request) {
+        $param = Array();
+
         foreach($request as $key =>$value) {
-            print_r($key . ":" . $value);
+            $current = new Request($value, $key);
+            array_push($param, $current);
+        }
+        $sql_string = $this->findParams($param);
+        return $sql_string;
+    }
+
+    public function checkConnection() {
+        if($this->conn) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-
-    /*
-        TODO:
-        Delete images (1 or more?) and update the database (important)
-        --> set the isDeleted flat to true (at first)
-    */
-    public function deleteImages() {
-
-    }
-    /*
-        TODO:
-        implement the connection between the database and the
-        API. This will take care of all the updates from the API (and client)
-    */
-    public function updateDb($command) {
-
+    public function findParams($array) {
+        $sql_string = "";
+        $isFirst = true;        
+        foreach($array as $row){
+            if($isFirst == true) {
+                $sql_string .= $row->key . "=" . $row->value;
+                $isFirst = false;
+            }elseif ($isFirst == false) {
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            }
+        }
+        return $sql_string;
     }
 
     /*
@@ -78,6 +95,11 @@ class DBsystem {
     */
     public function connect() {
         $this->conn = mysqli_connect($this->link, $this->username, $this->password, $this->dbname);
+        if($this->conn) {
+            return "Connection check";
+        } else {
+            return "Connection not working";
+        }
     }
 
     public function query($string) {
@@ -89,7 +111,6 @@ class DBsystem {
             while($row = mysqli_fetch_row($result)) {
                 array_push($array, $row);
             }
-
             return $array;
 
         } else {
