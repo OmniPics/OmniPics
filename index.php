@@ -1,18 +1,44 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Proof</title>
-        <link href="style.css" type="text/css" rel="stylesheet">
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="getImages.js"></script>
-    </head>
-    <body>
+<?php
 
-        <div class="wrapper" id="wrapper">
-            <!-- images comes here -->
-        </div>
+echo "SHITHSITHSI";
+
+//require("setup.php");
 
 
-    </body>
-</html>
+define("PROJECT_DIR", "home/tomasz/Dropbox/workspace/web/github.com/omnipics/omnipics/");
+define("SMARTY_DIR", "home/tomasz/Dropbox/workspace/web/github.com/omnipics/omnipics/smarty-3.1.27/libs/");
+
+require("home/tomasz/Dropbox/workspace/web/github.com/omnipics/omnipics/smarty-3.1.27/libs/Smarty.class.php");
+echo "TUTEJ";
+$smarty = new Smarty();
+
+$smarty->setTemplateDir(PROJECT_DIR . "smarty/templates/");
+$smarty->setCompileDir(PROJECT_DIR . "smarty/templates_c/");
+$smarty->setCacheDir(PROJECT_DIR . "smarty/cache/");
+$smarty->setConfigDir(PROJECT_DIR . "smarty/config/");
+
+$smarty->testInstall();
+
+$smarty->display("index.tpl");
+
+/*
+session_start();
+
+$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
+
+$page ="";
+switch ($page) {
+  case "picture":
+    // TODO: implement bildevisning
+
+    $smarty->display("picture.tpl")
+
+  case "edit":
+    // TODO: implement edit
+
+  default:
+    // TODO: implement hovedside
+
+    $smarty->display("index.tpl")
+    break;
+}
