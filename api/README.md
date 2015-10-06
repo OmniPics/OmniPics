@@ -25,3 +25,15 @@ $.ajax({
 		// data-variablene
 });
 ```
+
+
+## Tags som du kan bruke for å hente bilder:
+- imageIndex *(hente bilde etter ID)*
+- imageOffset *(kombinert med imageIndex blir dette et bilderange)*
+- imageSorting *(sorter bilder etter id, dato eller størrelse -> Akkurat nå funker bare id)*
+- format (formatet dataen skal returneres i. Akkurat funker bare 'json')
+- selected *(velg flere bilder f.eks. selected=1,3,4,10 der "," brukes for å dele)*
+
+## TODO
+
+
