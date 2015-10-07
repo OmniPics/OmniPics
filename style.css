@@ -10,6 +10,33 @@ html {
     font-family: 'Open Sans', sans-serif;
 }
 
+body {
+
+    background-color:#e5e5e5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#wrapper  {
+   
+    text-align: center;
+    margin: auto;
+    width: 60%;
+    border:3px solid #8AC007;
+    padding: 10px;
+}
+
+#search {
+    margin:0 auto;
+    width:40%;
+    margin-top:20px;
+}
+
+.container {
+
+    margin-top: 50px;
+    width: 900px;
+}
+
 .wrapper {
     margin:0 auto;
     width:30%;
@@ -35,4 +62,10 @@ html {
 .white img {
     width:400px;
 
+}
+
+.img {
+
+    height: 100px;
+    width: 100px
 }
