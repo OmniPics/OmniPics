@@ -21,14 +21,14 @@
       </span>
     </div>
 
-    
-      
+
+
         <div class="container">
             <ul class="nav nav-tabs">
                 <li role="presentation" id="dato" onclick="sortBy('dato')"><a role="button">Dato</a></li>
                 <li role="presentation" id="navn" onclick="sortBy('navn')"><a role="button">Navn</a></li>
                 <li role="presentation" id="sted" onclick="sortBy('sted')"><a role="button">Sted</a></li>
-            </ul>  
+            </ul>
             <div class="row">
                 <div class="col-md-4 portfolio-item">
                     <img class="img-responsive" src="http://globe-views.com/dcim/dreams/monkey/monkey-05.jpg">
@@ -39,7 +39,7 @@
                     <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
-                </div>                
+                </div>
                 <div class="col-md-4 portfolio-item">
                     <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
@@ -56,7 +56,7 @@
                     <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
-                </div>                
+                </div>
                 <div class="col-md-4 portfolio-item">
                     <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
@@ -73,7 +73,7 @@
                     <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
                     <p>Picture description</p>
-                </div>                
+                </div>
                 <div class="col-md-4 portfolio-item">
                     <img class="img-responsive" src="http://placehold.it/700x400">
                     <h3>Picture name</h3>
@@ -101,6 +101,3 @@
                 </tr>
         </table>
     </div>-->
-
-
-  

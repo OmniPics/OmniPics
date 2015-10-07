@@ -9,6 +9,14 @@
     TODO: add XML-functionality
 
     */
+class Request {
+    public $value;
+    public $key;
+    public function __construct($value, $key){
+        $this->value = $value;
+        $this->key = $key;
+    }
+}
 class DBsystem {
 
     private $conn;
@@ -48,29 +56,84 @@ class DBsystem {
 
     }
 
-    public function handleRequest($request) {
+    public function handleRequest($request, $method) {
+
+        $type = $request['REQUEST_METHOD'];
+        
+        $param = Array();
+
         foreach($request as $key =>$value) {
-            print_r($key . ":" . $value);
+            $current = new Request($value, $key);
+            array_push($param, $current);
+        }
+        $sql_string = $this->findParams($param);
+        return $sql_string;
+    }
+
+
+    public function findParams($array) {
+        $sql_string = "";
+        $isFirst = true;        
+    
+        $imageIndex = "";
+        $imageOffset = "";
+        $selected = "";
+        $sorted = "";
+            
+        foreach($array as $row){
+
+            $arr = Array();
+
+
+            if($row->key == "imageIndex") {
+                $imageIndex = $row->value; 
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+                array_push($arr, $imageIndex);
+            //    print_r("ImageIndex <br>");
+            }
+
+            if($row->key == "range") {
+                $imageIndex = $row->value; 
+                $sql_string .= " BETWEEN ";
+            //    print_r("ImageIndex <br>");
+            }
+
+            if($row->key == "imageOffset") {
+                $imageOffset = $row->value;
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            //    print_r("imageOffset <br>");
+            }
+            if($row->key == "selected") {
+                $selected = $row->value;
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            //    print_r("Selected <br>");
+            }
+            if($row->key == "sorted") {
+                $sorted = $row->value; 
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            //    print_r("Sorted <br>");
+            }
+
+            /*if($isFirst == true) {
+                $sql_string .= $row->key . "=" . $row->value;
+                $isFirst = false;
+            }elseif ($isFirst == false) {
+                $sql_string .= " AND " . $row->key . "=" . $row->value;
+            }*/
+        }
+        return $sql_string;
+    }
+
+    public function checkConnection() {
+        if($this->conn) {
+            return true;
+        } else {
+            return false;
         }
     }
 
 
-    /*
-        TODO:
-        Delete images (1 or more?) and update the database (important)
-        --> set the isDeleted flat to true (at first)
-    */
-    public function deleteImages() {
 
-    }
-    /*
-        TODO:
-        implement the connection between the database and the
-        API. This will take care of all the updates from the API (and client)
-    */
-    public function updateDb($command) {
-
-    }
 
     /*
         TODO:
@@ -78,6 +141,12 @@ class DBsystem {
     */
     public function connect() {
         $this->conn = mysqli_connect($this->link, $this->username, $this->password, $this->dbname);
+
+        if($this->conn) {
+            return "Connection check";
+        } else {
+            return "Connection not working";
+        }
     }
 
     public function query($string) {
@@ -89,9 +158,7 @@ class DBsystem {
             while($row = mysqli_fetch_row($result)) {
                 array_push($array, $row);
             }
-
             return $array;
-
         } else {
             // error handling
             print_r("no results");
@@ -101,10 +168,11 @@ class DBsystem {
     /*
         Handle the data given by the querys
     */
-    public function handleData($type, $data) {
+    public function formatData($type, $data) {
         if($type == "JSON") {
             // this will return the data as JSON
-            return json_encode($data);
+            $data = json_encode($data);
+            return $data;
         } else if($type == "XML") {
             // this will return the data as XML
         }
