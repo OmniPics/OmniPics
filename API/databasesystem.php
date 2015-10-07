@@ -32,6 +32,8 @@ class DatabaseSystem{
 		}
 	}
 
+
+
 	public function handleRequest($method, $request) {
 		if(!$method) {
 			array_push($this->errorArray, "No method in the request");
@@ -42,6 +44,8 @@ class DatabaseSystem{
 		switch ($method) {
 				case "GET":
 				$fixed = $this->fixLinks($request);
+				print_r($fixed);
+				//$this->queryHandler($fixed[0], $fixed[1]);
 				break;
 			case "POST":
 				break;
@@ -50,6 +54,24 @@ class DatabaseSystem{
 		}
 	}
 
+	public function queryHandler($query, $format) {
+		if(!empty($query)) {
+			$result = mysql_query($this->conn, $sql);
+			print_r($result);
+
+			while($row = mysqli_fetch_assoc($result)) {
+				print_r("Hello");
+			}
+
+
+		} else {
+			return null;
+		}
+	}
+	/*
+		TODO: When the format is present -> return the querystring AND the format (ex. json or xml)
+
+	*/
 	public function fixLinks($request) {
 
 		$index = "";
@@ -60,7 +82,7 @@ class DatabaseSystem{
 		$string = "";
 
 		foreach($request as $key => $value) {
-			print_r($key . ":" . $value . "<br>");
+			//print_r($key . ":" . $value . "<br>");
 			if($key == "imageIndex") {
 				$index = $value;
 			}
@@ -69,18 +91,18 @@ class DatabaseSystem{
 				$lastIndex = intval($imageIndex) + intval($offset);
 				$string .= "BETWEEN " . $imageIndex . " AND " . $lastIndex;
 			}
-			if($key == "sorted") {
-				$sorted = $value;
-				$string .= " AND " . $key . "=" . $value;
-			}
 			if($key == "format") {
 				$format = $value;
+				$string .= " AND " . $key . "=" . $value;
+			}
+			if($key == "sorted") {
+				$sorted = $value;
+				$string .= " SORTED BY " . $key . "=" . $value;
 			}
 
-
 		}
+		return array($string,"JSON");
 
-		print_r($index . ":" . $offset . ":" . $sorted . ":" . $format);
 	}
 
 

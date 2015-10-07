@@ -12,6 +12,7 @@
 	}
 
 	$data = $system->handleRequest($method, $req);
+
 /*
 	if($system->isOK() == 1) {
 		print_r("SYSTEM IS OK!<br>");
