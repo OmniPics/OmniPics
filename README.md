@@ -1,11 +1,10 @@
 # OmniPics
 # README
 
-------------------
-setup.php ->
 
-$local_username = "";
-$local_password = "";
+# setup.php ->
+# 
+# $local_username = "";
+# $local_password = "";
 
-$local_project_dir = "";
--------------------
+# $local_project_dir = "";
