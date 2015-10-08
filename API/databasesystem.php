@@ -8,6 +8,9 @@ require("request.php");
 
 class DatabaseSystem{
 
+
+	public $picture_array;
+
 	public $link;
 	public $username;
 	public $password;
@@ -25,6 +28,7 @@ class DatabaseSystem{
 
 	public function connect() {
 		$this->conn = mysqli_connect($this->link, $this->username, $this->password, $this->database);
+		echo "connect call";
 		if($this->conn) {
 			print_r("Connection");
 		} else {
@@ -121,11 +125,57 @@ class DatabaseSystem{
 		}
 	}
 
+	function loadProduct($picture_id) {
+		$picture = array(
+			'picture_id' => 0,
+			'filename' => "",
+			'extention' => "",
+		);
 
+		if ($picture_id > 0) {
+			$sql = "select * from Pictures where picture_id='$picture_id'";
+
+			$result = mysqli_query($sql);
+
+			if ($row = mysqli_fetch_assoc($result)) {
+				$picture = array(
+					"picture_id" => $row["picture_id"],
+					"filename" => $row["filename"],
+					"extention" => $row["extention"],
+				);
+			}
+			return $picture;
+		}
+
+	}
+
+
+	function listPictures(){
+
+		$sql = "SELECT *
+				FROM Pictures;";
+
+		$result = mysqli_query($sql);
+
+		if (!$result) {echo "error no result"; exit;};
+		if (mysqli_num_rows($result)) {echo "table is prob empty, checkit out"; exit;};
+
+		while($row = mysqli_fetch_assoc($result)) {
+			$this->picture_array[$row["picture_id"]] =  array(
+				"picture_id" => $row["picture_id"],
+			);
+		}
+		mysqli_free_result($result);
+
+		$new_array = array();
+		foreach ($this->picture_array as $element) {
+			$new_array[] = $this->loadProduct($element["picture_id"]);
+			$element;
+		}
+		return $new_array;
+	}
 
 }
-
-
 
 
 ?>
