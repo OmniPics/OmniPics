@@ -38,7 +38,7 @@
                             print_r("<br>");
                             array_push($result, $imageArray);
                         } else {
-                            print_r("value not in range <br>");
+                            // the current value is not in the range
                         }
                     } else {
                         // the key is not ID, but filename or filetype
