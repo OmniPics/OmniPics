@@ -1,5 +1,7 @@
 <?php
 
+$idConverter = "P_id";
+
 class Request {
 	public $method;
 	public $links;
@@ -9,5 +11,4 @@ class Request {
 		$this->links = $links;
 	}
 }
-
 ?>
