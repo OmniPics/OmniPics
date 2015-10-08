@@ -19,7 +19,7 @@
 <script>
 	// venter til alle div-er og scripts har blitt hentet ut før dette starter
 	$(document).ready(function() {
-		function hentBilder(20);		// <- jeg ber om de 20 første bildene
+		hentBilder(20);		// <- jeg ber om de 20 første bildene
 	});
 	/*
 		dette er funksjonen jeg skal bruke for å sende et jquery-ajax request til serveren med
@@ -29,8 +29,10 @@
 		// index til bilder som skal hentes ut;
 		var firstIndex = 1;
 		var lastIndex = firstIndex + antallBilder;
-		$ajax({
-			url: "./theAPI/test.php?imageIndex=" + firstIndex +"&imageOffset=" + lastIndex
+		$.ajax({
+			method: "GET",
+			url: "./API/test.php",
+			data: {"query","SELECT * FROM Pictures;"}
 		}).done(function(data) {
 			console.log(data);
 		});

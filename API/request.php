@@ -11,5 +11,4 @@ class Request {
 		$this->links = $links;
 	}
 }
-
 ?>
