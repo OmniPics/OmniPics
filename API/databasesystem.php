@@ -33,7 +33,6 @@ class DatabaseSystem{
 	}
 
 
-
 	public function handleRequest($method, $request) {
 		if(!$method) {
 			array_push($this->errorArray, "No method in the request");
@@ -81,6 +80,7 @@ class DatabaseSystem{
 
 		$string = "";
 
+
 		foreach($request as $key => $value) {
 			//print_r($key . ":" . $value . "<br>");
 			if($key == "imageIndex") {
@@ -102,9 +102,7 @@ class DatabaseSystem{
 
 		}
 		return array($string,"JSON");
-
 	}
-
 
 	public function combineStrings($word1, $word2, $linkingWord) {
 		return $word1 + " " + $linkingWord + " " + $word2;
