@@ -40,7 +40,6 @@ class Picture {
                     "path" => $row["path"],
                 );
             }
-            echo "<br>";
             return $picture;
         }
 
@@ -54,7 +53,7 @@ class Picture {
 
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error(); exit;}
-        if (mysqli_num_rows($result) == 0) {echo "the rows are empty, bye";exit;}
+        if (mysqli_num_rows($result) == 0) {echo "this gallery is empty! BYE!";exit;}
         while($row = mysqli_fetch_assoc($result))
         {
             $this->picture_array[$row["picture_id"]] =  array(
@@ -70,10 +69,24 @@ class Picture {
         $new_array = array();
         foreach ($this->picture_array as $picture) {
             $new_array[] = $this->loadPicture($picture["picture_id"]);
-            //$picture;
         }
         return $new_array;
     }
+
+    // TODO : this is just temporary implementation, should be expanded
+    function addPicture($filename, $extension, $path) {
+
+        $sql = "INSERT INTO Pictures
+                (filename, extension, path)
+                VALUES ('$filename', '$extension','$path');";
+
+        if (mysqli_query($this->connection,$sql) === TRUE) {
+            echo "picture is added to db";
+        } else {
+            echo "err: " . $sql . "<br>" . $this->connection->error;
+        }
+    }
+
 
     // TODO : add funcitons for ADDING REMOVEING EDITING DISPLAYING DELETING pictures from database
     /*
