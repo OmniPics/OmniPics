@@ -1,34 +1,34 @@
 CREATE TABLE Pictures
 (
-P_id INT AUTO_INCREMENT,
+picture_id INT AUTO_INCREMENT,
 filename VARCHAR(255) NOT NULL,
 extention VARCHAR(255) NOT NULL,
-PRIMARY KEY (P_id)
+PRIMARY KEY (picture_id)
 );
 
 CREATE TABLE Album
 (
-A_id INT NOT NULL AUTO_INCREMENT,
-Album_name VARCHAR(255) NOT NULL,
-PRIMARY KEY (A_id)
+album_id INT NOT NULL AUTO_INCREMENT,
+album_name VARCHAR(255) NOT NULL,
+PRIMARY KEY (album_id)
 );
 
 CREATE TABLE Meta
 (
-M_id INT NOT NULL AUTO_INCREMENT,
-PRIMARY KEY (M_id)
+meta_id INT NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (meta_id)
 );
 
 CREATE TABLE has_album
 (
-A_id INT REFERENCES Album(A_id),
-P_id INT REFERENCES Picture(P_id),
-CONSTRAINT has_album_pkey PRIMARY KEY (A_id, P_id)
+album_id INT REFERENCES Album(picture_id),
+picture_id INT REFERENCES Picture(picture_id),
+CONSTRAINT has_album_pkey PRIMARY KEY (album_id, picture_id)
 );
 
 CREATE TABLE has_meta
 (
-M_id INT REFERENCES Meta(M_id),
-P_id INT REFERENCES Pictures(P_id),
-CONSTRAINT has_meta_pkey PRIMARY KEY (M_id, P_id)
+meta_id INT REFERENCES Meta(meta_id),
+picture_id INT REFERENCES Pictures(picture_id),
+CONSTRAINT has_meta_pkey PRIMARY KEY (meta_id, picture_id)
 );
