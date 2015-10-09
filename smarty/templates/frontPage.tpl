@@ -15,7 +15,7 @@
 <div class="container">
 
 	<ul class="nav nav-tabs">
-		<li role="presentation" id="upload"><a href='fileupload.form.html'>Upload</a></li>
+		<a href='fileupload.form.html'>Upload</a>
         <li role="presentation" id="dato" onclick="sortBy('dato')"><a role="button">Dato</a></li>
         <li role="presentation" id="navn" onclick="sortBy('navn')"><a role="button">Navn</a></li>
         <li role="presentation" id="sted" onclick="sortBy('sted')"><a role="button">Sted</a></li>

@@ -14,13 +14,4 @@
 	$smarty->setCacheDir(PROJECT_DIR . "smarty/cache");
 	$smarty->setConfigDir(PROJECT_DIR . "smarty/config");
 
-	session_start();
-
 	require('mysql.php');
-/*
-	require("Content.class.php");
-	$content = new Content($mysqli);
-	$allPersonaliaInfo = $content->setAllContentToArray();
-	$content->setInfoToSmarty($smarty, $allPersonaliaInfo);
-*/
-

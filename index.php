@@ -4,15 +4,21 @@ require("setup.php");
 require("server/Picture.php");
 require("smartyStarter.php");
 
+session_start();
+
 $page = isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
-require_once("server/Picture.php");
 $pictures = new Picture($mysqli);
-
 switch($page) {
 
-		case '':
+		case "dick":
+			echo "nio";
+			break;
+
+		default:
+			echo "shit1";
 			$pics = $pictures->listPictures();
+			echo "shit";
 			$smarty->assign("pictures", $pics);
 			$smarty->display('frontPage.tpl');
 			break;
