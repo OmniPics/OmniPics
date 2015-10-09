@@ -63,13 +63,13 @@ class Picture {
                 "path" => $row["path"],
             );
         }
-
-        mysqli_free_result($result);
-
         $new_array = array();
-        foreach ($this->picture_array as $picture) {
-            $new_array[] = $this->loadPicture($picture["picture_id"]);
+        if (!mysqli_num_rows($result)==0) {
+            foreach ($this->picture_array as $picture) {
+                $new_array[] = $this->loadPicture($picture["picture_id"]);
+            }
         }
+        mysqli_free_result($result);
         return $new_array;
     }
 
