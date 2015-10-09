@@ -2,13 +2,14 @@
 
 require("setup.php");
 require("server/Picture.php");
-require("smartyStarter.php");
+require("client/smartyStarter.php");
 
 session_start();
 
 $page = isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
 $pictures = new Picture($local_database, $local_username, $local_password);
+
 switch($page) {
 
 		case "dick":

@@ -10,12 +10,11 @@
       </span>
     </div>
 
-<a href='fileupload.form.html'>Upload</a>
 
 <div class="container">
 
 	<ul class="nav nav-tabs">
-		<a href='fileupload.form.html'>Upload</a>
+		<a href='server/fileupload.form.html'>Upload</a>
         <li role="presentation" id="dato" onclick="sortBy('dato')"><a role="button">Dato</a></li>
         <li role="presentation" id="navn" onclick="sortBy('navn')"><a role="button">Navn</a></li>
         <li role="presentation" id="sted" onclick="sortBy('sted')"><a role="button">Sted</a></li>
@@ -25,7 +24,7 @@
 	{foreach $pictures as $picture}
 	<div class="row">
 	<div class="col-md-4 portfolio-item">
-					<img class="img-responsice" src="{$picture.path}" height="50%">
+					<img class="img-responsice" src="client/{$picture.path}" height="50%">
 					<h3>{$picture.filename}</h3>
 				</div>
 	</div>

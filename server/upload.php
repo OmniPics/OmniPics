@@ -30,15 +30,15 @@ if (!empty($_FILES["myPic"])) {
     if (is_dir(UPLOAD_DIR) && is_writable(UPLOAD_DIR)) {
         echo "is writable";
     } else {
-        echo 'Upload directory is not writable, or does not exist.';
+        echo UPLOAD_DIR . "  " .'Upload directory is not writable, or does not exist.';
     }
     if (!$success) {
         echo "could not save file for some reason";
         print_r(UPLOAD_DIR . $name);
         exit;
     }
-    require("setup.php");
-    require("server/Picture.php");
+    require("../setup.php");
+    require("Picture.php");
     $picture = new Picture($local_database, $local_username, $local_password);
     $picture->addPicture($filename, $extension, $file_dir);
 
@@ -46,4 +46,4 @@ if (!empty($_FILES["myPic"])) {
     chmod(UPLOAD_DIR . $name, 0644);
 }
 
-header('Location: '.'index.php');
+header('Location: '.'../index.php');

@@ -53,7 +53,7 @@ class Picture {
 
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
-        if (mysqli_num_rows($result) == 0) {echo "this gallery is empty! BYE!";exit;}
+        //if (mysqli_num_rows($result) == 0) {echo "this gallery is empty! BYE!";exit;}
         while($row = mysqli_fetch_assoc($result))
         {
             $this->picture_array[$row["picture_id"]] =  array(
@@ -74,6 +74,9 @@ class Picture {
     }
 
     // TODO : this is just temporary implementation, should be expanded
+
+
+
     function addPicture($filename, $extension, $path) {
 
         $sql = "INSERT INTO Pictures
