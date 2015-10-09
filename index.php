@@ -1,22 +1,19 @@
-
 <?php
+
 require("setup.php");
 require("server/Picture.php");
+require("smartyStarter.php");
 
+$page = isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
+require_once("server/Picture.php");
+$pictures = new Picture($mysqli);
 
-echo "
-        <a href='fileupload.form.html'>Upload</a>
-";
+switch($page) {
 
-
-$pictures = new Picture($local_database, $local_username, $local_password);
-$pics = $pictures->listPictures();
-
-foreach ($pics as $pic) {
-    echo "
-            <p>$pic[filename]</p>
-            <img src='$pic[path]' alt='$pic[filename]' height='20%'>
-            <a href='remove.form.html'><h>X</h></a>
-    ";
-}
+		case '':
+			$pics = $pictures->listPictures();
+			$smarty->assign("pictures", $pics);
+			$smarty->display('frontPage.tpl');
+			break;
+	}

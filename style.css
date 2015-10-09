@@ -25,10 +25,19 @@ body {
     padding: 10px;
 }
 
+.yeBoy {
+
+    height: ;
+}
 #search {
     margin:0 auto;
     width:40%;
     margin-top:20px;
+}
+
+.toTheRight {
+
+    float: right;
 }
 
 .container {

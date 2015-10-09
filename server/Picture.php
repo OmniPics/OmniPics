@@ -5,18 +5,8 @@ class Picture {
     private $picture_array;
     public $connection;
 
-    function __construct($local_database, $local_username, $local_password) {
-
-        $this->connection = mysqli_connect("localhost",$local_username,$local_password,$local_database);
-
-        if (!mysqli_select_db($this->connection, $local_database)) {
-            echo "unable to select pics: " . mysqli_error();
-            exit;
-        }
-        if (!$this->connection) {
-            echo "unable to get inside: " . mysqli_error();
-            exit;
-        }
+    function __construct($connection) {
+        $this->connection = $connection;
     }
 
 
@@ -52,7 +42,7 @@ class Picture {
         FROM   Pictures";
 
         $result = mysqli_query($this->connection,$sql);
-        if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error(); exit;}
+        if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
         if (mysqli_num_rows($result) == 0) {echo "this gallery is empty! BYE!";exit;}
         while($row = mysqli_fetch_assoc($result))
         {
