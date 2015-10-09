@@ -4,7 +4,7 @@
 
 	require("setup.php");
 	define("PROJECT_DIR", $local_project_dir);
-	define("SMARTY_DIR", "Smarty-3.1.21/libs/");
+	define("SMARTY_DIR", "smarty-3.1.27/libs/");
 
 	require(SMARTY_DIR . "Smarty.class.php");
 

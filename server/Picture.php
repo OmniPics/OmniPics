@@ -5,8 +5,18 @@ class Picture {
     private $picture_array;
     public $connection;
 
-    function __construct($connection) {
-        $this->connection = $connection;
+    function __construct($local_database, $local_username, $local_password) {
+
+        $this->connection = mysqli_connect("localhost",$local_username,$local_password,$local_database);
+
+        if (!mysqli_select_db($this->connection, $local_database)) {
+            echo "unable to select pics: " . mysqli_error();
+            exit;
+        }
+        if (!$this->connection) {
+            echo "unable to get inside: " . mysqli_error();
+            exit;
+        }
     }
 
 

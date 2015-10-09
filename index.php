@@ -8,7 +8,7 @@ session_start();
 
 $page = isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
-$pictures = new Picture($mysqli);
+$pictures = new Picture($local_database, $local_username, $local_password);
 switch($page) {
 
 		case "dick":
@@ -16,9 +16,7 @@ switch($page) {
 			break;
 
 		default:
-			echo "shit1";
 			$pics = $pictures->listPictures();
-			echo "shit";
 			$smarty->assign("pictures", $pics);
 			$smarty->display('frontPage.tpl');
 			break;
