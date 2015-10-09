@@ -28,7 +28,7 @@ class Picture {
         );
         if ($picture_id > 0) {
             $sql = "SELECT *
-                    FROM ictures
+                    FROM pictures
                     WHERE picture_id='$picture_id'";
 
             $result = mysqli_query($this->connection,$sql);
