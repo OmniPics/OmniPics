@@ -1,8 +1,8 @@
 <?php
 
 require("setup.php");
-require("server/Picture.php");
-require("client/smartyStarter.php");
+require("Picture.php");
+require("smartyStarter.php");
 
 session_start();
 

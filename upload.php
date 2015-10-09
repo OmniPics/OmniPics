@@ -37,7 +37,7 @@ if (!empty($_FILES["myPic"])) {
         print_r(UPLOAD_DIR . $name);
         exit;
     }
-    require("../setup.php");
+    require("setup.php");
     require("Picture.php");
     $picture = new Picture($local_database, $local_username, $local_password);
     $picture->addPicture($filename, $extension, $file_dir);
@@ -46,4 +46,4 @@ if (!empty($_FILES["myPic"])) {
     chmod(UPLOAD_DIR . $name, 0644);
 }
 
-header('Location: '.'../index.php');
+header('Location: '.'index.php');
