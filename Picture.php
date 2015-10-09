@@ -28,7 +28,7 @@ class Picture {
         );
         if ($picture_id > 0) {
             $sql = "SELECT *
-                    FROM Pictures
+                    FROM ictures
                     WHERE picture_id='$picture_id'";
 
             $result = mysqli_query($this->connection,$sql);
@@ -49,7 +49,7 @@ class Picture {
     function listPictures() {
 
         $sql = "SELECT *
-        FROM   Pictures";
+        FROM   pictures";
 
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
@@ -79,7 +79,7 @@ class Picture {
 
     function addPicture($filename, $extension, $path) {
 
-        $sql = "INSERT INTO Pictures
+        $sql = "INSERT INTO pictures
                 (filename, extension, path)
                 VALUES ('$filename', '$extension','$path');";
 
