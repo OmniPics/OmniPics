@@ -25,8 +25,16 @@ if (!empty($_FILES["myPic"])) {
     // preserve file from temporary directory
     $success = move_uploaded_file($myPic["tmp_name"],
         UPLOAD_DIR . $name);
+
+
+    if (is_dir(UPLOAD_DIR) && is_writable(UPLOAD_DIR)) {
+        echo "is writable";
+    } else {
+        echo 'Upload directory is not writable, or does not exist.';
+    }
     if (!$success) {
         echo "could not save file for some reason";
+        print_r(UPLOAD_DIR . $name);
         exit;
     }
     require("setup.php");
