@@ -29,11 +29,26 @@ body {
 
     height: ;
 }
+#topArea {
+
+    padding-top: 30px;
+    width: 900px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#uploadButton {
+
+    float: left;
+}
+
 #search {
     margin:0 auto;
     width:40%;
-    margin-top:20px;
+    float: none;
 }
+
 
 .toTheRight {
 
@@ -42,7 +57,7 @@ body {
 
 .container {
 
-    margin-top: 50px;
+    margin-top: 80px;
     width: 900px;
 }
 
