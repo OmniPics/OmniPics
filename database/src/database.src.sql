@@ -1,4 +1,4 @@
-CREATE TABLE Pictures
+CREATE TABLE pictures
 (
 picture_id INT AUTO_INCREMENT,
 filename VARCHAR(255) NOT NULL,
@@ -7,14 +7,14 @@ path VARCHAR(255) NOT NULL,
 PRIMARY KEY (picture_id)
 );
 
-CREATE TABLE Album
+CREATE TABLE album
 (
 album_id INT NOT NULL AUTO_INCREMENT,
 album_name VARCHAR(255) NOT NULL,
 PRIMARY KEY (album_id)
 );
 
-CREATE TABLE Meta
+CREATE TABLE meta
 (
 meta_id INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY (meta_id)
