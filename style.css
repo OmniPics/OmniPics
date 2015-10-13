@@ -25,6 +25,18 @@ body {
     padding: 10px;
 }
 
+
+
+#sort {
+
+    float: right;
+}
+
+#trash {
+
+    float: right;
+} 
+
 .yeBoy {
 
     height: ;
@@ -88,8 +100,36 @@ body {
 
 }
 
-.img {
+#pictureViewer {
 
-    height: 100px;
-    width: 100px
+    margin: 0 auto;
+}
+
+.img-responsive {
+
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+
+
+
+.viewerPic {
+    height: 400px;
+    background-color: gray;
+}
+
+.viewingPic {
+
+    margin: 0 0 0 0;
+}
+#ViewerRow {
+
+
+    background-color: white;
+}
+
+footer {
+
+    margin-bottom: 250px;
 }
