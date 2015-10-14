@@ -14,13 +14,13 @@ $pictures = new Picture($local_database, $local_username, $local_password);
 
 switch($page) {
 
-	case "deletePic":
+	case "removePic":
 		$pictures->removePicture($picture_id);
 		// TODO: smarty stuff....
 
 		break;
 
-	case "cleanUp":
+	case "dumpdb":
 		$pictures->cleanDatabase();
 		// TODO: smarty stuff....
 
