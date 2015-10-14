@@ -116,7 +116,23 @@ class Picture {
         header('Location: '.'index.php');
     }
 
-    // TODO : add funcitons for ADDING REMOVEING EDITING DISPLAYING DELETING pictures from database
+    function sortPictures($picture_array, $value) {
+        $sorted_array = $this->listPictures();
+
+        switch($value) {
+            case "date":
+                asort($sorted_array);
+                break;
+            case "name":
+
+                break;
+            case "place":
+
+                break;
+        }
+    }
+
+    // TODO : add funcitons for EDITING pictures from database
     /*
      *
      *
