@@ -2,6 +2,10 @@
 
 class Picture {
 
+    // TODO : fix "place" variablel, either with meta, or some other shit
+
+    private $place = "uis 24/7";
+
     private $picture_array;
     public $connection;
 
@@ -38,6 +42,8 @@ class Picture {
                     "filename" => $row["filename"],
                     "extension" => $row["extension"],
                     "path" => $row["path"],
+                    "place" => $row["place"],
+                    "upload_date" => $row["upload_date"],
                 );
             }
             return $picture;
@@ -61,6 +67,8 @@ class Picture {
                 "filename" => $row["filename"],
                 "extension" => $row["extension"],
                 "path" => $row["path"],
+                "place" => $row["place"],
+                "upload_date" => $row["upload_date"],
             );
         }
         $new_array = array();
@@ -78,10 +86,10 @@ class Picture {
 
 
     function addPicture($filename, $extension, $path) {
-
+        // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures
-                (filename, extension, path)
-                VALUES ('$filename', '$extension','$path');";
+                (filename, extension, path, place, upload_date)
+                VALUES ('$filename', '$extension','$path','$this->place',NOW());";
 
         if (mysqli_query($this->connection,$sql) === TRUE) {
             echo "picture is added to db";
@@ -116,20 +124,28 @@ class Picture {
         header('Location: '.'index.php');
     }
 
-    function sortPictures($picture_array, $value) {
-        $sorted_array = $this->listPictures();
+    function sortPictures($value, $sort) {
+
+        $sort_array = $this->listPictures();
 
         switch($value) {
             case "date":
-                asort($sorted_array);
+                usort($sort_array, function($a, $b) {
+                    return $a['upload_date'] < $b['upload_date'];
+                });
                 break;
             case "name":
-
+                usort($sort_array, function($a, $b) {
+                    return $a['filename'] < $b['filename'];
+                });
                 break;
             case "place":
-
+                usort($sort_array, function($a, $b) {
+                    return $a['place'] < $b['place'];
+                });
                 break;
         }
+        return $sort_array;
     }
 
     // TODO : add funcitons for EDITING pictures from database

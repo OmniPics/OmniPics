@@ -14,12 +14,25 @@ $pictures = new Picture($local_database, $local_username, $local_password);
 
 switch($page) {
 
-	case "sort":
-		// TODO: figure out sorting
-		$pics = $pictures->listPictures();
+
+	// TODO : this should be done in ajax:
+	case "place":
+		$pics = $pictures->sortPictures("place");
 		$smarty->assign("pictures", $pics);
 		$smarty->display('frontPage.tpl');
 		break;
+	case "name":
+		$pics = $pictures->sortPictures("name");
+		$smarty->assign("pictures", $pics);
+		$smarty->display('frontPage.tpl');
+		break;
+
+	case "date":
+		$pics = $pictures->sortPictures("date");
+		$smarty->assign("pictures", $pics);
+		$smarty->display('frontPage.tpl');
+		break;
+	// end TODO
 
 	case "upload":
 		// TODO: kalle form på en annen måte, enn det: ??s
