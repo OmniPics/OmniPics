@@ -4,6 +4,8 @@ picture_id INT AUTO_INCREMENT,
 filename VARCHAR(255) NOT NULL,
 extension VARCHAR(255) NOT NULL,
 path VARCHAR(255) NOT NULL,
+place VARCHAR(255) NOT NULL,
+upload_date DATETIME NOT NULL,
 PRIMARY KEY (picture_id)
 );
 
