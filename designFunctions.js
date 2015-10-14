@@ -1,7 +1,56 @@
 $(document).ready(function() {
+
 	
 	$('#dato').addClass('active');
+
+	$('#golink').click(function() {
+        return false;
+    	}).dblclick(function() {
+        	window.location = this.href;
+        	return false;
+    });
 });
+
+var selectedPicture_ids = [];
+
+function useIt() {
+	$.ajax({        
+       type: "POST",
+       url: "http://localhost/omnipics/index.php?page=removePics",
+       data: { 	selectedPictures : selectedPicture_ids }
+            
+    });
+
+    window.location = "index.php";
+	
+}
+
+
+function pictureLink(link_path, link_CSS_id) {
+
+	$(''+link_CSS_id+'').dblclick(function() {
+
+		window.location = link_path;
+	});
+}
+
+function selected(image_CSS_id, db_picture_id) {
+
+	if(!$(''+image_CSS_id+'').hasClass('selected')) {
+
+		$(''+image_CSS_id+'').addClass('selected');
+
+		selectedPicture_ids[''+db_picture_id+''] = db_picture_id;
+		
+	}
+	else {
+
+		$(''+image_CSS_id+'').removeClass('selected');
+
+		delete selectedPicture_ids[''+db_picture_id+''];
+	}
+}
+
 
 function sortBy(sortingType) {
 

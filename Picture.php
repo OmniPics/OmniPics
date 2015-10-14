@@ -116,6 +116,15 @@ class Picture {
         header('Location: '.'index.php');
     }
 
+    function removeMultiplePictures($arrayOfPictureIDs) {
+
+            foreach ($arrayOfPictureIDs as $key => $value) {
+
+                echo $key;
+                $this->removePicture($key);
+            }
+    }
+
     // TODO : add funcitons for ADDING REMOVEING EDITING DISPLAYING DELETING pictures from database
     /*
      *

@@ -23,8 +23,8 @@
         		<li role="presentation" id="dato" onclick="sortBy('dato')"><a role="button">Dato</a></li>
         		<li role="presentation" id="navn" onclick="sortBy('navn')"><a role="button">Navn</a></li>
         		<li role="presentation" id="sted" onclick="sortBy('sted')"><a role="button">Sted</a></li>
-				<button id="trash" type="button" class="btn btn-default">
-  					<span class="glyphicon glyphicon-trash" ></span>
+				<button id="trash" type="button" class="btn btn-default" onclick="useIt()">
+  					<span class="glyphicon glyphicon-trash"></span>
 				</button>
         		<button id="sort" type="button" class="btn btn-default">
   					<span class="glyphicon glyphicon-sort"></span>
@@ -41,9 +41,11 @@
 				{if isset($pictures[$i+$j])}
 
 					<div class="col-md-4 portfolio-item">
-						<a href="index.php?page=pictureViewer&&picture_id={$i+$j}"><img class="img-responsive" src="{$pictures[$i+$j].path}"></a>
-						<!--<p>{$pictures[$i+$j].filename}</p>-->
-						<p></p>
+						<div id="golink{$i+$j}" onclick="pictureLink('index.php?page=pictureViewer&&picture_id={$i+$j}', '#golink{$i+$j}')">
+							<!--<input id="hiddenValue{*i$+$j*}" type="hidden">-->
+							<img onclick="selected('#frontPageImage{$i+$j}', {$pictures[$i+$j].picture_id})" id="frontPageImage{$i+$j}" class="img-responsive" src="{$pictures[$i+$j].path}"></a>
+							<p id="pictureInfo">{$pictures[$i+$j].filename}</p>
+						</div>
 					</div>
 				{/if}	
 			{/for}
