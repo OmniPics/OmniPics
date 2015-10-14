@@ -16,7 +16,9 @@ switch($page) {
 
 	case "sort":
 		// TODO: figure out sorting
-
+		$pics = $pictures->listPictures();
+		$smarty->assign("pictures", $pics);
+		$smarty->display('frontPage.tpl');
 		break;
 
 	case "upload":
