@@ -14,16 +14,28 @@ $pictures = new Picture($local_database, $local_username, $local_password);
 
 switch($page) {
 
-		case "pictureViewer":
-			$pics = $pictures->listPictures();
-			$smarty->assign("pictures", $pics);
-			$smarty->assign("picture_id", $picture_id);
-			$smarty->display('pictureViewer.tpl');
-			break;
+	case "removePic":
+		$pictures->removePicture($picture_id);
+		// TODO: smarty stuff....
 
-		default:
-			$pics = $pictures->listPictures();
-			$smarty->assign("pictures", $pics);
-			$smarty->display('frontPage.tpl');
-			break;
+		break;
+
+	case "dumpdb":
+		$pictures->dumpDatabase();
+		// TODO: smarty stuff....
+
+		break;
+
+	case "pictureViewer":
+		$pics = $pictures->listPictures();
+		$smarty->assign("pictures", $pics);
+		$smarty->assign("picture_id", $picture_id);
+		$smarty->display('pictureViewer.tpl');
+		break;
+
+	default:
+		$pics = $pictures->listPictures();
+		$smarty->assign("pictures", $pics);
+		$smarty->display('frontPage.tpl');
+		break;
 	}
