@@ -14,6 +14,16 @@ $pictures = new Picture($local_database, $local_username, $local_password);
 
 switch($page) {
 
+	case "sort":
+		// TODO: figure out sorting
+
+		break;
+
+	case "upload":
+		// TODO: kalle form på en annen måte, enn det: ??s
+		header("location: fileupload.form.html");
+		break;
+
 	case "removePic":
 		$pictures->removePicture($picture_id);
 		// TODO: smarty stuff....
