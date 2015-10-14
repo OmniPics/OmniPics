@@ -92,12 +92,28 @@ class Picture {
 
 
     function cleanDatabase(){
-        $sql = "DROP TABLE pictures, meta, album, has_meta, has_album;";
-        if (mysqli_query($this->connecition, $sql)===TRUE) {
-            echo "all tables deleted";
-        }else {
-            echo "err: " . $sql . "<br>" . $this->connection->error;
+        $sql = "TRUNCATE TABLE ;";
+
+        if (mysqli_query($this->connection, $sql . "pictures")!==TRUE) {echo "all WRONGED" ."pictures";}
+        if (mysqli_query($this->connection, $sql . "meta")!==TRUE) {echo "all WRONGED"."meta";}
+        if (mysqli_query($this->connection, $sql . "has_meta")!==TRUE) {echo "all WRONGED"."has_meta";}
+        if (mysqli_query($this->connection, $sql . "has_album")!==TRUE) {echo "all WRONGED"."has_album";}
+        if (mysqli_query($this->connection, $sql . "album")!==TRUE) {echo "all WRONGED"."album";}
+
+        header('Location: '.'index.php');
+    }
+
+    function removePicture($picture_id){
+        $sql = "
+            DELETE FROM pictures
+            WHERE picture_id=$picture_id;
+        ";
+
+        if (mysqli_query($this->connection, $sql)!==TRUE){
+            echo "failed at removeing file" . $sql;
         }
+
+        header('Location: '.'index.php');
     }
 
     // TODO : add funcitons for ADDING REMOVEING EDITING DISPLAYING DELETING pictures from database
