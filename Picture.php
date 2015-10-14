@@ -96,6 +96,14 @@ class Picture {
      *
      *
      */
+    function cleanDatabase(){
+        $sql = "DROP TABLE pictures, meta, album, has_meta, has_album;";
+        if (mysqli_query($this->connecition, $sql)===TRUE) {
+            echo "all tables deleted";
+        }else {
+            echo "err: " . $sql . "<br>" . $this->connection->error;
+        }
+    }
 
 
 
