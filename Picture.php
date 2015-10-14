@@ -91,14 +91,14 @@ class Picture {
     }
 
 
-    function cleanDatabase(){
-        $sql = "TRUNCATE TABLE ;";
+    function dumpDatabase(){
+        $sql = "TRUNCATE TABLE ";
 
-        if (mysqli_query($this->connection, $sql . "pictures")!==TRUE) {echo "all WRONGED" ."pictures";}
-        if (mysqli_query($this->connection, $sql . "meta")!==TRUE) {echo "all WRONGED"."meta";}
-        if (mysqli_query($this->connection, $sql . "has_meta")!==TRUE) {echo "all WRONGED"."has_meta";}
-        if (mysqli_query($this->connection, $sql . "has_album")!==TRUE) {echo "all WRONGED"."has_album";}
-        if (mysqli_query($this->connection, $sql . "album")!==TRUE) {echo "all WRONGED"."album";}
+        if (mysqli_query($this->connection, $sql . "pictures;")!==TRUE) {echo "all WRONGED" ."pictures";}
+        if (mysqli_query($this->connection, $sql . "meta;")!==TRUE) {echo "all WRONGED"."meta";}
+        if (mysqli_query($this->connection, $sql . "has_meta;")!==TRUE) {echo "all WRONGED"."has_meta";}
+        if (mysqli_query($this->connection, $sql . "has_album;")!==TRUE) {echo "all WRONGED"."has_album";}
+        if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
 
         header('Location: '.'index.php');
     }

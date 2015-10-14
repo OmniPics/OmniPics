@@ -21,7 +21,7 @@ switch($page) {
 		break;
 
 	case "dumpdb":
-		$pictures->cleanDatabase();
+		$pictures->dumpDatabase();
 		// TODO: smarty stuff....
 
 		break;
