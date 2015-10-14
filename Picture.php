@@ -49,7 +49,7 @@ class Picture {
     function listPictures() {
 
         $sql = "SELECT *
-        FROM  pictures";
+        FROM   pictures";
 
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
@@ -91,11 +91,6 @@ class Picture {
     }
 
 
-    // TODO : add funcitons for ADDING REMOVEING EDITING DISPLAYING DELETING pictures from database
-    /*
-     *
-     *
-     */
     function cleanDatabase(){
         $sql = "DROP TABLE pictures, meta, album, has_meta, has_album;";
         if (mysqli_query($this->connecition, $sql)===TRUE) {
@@ -104,6 +99,12 @@ class Picture {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
     }
+
+    // TODO : add funcitons for ADDING REMOVEING EDITING DISPLAYING DELETING pictures from database
+    /*
+     *
+     *
+     */
 
 
 
