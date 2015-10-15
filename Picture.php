@@ -114,7 +114,7 @@ class Picture {
     function removePicture($picture_id){
         $sql = "
             DELETE FROM pictures
-            WHERE picture_id=". $picture_id . "";
+            WHERE picture_id=$picture_id";
 
         if (mysqli_query($this->connection, $sql)!==TRUE){
             echo "failed at removeing file" . $sql;
@@ -123,25 +123,44 @@ class Picture {
         header('Location: '.'index.php');
     }
 
-    function sortPictures($value) {
+    function sortPictures($value, $order) {
         // TODO: implement sorting both ways < & >
         $sort_array = $this->listPictures();
 
         switch($value) {
-            case "date":
-                usort($sort_array, function($a, $b) {
-                    return $a['upload_date'] < $b['upload_date'];
-                });
+            case "upload_date":
+                if ($order) {
+                    usort($sort_array, function($a, $b) {
+                        return $a['upload_date'] < $b['upload_date'];
+                    });
+                }else {
+                    usort($sort_array, function($a, $b) {
+                        return $a['upload_date'] > $b['upload_date'];
+                    });
+                }
+
                 break;
-            case "name":
-                usort($sort_array, function($a, $b) {
-                    return $a['filename'] < $b['filename'];
-                });
+            case "filename":
+                if ($order) {
+                    usort($sort_array, function($a, $b) {
+                        return $a['filename'] < $b['filename'];
+                    });
+                }else {
+                    usort($sort_array, function($a, $b) {
+                        return $a['filename'] > $b['filename'];
+                    });
+                }
                 break;
             case "place":
-                usort($sort_array, function($a, $b) {
-                    return $a['place'] < $b['place'];
-                });
+                if ($order) {
+                    usort($sort_array, function($a, $b) {
+                        return $a['place'] < $b['place'];
+                    });
+                }else {
+                    usort($sort_array, function($a, $b) {
+                        return $a['place'] > $b['place'];
+                    });
+                }
                 break;
         }
         return $sort_array;
