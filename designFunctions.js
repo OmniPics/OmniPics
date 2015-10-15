@@ -22,6 +22,7 @@ function useIt() {
     });
 
     window.location = "index.php";
+		window.location = "index.php";
     selectedPicture_ids = [];
 
 }
