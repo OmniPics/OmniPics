@@ -1,4 +1,5 @@
 <?php
+define("UPLOAD_DIR", "images/");
 require("setup.php");
 require("Picture.php");
 
@@ -46,7 +47,7 @@ if(!empty($uploaded)) {
   $picture->addPicture($filename, $extension, $file_dir, $upload_date);
 
   // set proper permissions on the new file
-  chmod("images/" . $name, 0644);
+  chmod(UPLOAD.DIR . $name, 0644);
   header('Location: '.'index.php');
 }
 
