@@ -26,6 +26,7 @@ if(!empty($_FILES['myPic']['name'][0])){
           $file_dir = "images/" . $filename;
 
           if(move_uploaded_file($file_tmp, $file_dir)) {
+            $upload_date = DateTime;
             $uploaded[$position] = $file_dir;
           }else {
             $failed[$position] = "[{$filename}] failed to upload.";
@@ -42,10 +43,10 @@ if(!empty($uploaded)) {
   echo "$filename has been successfully uploaded!.";
 
   $picture = new Picture($local_database, $local_username, $local_password);
-  $picture->addPicture($filename, $extension, $file_dir);
+  $picture->addPicture($filename, $extension, $file_dir, $upload_date);
 
   // set proper permissions on the new file
-  chmod(UPLOAD_DIR . $name, 0644);
+  chmod("images/" . $name, 0644);
   header('Location: '.'index.php');
 }
 
