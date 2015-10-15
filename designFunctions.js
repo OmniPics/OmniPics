@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	
+
 	$('#dato').addClass('active');
 
 	$('#golink').click(function() {
@@ -11,19 +11,19 @@ $(document).ready(function() {
     });
 });
 
-var selectedPicture_ids = [];
+var selectedPicture_ids = {};
 
 function useIt() {
-	$.ajax({        
+	$.ajax({
        type: "POST",
-       url: "http://localhost/omnipics/index.php?page=removePics",
+       url: "index.php?page=removePics",
        data: { 	selectedPictures : selectedPicture_ids }
-            
+
     });
 
     window.location = "index.php";
     selectedPicture_ids = [];
-	
+
 }
 
 
@@ -42,12 +42,12 @@ function selected(image_CSS_id, db_picture_id) {
 		$(''+image_CSS_id+'').removeClass('selected');
 
 		delete selectedPicture_ids[''+db_picture_id+''];
-		
+
 	}
 	else {
 
 		$(''+image_CSS_id+'').addClass('selected');
-		
+
 
 
 		selectedPicture_ids[''+db_picture_id+''] = db_picture_id;
