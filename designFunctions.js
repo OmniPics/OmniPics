@@ -37,18 +37,20 @@ function pictureLink(link_path, link_CSS_id) {
 
 function selected(image_CSS_id, db_picture_id) {
 
-	if(!$(''+image_CSS_id+'').hasClass('selected')) {
-
-		$(''+image_CSS_id+'').addClass('selected');
-
-		selectedPicture_ids[''+db_picture_id+''] = db_picture_id;
-		
-	}
-	else {
+	if($(''+image_CSS_id+'').hasClass('selected')) {
 
 		$(''+image_CSS_id+'').removeClass('selected');
 
 		delete selectedPicture_ids[''+db_picture_id+''];
+		
+	}
+	else {
+
+		$(''+image_CSS_id+'').addClass('selected');
+		
+
+
+		selectedPicture_ids[''+db_picture_id+''] = db_picture_id;
 	}
 }
 

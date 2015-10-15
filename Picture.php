@@ -123,14 +123,6 @@ class Picture {
         header('Location: '.'index.php');
     }
 
-    function removeMultiplePictures($arrayOfPictureIDs) {
-
-            foreach ($arrayOfPictureIDs as $key => $value) {
-
-                $this->removePicture($key);
-            }
-    }
-
     function sortPictures($value) {
         // TODO: implement sorting both ways < & >
         $sort_array = $this->listPictures();

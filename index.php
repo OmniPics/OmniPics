@@ -12,11 +12,6 @@ $picture_id = isset($_REQUEST["picture_id"]) ? $_REQUEST["picture_id"] : "";
 
 $arrayOfPictureIDs = isset($_REQUEST["selectedPictures"]) ? $_REQUEST["selectedPictures"] : "";
 
-if(isset($_REQUEST["selectedPictures"])) {
-
-	echo "baaaaaaaaaaaaaalls";
-}
-
 $selectedPicsArray = array();
 
 $pictures = new Picture($local_database, $local_username, $local_password);
@@ -70,7 +65,9 @@ switch($page) {
 		break;
 
 	case "removePics":
-		$pictures->removeMultiplePictures($arrayOfPictureIDs);
+		foreach ($arrayOfPictureIDs as $key) {
+			$pictures->removePicture($key);
+		}
 
 	default:
 		$pics = $pictures->listPictures();
