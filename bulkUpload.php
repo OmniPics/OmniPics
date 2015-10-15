@@ -47,8 +47,11 @@ if(!empty($uploaded)) {
   $picture->addPicture($filename, $extension, $file_dir, $upload_date);
 
   // set proper permissions on the new file
-  chmod(UPLOAD.DIR . $name, 0644);
+
+  chmod(UPLOAD.DIR . $filename, 0644);
   header('Location: '.'index.php');
+
+  
 }
 
 else if(!empty($failed)){
