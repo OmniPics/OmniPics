@@ -16,12 +16,13 @@ var selectedPicture_ids = [];
 function useIt() {
 	$.ajax({        
        type: "POST",
-       url: "http://localhost/omnipics/index.php?page=removePics",
+       url: "http://localhost/omnipics/index.php",
        data: { 	selectedPictures : selectedPicture_ids }
             
     });
 
     window.location = "index.php";
+    selectedPicture_ids = [];
 	
 }
 

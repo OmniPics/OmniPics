@@ -16,6 +16,9 @@
 	    </span>
 	</div>
 </div>
+<ul>
+{$selected|@count}
+</ul>
 
 <div class="container">
 		
@@ -32,6 +35,8 @@
 	</ul>
 
 
+
+
 	{for $i=0 to $pictures|@count step 3}
 
 		<div class="row">
@@ -42,7 +47,6 @@
 
 					<div class="col-md-4 portfolio-item">
 						<div id="golink{$i+$j}" onclick="pictureLink('index.php?page=pictureViewer&&picture_id={$i+$j}', '#golink{$i+$j}')">
-							<!--<input id="hiddenValue{*i$+$j*}" type="hidden">-->
 							<img onclick="selected('#frontPageImage{$i+$j}', {$pictures[$i+$j].picture_id})" id="frontPageImage{$i+$j}" class="img-responsive" src="{$pictures[$i+$j].path}"></a>
 							<p id="pictureInfo">{$pictures[$i+$j].filename}</p>
 						</div>

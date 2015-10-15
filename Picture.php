@@ -106,8 +106,7 @@ class Picture {
     function removePicture($picture_id){
         $sql = "
             DELETE FROM pictures
-            WHERE picture_id=$picture_id;
-        ";
+            WHERE picture_id=". $picture_id . "";
 
         if (mysqli_query($this->connection, $sql)!==TRUE){
             echo "failed at removeing file" . $sql;
@@ -120,7 +119,6 @@ class Picture {
 
             foreach ($arrayOfPictureIDs as $key => $value) {
 
-                echo $key;
                 $this->removePicture($key);
             }
     }
