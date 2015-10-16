@@ -112,6 +112,14 @@ body {
     
 }
 
+.visningsbilde {
+
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    
+}
+
 #pictureInfo {
 
     text-align: center;
@@ -127,15 +135,41 @@ body {
 .viewingPic {
 
     margin: 0 0 0 0;
-    margin-left: -15px;
-    margin-bottom: -15px;
+    margin-left: 0px;
+    margin-bottom: 0px;
 }
 #ViewerRow {
 
 
-    background-color: white;
-    height: 450px;
+   
+    
 }
+#toFrontPageButton {
+
+    float: left;
+}
+#tilbakeBlokk{
+    height: 1000px;
+    width: 300px;
+    background-color: blue;
+    position: absolute;
+    opacity: 0;
+}#ekstraBlokk{
+    height: 1000px;
+    width: 300px;
+    background-color: green;
+    position: absolute;
+    opacity: 0;
+}
+
+#nesteBlokk{
+    height: 1000px;
+    width: 630px;
+    background-color: red;
+    position: absolute;
+    float: right;
+    opacity: 0;
+    }
 
 .selected {
 
