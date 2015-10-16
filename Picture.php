@@ -1,7 +1,7 @@
 <?php
 
 class Picture {
-    private $place = "uis 24/7";
+    private $tags;
     private $picture_array;
     public $connection;
     function __construct($local_database, $local_username, $local_password) {
@@ -77,7 +77,7 @@ class Picture {
         // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures
                 (filename, extension, path, place, upload_date)
-                VALUES ('$filename', '$extension','$path','$this->place',NOW());";
+                VALUES ('$filename', '$extension','$path','abc',NOW());";
 
         if (mysqli_query($this->connection,$sql) === TRUE) {
             echo "picture is added to db";
