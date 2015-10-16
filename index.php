@@ -31,6 +31,15 @@ switch($page) {
 		$smarty->display('pictureViewer.tpl');
 		break;
 
+
+	case "sort":
+		$pics = $pictures->getSortedBySQL("filename",1,1);
+		$smarty->assign("selected", $arrayOfPictureIDs);
+		$smarty->assign("pictures", $pics);
+		$smarty->assign("selectedPicsArray", $selectedPicsArray);
+		$smarty->display('frontPage.tpl');
+		break;
+
 	case "removePics":
 		foreach ($arrayOfPictureIDs as $key) {
 			$pictures->removePicture($key);

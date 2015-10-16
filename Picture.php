@@ -52,10 +52,7 @@ class Picture {
     }
 
 
-    function listPictures() {
-
-        $sql = "SELECT *
-        FROM   pictures";
+    function listPictures($sql = "SELECT * FROM pictures") {
 
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
@@ -123,47 +120,19 @@ class Picture {
         header('Location: '.'index.php');
     }
 
-    function sortPictures($value, $order) {
-        // TODO: implement sorting both ways < & >
-        $sort_array = $this->listPictures();
+    function getSortedBySQL($value, $order, $amount=0) {
+        if ($amount == 0) {$amount = "";}
+        else {$amount = "LIMIT $amount";}
 
-        switch($value) {
-            case "upload_date":
-                if ($order) {
-                    usort($sort_array, function($a, $b) {
-                        return $a['upload_date'] < $b['upload_date'];
-                    });
-                }else {
-                    usort($sort_array, function($a, $b) {
-                        return $a['upload_date'] > $b['upload_date'];
-                    });
-                }
+        if ($order == 0) {$order = "DESC";}
+        else if ($order > 0) {$order = "ASC";}
 
-                break;
-            case "filename":
-                if ($order) {
-                    usort($sort_array, function($a, $b) {
-                        return $a['filename'] < $b['filename'];
-                    });
-                }else {
-                    usort($sort_array, function($a, $b) {
-                        return $a['filename'] > $b['filename'];
-                    });
-                }
-                break;
-            case "place":
-                if ($order) {
-                    usort($sort_array, function($a, $b) {
-                        return $a['place'] < $b['place'];
-                    });
-                }else {
-                    usort($sort_array, function($a, $b) {
-                        return $a['place'] > $b['place'];
-                    });
-                }
-                break;
-        }
-        return $sort_array;
+        $sql = "SELECT *
+                FROM pictures
+                ORDER BY $value $order
+                $amount";
+
+        return $this->listPictures($sql);
     }
 
     // TODO : add funcitons for EDITING pictures from database
