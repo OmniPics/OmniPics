@@ -37,9 +37,7 @@ class Picture {
         }
     }
 
-
     function listPictures($sql = "SELECT * FROM pictures") {
-
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
         while($row = mysqli_fetch_assoc($result))
@@ -131,8 +129,31 @@ class Picture {
         }
         while($row = mysqli_fetch_assoc($result)){$tags_id = $row['tags_id'];}
 
+
+
+    function hasTag($tag){
+        // TODO: logic for checking if tag exists in db. in SQL!
+    }
+    function getTags(){
+        // TODO: return array of all the tags with id's
+    }
+    function addTag($tag,$picture_id) {
+        if(!$this->hasTag($tag)){
+            $sql = "INSERT INTO tags (tags) VALUES ($tag)";
+            if (mysqli_query($this->connection, $sql)!==TRUE){
+                echo "failed at inserting tag " . $sql;
+            }
+        }
+        $sql = "SELECT tags_id FROM tags WHERE tags='$tag'";
+        $result = mysqli_query($this->connection, $sql);
+        if ($result!==TRUE){
+            echo "failed at getting tagID wtf " . $sql;
+        }
+        while($row = mysqli_fetch_assoc($result)){$tags_id = $row['tags_id'];}
+
         $insert = "INSERT INTO has_tags (picture_id, tags_id)
                    VALUES ($picture_id,$tags_id)";
         mysqli_query($this->connection,$insert);
     }
+}
 }

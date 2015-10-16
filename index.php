@@ -20,6 +20,7 @@ switch($page) {
 		break;
 
 
+
 	case "sort":
 		$pics = $pictures->getSortedBySQL("filename",1,1);
 		$smarty->assign("selected", $arrayOfPictureIDs);
