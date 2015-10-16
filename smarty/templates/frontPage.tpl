@@ -17,7 +17,7 @@
 	</div>
 </div>
 <ul>
-{$selected|@count}
+
 </ul>
 
 <div class="container">

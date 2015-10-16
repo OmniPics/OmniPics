@@ -12,8 +12,6 @@ $picture_id = isset($_REQUEST["picture_id"]) ? $_REQUEST["picture_id"] : "";
 
 $arrayOfPictureIDs = isset($_REQUEST["selectedPictures"]) ? $_REQUEST["selectedPictures"] : "";
 
-$selectedPicsArray = array();
-
 $pictures = new Picture($local_database, $local_username, $local_password);
 
 
@@ -51,7 +49,6 @@ switch($page) {
 		$pics = $pictures->listPictures();
 		$smarty->assign("selected", $arrayOfPictureIDs);
 		$smarty->assign("pictures", $pics);
-		$smarty->assign("selectedPicsArray", $selectedPicsArray);
 		$smarty->display('frontPage.tpl');
 		break;
 	}
