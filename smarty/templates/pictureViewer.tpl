@@ -23,21 +23,31 @@
 
 		<div id="ViewerRow" class="row">
 
-					<div class="col-md-8 portfolio-item viewingPic">
+
+						<a {if (isset($pictures[$picture_id-1]))}href="index.php?page=pictureViewer&&picture_id={$picture_id - 1}"{/if}>
+						<div class="col-md-1" id="tilbakeBlokk">
 						
+						</div></a>
 
-						<img class="visningsbilde" src="{$pictures[$picture_id].path}">
-						 {if (isset($pictures[$picture_id+1]))}
-						<a href="index.php?page=pictureViewer&&picture_id={$picture_id + 1}"> <div id="nesteBlokk"></div> </a>
-						{/if}
-						<div id="ekstraBlokk"></div>
-						{if (isset($pictures[$picture_id-1]))}
-						<a href="index.php?page=pictureViewer&&picture_id={$picture_id - 1}"> <div id="tilbakeBlokk"></div></a>
-						{/if}
-
+						<div class="col-md-7" id="pictureViewerImg">
+						<img class="img-responsive" src="{$pictures[$picture_id].path}">
 						</div>
+
+						
+						<a {if (isset($pictures[$picture_id+1]))} href="index.php?page=pictureViewer&&picture_id={$picture_id + 1}"{/if}>
+						 <div class="col-md-1" id="nesteBlokk">
+						
+						</div>
+						</a>
+						
+						<div class="col-md-3">
+						Metadata kommer her
+					
+					
+
+					
 						<!--<p>{$pictures[$i+$j].filename}</p>-->
-						<p></p>
+						
 					
 			
 		</div>

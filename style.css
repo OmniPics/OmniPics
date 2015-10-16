@@ -149,27 +149,21 @@ body {
     float: left;
 }
 #tilbakeBlokk{
-    height: 1000px;
-    width: 300px;
     background-color: blue;
-    position: absolute;
     opacity: 0;
-}#ekstraBlokk{
-    height: 1000px;
-    width: 300px;
-    background-color: green;
-    position: absolute;
-    opacity: 0;
+     height: 500px;
 }
 
 #nesteBlokk{
-    height: 1000px;
-    width: 630px;
     background-color: red;
-    position: absolute;
-    float: right;
     opacity: 0;
+    height: 500px;
     }
+
+#pictureViewerImg{
+    padding-right: 0px;
+    padding-left: 0px;
+}
 
 .selected {
 
