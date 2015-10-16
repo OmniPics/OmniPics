@@ -35,3 +35,17 @@ meta_id INT REFERENCES Meta(meta_id),
 picture_id INT REFERENCES Pictures(picture_id),
 CONSTRAINT has_meta_pkey PRIMARY KEY (meta_id, picture_id)
 );
+
+CREATE TABLE Tags
+(
+tags_id INT AUTO_INCREMENT,
+tags VARCHAR(255),
+PRIMARY KEY (tags_id)
+);
+
+CREATE TABLE has_tags
+(
+tags_id INT REFERENCES Tags(tags_id),
+picture_id INT REFERENCES Pictures(picture_id),
+CONSTRAINT has_tags_pkey PRIMARY KEY (tags_id, picture_id)
+);
