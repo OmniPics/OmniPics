@@ -120,7 +120,7 @@ class Picture {
         header('Location: '.'index.php');
     }
 
-    function getSortedBySQL($value, $order, $amount) {
+    function getSortedBySQL($value, $order, $amount=0) {
         if ($amount == 0) {$amount = "";}
         else {$amount = "LIMIT $amount";}
 
