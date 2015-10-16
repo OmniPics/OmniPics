@@ -40,7 +40,6 @@ switch($page) {
 		$pics = $pictures->listPictures();
 		$smarty->assign("selected", $arrayOfPictureIDs);
 		$smarty->assign("pictures", $pics);
-		$smarty->assign("selectedPicsArray", $selectedPicsArray);
 		$smarty->display('frontPage.tpl');
 		break;
 	}
