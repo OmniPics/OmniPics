@@ -71,7 +71,6 @@ class Picture {
         // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures (filename, extension, path, place, upload_date)
                 VALUES ('$filename', '$extension','$path','abc',NOW());";
-
         if (mysqli_query($this->connection,$sql) === TRUE) {
             echo "picture is added to db";
         } else {
@@ -90,7 +89,7 @@ class Picture {
     function removePicture($picture_id){
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         if (mysqli_query($this->connection, $sql)!==TRUE){
-            echo "failed at removeing file " . $sql;
+            echo "failed at removing file" . $sql;
         }
         header('Location: '.'index.php');
     }
@@ -118,4 +117,8 @@ class Picture {
                    VALUES ($picture_id,$tags_id)";
         mysqli_query($this->connection,$insert);
     }
+    function closeConnection() {
+        mysqli_close($this->connection);
+    }
+    // TODO : add funcitons for EDITING pictures from database
 }
