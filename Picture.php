@@ -22,8 +22,6 @@ class Picture {
             exit;
         }
     }
-
-
     function loadPicture($picture_id) {
         $picture = array(
             'picture_id' => 0,
@@ -50,10 +48,12 @@ class Picture {
         }
 
     }
-
-
     function listPictures($sql = "SELECT * FROM pictures") {
-
+        if($sql =="") {
+              $sql = "SELECT * FROM   pictures";
+        }else {
+            $sql = $sql;
+        }
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
         //if (mysqli_num_rows($result) == 0) {echo "this gallery is empty! BYE!";exit;}
@@ -77,25 +77,18 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-
     // TODO : this is just temporary implementation, should be expanded
-
-
-
     function addPicture($filename, $extension, $path) {
         // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures
                 (filename, extension, path, place, upload_date)
                 VALUES ('$filename', '$extension','$path','$this->place',NOW());";
-
         if (mysqli_query($this->connection,$sql) === TRUE) {
             echo "picture is added to db";
         } else {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
     }
-
-
     function dumpDatabase(){
         $sql = "TRUNCATE TABLE ";
 
@@ -114,27 +107,19 @@ class Picture {
             WHERE picture_id=$picture_id";
 
         if (mysqli_query($this->connection, $sql)!==TRUE){
-            echo "failed at removeing file" . $sql;
+            echo "failed at removing file" . $sql;
         }
-
-        header('Location: '.'index.php');
     }
-
-    function getSortedBySQL($value, $order, $amount=0) {
+    function sortedPictures($order, $value, $amount) {
         if ($amount == 0) {$amount = "";}
-        else {$amount = "LIMIT $amount";}
-
+        else {$amount = "LIMIT " . $amount ."";}
         if ($order == 0) {$order = "DESC";}
         else if ($order > 0) {$order = "ASC";}
-
-        $sql = "SELECT *
-                FROM pictures
-                ORDER BY $value $order
-                $amount";
-
+        $sql = "SELECT * FROM pictures ORDER BY " . $value . " " . $order . " " . $amount . ";";
         return $this->listPictures($sql);
     }
-
+    function closeConnection() {
+        mysqli_close($this->connection);
+    }
     // TODO : add funcitons for EDITING pictures from database
-
 }
