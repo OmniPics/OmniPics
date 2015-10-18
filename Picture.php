@@ -84,14 +84,12 @@ class Picture {
         if (mysqli_query($this->connection, $sql . "has_meta;")!==TRUE) {echo "all WRONGED"."has_meta";}
         if (mysqli_query($this->connection, $sql . "has_album;")!==TRUE) {echo "all WRONGED"."has_album";}
         if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
-        header('Location: '.'index.php');
     }
     function removePicture($picture_id){
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         if (mysqli_query($this->connection, $sql)!==TRUE){
             echo "failed at removing file" . $sql;
         }
-        header('Location: '.'index.php');
     }
     function hasTag($tag){
         // TODO: logic for checking if tag exists in db. in SQL!
