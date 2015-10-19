@@ -59,7 +59,7 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($value, $order, $amount) {
+    function sortedPictures($order, $value, $amount) {
         if ($amount == 0) {$amount = "";}
         else {$amount = "LIMIT $amount";}
         if ($order == 0) {$order = "DESC";}
@@ -91,7 +91,6 @@ class Picture {
         if (mysqli_query($this->connection, $sql)!==TRUE){
             echo "failed at removing file" . $sql;
         }
-        header('Location: '.'index.php');
     }
     function hasTag($tag){
         // TODO: logic for checking if tag exists in db. in SQL!

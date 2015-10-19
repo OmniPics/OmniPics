@@ -29,7 +29,7 @@ if($sortBy=="") {
 	$pictureArray = $pictures->listPictures('');	
 } else {
 
-	$pictureArray = $pictures->sortedPictures($sortBy,$orderNumber,$limitNumber);
+	$pictureArray = $pictures->sortedPictures($orderNumber,$sortBy,$limitNumber);
 }
 
 
