@@ -59,7 +59,7 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($value, $order, $amount) {
+    function sortedPictures($order, $value, $amount) {
         if ($amount == 0) {$amount = "";}
         else {$amount = "LIMIT $amount";}
         if ($order == 0) {$order = "DESC";}

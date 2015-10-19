@@ -18,9 +18,21 @@ $(document).ready(function() {
 
 var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
-var amountOfPicsDisplayed = '6';
+var amountOfPicsDisplayed = '9';
 
 var selectedPicture_ids = {};
+
+function toggleAscDesc() {
+
+	if(picsAscOrDesc == '0'){
+
+		picsAscOrDesc = '1';
+	}else {
+		picsAscOrDesc = '0';
+	}
+
+	listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed);
+}
 
 function listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed) {
 
