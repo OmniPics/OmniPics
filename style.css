@@ -16,6 +16,28 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+ .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.true {}
+
 #wrapper  {
    
     text-align: center;
@@ -50,7 +72,7 @@ body {
     padding-right: 15px;
 }
 
-#uploadButton {
+#submit {
 
     float: left;
 }
@@ -112,6 +134,14 @@ body {
     
 }
 
+.visningsbilde {
+
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    
+}
+
 #pictureInfo {
 
     text-align: center;
@@ -127,14 +157,34 @@ body {
 .viewingPic {
 
     margin: 0 0 0 0;
-    margin-left: -15px;
-    margin-bottom: -15px;
+    margin-left: 0px;
+    margin-bottom: 0px;
 }
 #ViewerRow {
 
 
-    background-color: white;
-    height: 450px;
+   
+    
+}
+#toFrontPageButton {
+
+    float: left;
+}
+#tilbakeBlokk{
+    background-color: blue;
+    opacity: 0;
+     height: 500px;
+}
+
+#nesteBlokk{
+    background-color: red;
+    opacity: 0;
+    height: 500px;
+    }
+
+#pictureViewerImg{
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .selected {

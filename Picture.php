@@ -59,7 +59,7 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($value, $order, $amount) {
+    function sortedPictures($order, $value, $amount) {
         if ($amount == 0) {$amount = "";}
         else {$amount = "LIMIT $amount";}
         if ($order == 0) {$order = "DESC";}
@@ -71,7 +71,6 @@ class Picture {
         // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures (filename, extension, path, place, upload_date)
                 VALUES ('$filename', '$extension','$path','abc',NOW());";
-
         if (mysqli_query($this->connection,$sql) === TRUE) {
             echo "picture is added to db";
         } else {
@@ -85,14 +84,12 @@ class Picture {
         if (mysqli_query($this->connection, $sql . "has_meta;")!==TRUE) {echo "all WRONGED"."has_meta";}
         if (mysqli_query($this->connection, $sql . "has_album;")!==TRUE) {echo "all WRONGED"."has_album";}
         if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
-        header('Location: '.'index.php');
     }
     function removePicture($picture_id){
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         if (mysqli_query($this->connection, $sql)!==TRUE){
-            echo "failed at removeing file " . $sql;
+            echo "failed at removing file" . $sql;
         }
-        header('Location: '.'index.php');
     }
     function hasTag($tag){
         // TODO: logic for checking if tag exists in db. in SQL!
@@ -118,4 +115,8 @@ class Picture {
                    VALUES ($picture_id,$tags_id)";
         mysqli_query($this->connection,$insert);
     }
+    function closeConnection() {
+        mysqli_close($this->connection);
+    }
+    // TODO : add funcitons for EDITING pictures from database
 }
