@@ -1,39 +1,26 @@
 <?php
-/*
-	
-	README:
-	- file is made to get a lot of images from disk and check for tags
-	- this is for testing the exif tag function we have made "read_metadata_from_image.php"
 
-*/
-# the function that collects the meta from the images
-require("read_metadata_from_image.php");
+require("readMetaFromImage.php");
 
-# get all the files from the ./images-folder
-$dir = "./images/";
-$files = scandir($dir);
+//$dir = "./images/";			// the local image-directory
+#$metaArray = Array();		// init array
+$minFileLength = 3;			// the minimum length of the filename + extension (1.jpg) is still bigger than 3
+$maxFileLength = 50;		// the maximum length of the filename + extension (xxxxxx.jpg)
 
-foreach($files as $file) {
-	//$exploded = explode(".", $file);
-	if (strlen($file) > 3 && $file != ".girignore") {
-		print $file;
-		$data = get_metadata($dir, $file);
+
+function getAllMetaFromDir($dir) {
+	$files = scandir($dir);
+	$allMetadata = Array();
+	foreach($files as $file) {
+		if(strlen($file) > $minFileLength && $file != ".gitignore") {
+			$allMetadata = get_metadata($dir, $file);
+			array_push($metaArray, $data);
+		}
 	}
-	print_r(error_get_last());
-	print "<br>";
-
+	return $allMetadata;
 }
 
-//$data = get_metadata("./images/img.jpg");
-/*
-foreach ($data as $key => $section) {
-	foreach ($section as $name => $val) {
-		// do stuff
-		print $name;
-		print "<br>";
-	}
-}
-*/
-
+$unformat = getAllMetaFromDir("./images/");
+print json_encode($unformat);
 
 ?>
