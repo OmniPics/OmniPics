@@ -36,9 +36,14 @@ body {
     display: block;
 }
 
-.img-viewer {
+.img-frontPage {
 
     max-height: 150px;
+}
+
+.img-pictureViewer {
+
+    max-height: 500px;
 }
 
 #wrapper  {

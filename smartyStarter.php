@@ -8,7 +8,7 @@
 
 	require(SMARTY_DIR . "Smarty.class.php");
 
-	$smarty = new Smarty();
+	$smarty = new SmartyBC();
 	$smarty->setTemplateDir(PROJECT_DIR . "smarty/templates");
 	$smarty->setCompileDir(PROJECT_DIR . "smarty/templates_c");
 	$smarty->setCacheDir(PROJECT_DIR . "smarty/cache");

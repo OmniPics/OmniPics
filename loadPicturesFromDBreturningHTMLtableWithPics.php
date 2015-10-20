@@ -15,21 +15,24 @@ if($picturesToDelete != "") {
 
 
 
-$order = isset($_REQUEST["order"]) ? $_REQUEST["order"] : "";
-$orderNumber = intval($order);
+$picsAscDescString = isset($_REQUEST["picsAscOrDesc"]) ? $_REQUEST["picsAscOrDesc"] : "";
+$picsAscDesc = intval($picsAscDescString);
 
-$limit = isset($_REQUEST["limit"]) ? $_REQUEST["limit"] : "";
-$limitNumber = intval($limit);
+$picsIndexStartString = isset($_REQUEST["picsIndexStart"]) ? $_REQUEST["picsIndexStart"] : "";
+$picsIndexStart = intval($picsIndexStartString);
 
-$sortBy = isset($_REQUEST["sortby"]) ? $_REQUEST["sortby"] : "";
+$amountOfPicsString = isset($_REQUEST["amountOfPics"]) ? $_REQUEST["amountOfPics"] : "";
+$amountOfPics = intval($amountOfPicsString);
+
+$orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
 
-if($sortBy=="") {
+if($orderPicsBy=="") {
 	
 	$pictureArray = $pictures->listPictures('');	
 } else {
 
-	$pictureArray = $pictures->sortedPictures($orderNumber,$sortBy,$limitNumber);
+	$pictureArray = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, $amountOfPics);
 }
 
 
@@ -42,8 +45,8 @@ for($i = 0; $i < count($pictureArray); $i+=3) {
 		if (isset($pictureArray[$i+$j])) {
 
 			echo '<div class="col-md-4 portfolio-item">';
-				echo '<div id="golink' . ($i+$j) .'" onclick="pictureLink'; echo "('index.php?page=pictureViewer&&picture_id=" . ($i+$j) ."', '#golink" . ($i+$j) ."')"; echo '">';
-					echo '<img onclick="selected('; echo "'#frontPageImage" . ($i+$j) . "'," . $pictureArray[$i+$j]['picture_id']; echo ')" id="frontPageImage' . ($i+$j) .'" class="img-responsive img-viewer" src="' . $pictureArray[$i+$j]['path'] .'"></a>';
+				echo '<div id="golink' . ($i+$j) .'" onclick="pictureLink'; echo "('index.php?page=pictureViewer&&pictureIndex=" . ($i+$j) ."','#golink" . ($i+$j) . "')"; echo '">';
+					echo '<img onclick="selected('; echo "'#frontPageImage" . ($i+$j) . "'," . $pictureArray[$i+$j]['picture_id']; echo ')" id="frontPageImage' . ($i+$j) .'" class="img-responsive img-frontPage" src="' . $pictureArray[$i+$j]['path'] .'"></a>';
 					echo '<p id="pictureInfo">' . $pictureArray[$i+$j]['filename'] . '</p>';
 				echo '</div>';
 			echo '</div>';
@@ -54,3 +57,9 @@ for($i = 0; $i < count($pictureArray); $i+=3) {
 }
 
 $pictures->closeConnection();
+
+?>
+
+<div>
+SLICK!
+</div>

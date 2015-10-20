@@ -59,14 +59,27 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($order, $value, $amount) {
-        if ($amount == 0) {$amount = "";}
-        else {$amount = "LIMIT $amount";}
-        if ($order == 0) {$order = "DESC";}
-        else if ($order > 0) {$order = "ASC";}
-        $sql = "SELECT * FROM pictures ORDER BY $value $order $amount";
+
+    function sortedPictures($order, $value, $startIndex, $amount) {
+
+        if ($amount == 0) {
+            $limit = "";
+        }
+        else {
+            $limit = "LIMIT $startIndex, $amount";
+        }
+        if ($order == 0) {
+            $order = "DESC";
+        }
+        else if ($order > 0) {
+            $order = "ASC";
+        }
+
+        $sql = "SELECT * FROM pictures ORDER BY $value $order $limit";
+
         return $this->listPictures($sql);
     }
+
     function addPicture($filename, $extension, $path) {
         // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures (filename, extension, path, place, upload_date)
@@ -77,6 +90,7 @@ class Picture {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
     }
+
     function dumpDatabase(){
         $sql = "TRUNCATE TABLE ";
         if (mysqli_query($this->connection, $sql . "pictures;")!==TRUE) {echo "all WRONGED" ."pictures";}
