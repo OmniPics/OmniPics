@@ -36,7 +36,10 @@ body {
     display: block;
 }
 
-.true {}
+.img-viewer {
+
+    max-height: 150px;
+}
 
 #wrapper  {
    
