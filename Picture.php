@@ -95,9 +95,15 @@ class Picture {
     }
     function hasTag($tag){
         // TODO: logic for checking if tag exists in db. in SQL!
+        $sql = "SELECT COUNT(1) FROM tags WHERE tags LIKE $tag";
+        $result = mysqli_query($this->connection, $sql);
+        if ($result!==TRUE){echo "failed ad looking";}
+        if ($result === 0) { echo "it worked"};
+
     }
     function getTags(){
         // TODO: return array of all the tags with id's
+        return $this->tags;
     }
     function addTag($tag,$picture_id) {
         if(!$this->hasTag($tag)){
