@@ -8,7 +8,7 @@ $filepath = isset($_REQUEST["rotatePath"]) ? $_REQUEST["rotatePath"] : "";
 
 if($filepath != "") {
 
- 	$degrees = -90;  //change this to be whatever degree of rotation you want
+ 	$degrees = -90;  
 
 	header('Content-type: image/JPG');
 	$source = imagecreatefromjpeg($filepath);
@@ -40,22 +40,22 @@ $amountOfPics = intval($amountOfPicsString);
 
 $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
-$obviousFirstPosInPicturesArray = 0;
 
-
+//Retrieves only two pictures from DB. One pic to be used and the next pic to check if it exists.
 $pictureArray = $pictures->sortedPictures($picsAscDesc,$orderPicsBy,$picsIndexStart, $amountOfPics);
 
 
-/*In order to make the picture refresh immediately after rotating picture, the picture source needs to differ from it's previous source.
-To do this i add a ?x=$num*/
+/*In order to make the picture refresh immediately after rotating picture, the img src needs to differ from it's previous src.
+To do this i add a ?x=$num to source*/
 
 $num = rand(0,1000);
 
-//To avoid getting an index which doesn't exist when deleting the last picture
+//When deleting pictures I immediately get the next picture. This is to avoid trying to retrieve a next picture which doesn't exist.
 
 $noMorePics = 0;
 
-if(!isset($pictureArray[$obviousFirstPosInPicturesArray+1])) {
+//Checks if next picture exists
+if(!isset($pictureArray[1])) {
 
 	$picsIndexStart--;
 
@@ -66,17 +66,16 @@ if(!isset($pictureArray[$obviousFirstPosInPicturesArray+1])) {
 
 
 ?>
-
-			
+		
 
 		<ul class="nav nav-tabs">
 	        		<button id="pnecil" type="button" class="btn btn-default">
 	  					<span class="glyphicon glyphicon-pencil" ></span>
 					</button>
-					<button id="trash" type="button" class="btn btn-default" <?php echo 'onclick="deletePic('; echo "'" . $pictureArray[$obviousFirstPosInPicturesArray]['picture_id'] . "'," . $picsIndexStart . ", ".$noMorePics.")"; echo '">'; ?>
+					<button id="trash" type="button" class="btn btn-default" <?php echo 'onclick="deletePic('; echo "'" . $pictureArray[0]['picture_id'] . "'," . $picsIndexStart . ", ".$noMorePics.")"; echo '">'; ?>
 	  					<span class="glyphicon glyphicon-trash" ></span>
 					</button>
-					<?php echo '<button id="sort" type="button" class="btn btn-default" onclick="rotate('; echo "'" . $pictureArray[$obviousFirstPosInPicturesArray]['path'] . "'"; echo  ')">';
+					<?php echo '<button id="sort" type="button" class="btn btn-default" onclick="rotate('; echo "'" . $pictureArray[0]['path'] . "'"; echo  ')">';
 					?>
 					<span class="glyphicon glyphicon-repeat"></span>
 			</button>
@@ -89,11 +88,11 @@ if(!isset($pictureArray[$obviousFirstPosInPicturesArray+1])) {
 		}?>
 
 		<div class="col-md-7" id="pictureViewerImg">
-			<?php echo '<img class="img-responsive img-pictureViewer" src="' . $pictureArray[$obviousFirstPosInPicturesArray]["path"] .'?x=' . $num . '">';?>
+			<?php echo '<img class="img-responsive img-pictureViewer" src="' . $pictureArray[0]["path"] .'?x=' . $num . '">';?>
 		</div>
 
 
-		<?php if (isset($pictureArray[$obviousFirstPosInPicturesArray+1]) ) {
+		<?php if (isset($pictureArray[1]) ) {
 			echo '<div class="col-md-1" id="nesteBlokk" onclick="nextPic()"></div>';
 		}?>
 
