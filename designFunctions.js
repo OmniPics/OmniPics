@@ -37,7 +37,6 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics
 	$.ajax({
        type: "POST",
        url: "loadPicturesFromDBreturningHTMLtableWithPics.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
-       data: { 	selectedPictures : selectedPicture_ids },
        success: function(result){
             $("#pictures").html(result);
         }
@@ -48,7 +47,17 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics
 
 function deletePicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics) {
 
-	listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
+	$.ajax({
+       type: "POST",
+       url: "loadPicturesFromDBreturningHTMLtableWithPics.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
+       data: { 	selectedPictures : selectedPicture_ids },
+       success: function(result){
+            $("#pictures").html(result);
+        }
+    });
+
+    selectedPicture_ids = {};
+
 }
 
 function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics) {
