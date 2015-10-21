@@ -4,11 +4,12 @@
 			<button id="toFrontPageButton" type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='index.php'">Front Page
 			</button>
 
+
 		<script language="JavaScript" type="text/javascript">
 		{literal} //In order to write javascript in smarty
 
-			var picsAscOrDesc = '0';
-			var orderPicsBy = "upload_date";
+			var picsAscOrDesc = {/literal}{$picsAscDesc}{literal};
+			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$pictureIndex}{literal};
 			var amountOfPics = '2'; //Need two pictures to check if the next pic exists
 

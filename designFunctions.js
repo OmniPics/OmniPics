@@ -21,7 +21,6 @@ var orderPicsBy = "upload_date";
 var picsIndexStart = '0';
 var amountOfPics = '9';
 
-var loadFrontPage = true;
 
 var selectedPicture_ids = {};
 
