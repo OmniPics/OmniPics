@@ -82,8 +82,11 @@ class Picture {
         if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
     }
     function removePicture($picture_id){
+        mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 0;");
+        mysqli_query($this->connection,"DELETE FROM has_tags WHERE picture_id=$picture_id");
+        mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 1;");
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
-        if (mysqli_query($this->connection, $sql)!==TRUE){
+        if (mysqli_query($this->connection, $sql)!==TRUE) {
             echo "failed at removing file" . $sql;
         }
     }
