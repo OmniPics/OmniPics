@@ -13,11 +13,7 @@ class Picture {
         }
     }
     function loadPicture($picture_id) {
-        $picture = array(
-            'picture_id' => 0,
-            'filename' => "",
-            'extension' => "",
-        );
+        $picture = array();
         if ($picture_id > 0) {
             $sql = "SELECT *
                     FROM pictures
@@ -91,22 +87,42 @@ class Picture {
             echo "failed at removing file" . $sql;
         }
     }
-    function hasTag($tag){
-        // TODO: logic for checking if tag exists in db. in SQL!
-    }
-    function getTags(){
+    function getTags($picture_id){
         // TODO: return array of all the tags with id's
+        $temp = "CREATE VIEW temp AS SELECT * FROM pictures WHERE picture_id=$picture_id";
+        mysqli_query($this->connection, $temp);//temp view to select from JOIN
+        $sql = "SELECT *
+                FROM has_tags
+                INNER JOIN temp
+                  ON has_tags.picture_id = temp.picture_id
+                INNER JOIN tags
+                  ON has_tags.tags_id = tags.tags_id";
+        $result = mysqli_query($this->connection,$sql);
+        $this->tags = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $this->tags[] = $row['tags'];
+        }
+        mysqli_query($this->connection, "DROP VIEW temp");
+        mysqli_free_result($result);
+        return $this->tags;
+    }
+    private function hasTag($tag){
+        // TODO: logic for checking if tag exists in db. in SQL!
+        $sql = "SELECT COUNT(1) AS ANS FROM tags WHERE tags LIKE '$tag'";
+        $result = mysqli_query($this->connection, $sql);
+        while($row = mysqli_fetch_assoc($result)){$ans = $row['ANS'];}
+        return $ans;
     }
     function addTag($tag,$picture_id) {
         if(!$this->hasTag($tag)){
-            $sql = "INSERT INTO tags (tags) VALUES ($tag)";
+            $sql = "INSERT INTO tags (tags) VALUES ('$tag')";
             if (mysqli_query($this->connection, $sql)!==TRUE){
                 echo "failed at inserting tag " . $sql;
             }
         }
-        $sql = "SELECT tags_id FROM tags WHERE tags='$tag'";
+        $sql = "SELECT tags_id FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
-        if ($result!==TRUE){
+        if ($result!=TRUE){
             echo "failed at getting tagID wtf " . $sql;
         }
         while($row = mysqli_fetch_assoc($result)){$tags_id = $row['tags_id'];}
