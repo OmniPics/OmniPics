@@ -108,9 +108,16 @@ class Picture {
         mysqli_free_result($result);
         return $this->tags;
     }
-    private function hasTag($tag){
+    function removeTag($tag,$picture_id){
+        $tags_id = $this->hasTag($tag);
+        $sql = "DELETE FROM has_tags WHERE tags_id=$tags_id AND picture_id=$picture_id";
+        if(mysqli_query($this->connection,$sql)!==TRUE){
+            echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection";
+        }
+    }
+    function hasTag($tag){
         // TODO: logic for checking if tag exists in db. in SQL!
-        $sql = "SELECT COUNT(1) AS ANS FROM tags WHERE tags LIKE '$tag'";
+        $sql = "SELECT tags_id AS ANS FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
         while($row = mysqli_fetch_assoc($result)){$ans = $row['ANS'];}
         return $ans;
