@@ -5,12 +5,12 @@
 			</button>
 
 		<script language="JavaScript" type="text/javascript">
-		{literal}
+		{literal} //In order to write javascript in smarty
 
 			var picsAscOrDesc = '0';
 			var orderPicsBy = "upload_date";
 			var picsIndexStart = {/literal}{$pictureIndex}{literal};
-			var amountOfPics = '2'; //To check if the next pic exists
+			var amountOfPics = '2'; //Need two pictures to check if the next pic exists
 
 			$(document).ready(function() {
 				pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
@@ -20,11 +20,39 @@
 
 				$.ajax({
 			       type: "POST",
-			       url: "rotate.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
+			       url: "getPictureViewerContent.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
 			       success: function(result){
 			            $("#pictureViewer").html(result);
 			        }
 			    });
+			}
+
+			function rotate(rotatePath) {
+
+				$.ajax({
+			       type: "POST",
+			       url: "getPictureViewerContent.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"&&rotatePath="+rotatePath+"",
+			       success: function(result){
+			            $("#pictureViewer").html(result);
+			        }
+			    });
+			}
+
+			function deletePic(pictureId, picsIndexStart, noMorePics) {
+				
+				if(noMorePics) {
+
+					window.location = "index.php"; 
+				}
+
+				$.ajax({
+			       type: "POST",
+			       url: "getPictureViewerContent.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"&&deletePic="+pictureId+"",
+			       success: function(result){
+			            $("#pictureViewer").html(result);
+			        }
+			    });
+
 			}
 
 			function nextPic() {

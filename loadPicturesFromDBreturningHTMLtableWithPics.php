@@ -14,7 +14,6 @@ if($picturesToDelete != "") {
 }
 
 
-
 $picsAscDescString = isset($_REQUEST["picsAscOrDesc"]) ? $_REQUEST["picsAscOrDesc"] : "";
 $picsAscDesc = intval($picsAscDescString);
 
@@ -59,7 +58,3 @@ for($i = 0; $i < count($pictureArray); $i+=3) {
 $pictures->closeConnection();
 
 ?>
-
-<div>
-SLICK!
-</div>
