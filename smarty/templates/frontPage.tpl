@@ -34,7 +34,7 @@
 				<button id="trash" type="button" class="btn btn-default" onclick="deletePicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed)">
   					<span class="glyphicon glyphicon-trash"></span>
 				</button>
-        		<button id="sort" type="button" class="btn btn-default">
+        		<button id="sort" type="button" class="btn btn-default" onclick="toggleAscDesc()">
   					<span class="glyphicon glyphicon-sort"></span>
 				</button>
 	</ul>

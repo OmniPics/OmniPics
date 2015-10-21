@@ -55,7 +55,7 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($value, $order, $amount) {
+    function sortedPictures($order, $value, $amount) {
         if ($amount == 0) {$amount = "";}
         else {$amount = "LIMIT $amount";}
         if ($order == 0) {$order = "DESC";}
@@ -80,14 +80,12 @@ class Picture {
         if (mysqli_query($this->connection, $sql . "has_meta;")!==TRUE) {echo "all WRONGED"."has_meta";}
         if (mysqli_query($this->connection, $sql . "has_album;")!==TRUE) {echo "all WRONGED"."has_album";}
         if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
-        header('Location: '.'index.php');
     }
     function removePicture($picture_id){
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         if (mysqli_query($this->connection, $sql)!==TRUE){
             echo "failed at removing file" . $sql;
         }
-        header('Location: '.'index.php');
     }
     function getTags($picture_id){
         // TODO: return array of all the tags with id's
