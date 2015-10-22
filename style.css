@@ -36,7 +36,15 @@ body {
     display: block;
 }
 
-.true {}
+.img-frontPage {
+
+    max-height: 150px;
+}
+
+.img-pictureViewer {
+
+    max-height: 500px;
+}
 
 #wrapper  {
    
@@ -160,25 +168,20 @@ body {
     margin-left: 0px;
     margin-bottom: 0px;
 }
-#ViewerRow {
 
-
-   
-    
-}
 #toFrontPageButton {
 
     float: left;
 }
 #tilbakeBlokk{
     background-color: blue;
-    opacity: 0;
-     height: 500px;
+    opacity: 0.5;
+    height: 500px;
 }
 
 #nesteBlokk{
     background-color: red;
-    opacity: 0;
+    opacity: 0.5;
     height: 500px;
     }
 

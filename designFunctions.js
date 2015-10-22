@@ -18,28 +18,25 @@ $(document).ready(function() {
 
 var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
-var amountOfPicsDisplayed = '100';
+var amountOfPicsDisplayed = '9';
+var picsIndexStart = '0';
+var amountOfPics = '9';
 
 var selectedPicture_ids = {};
 
 function toggleAscDesc() {
 
-	if(picsAscOrDesc == '0'){
+	if(picsAscOrDesc == '0') picsAscOrDesc = '1';
+	else picsAscOrDesc = '0';
 
-		picsAscOrDesc = '1';
-	}else {
-		picsAscOrDesc = '0';
-	}
-
-	listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed);
+	listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
 }
 
-function listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed) {
+function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics) {
 
 	$.ajax({
        type: "POST",
-       url: "loadPicturesFromDBreturningHTMLtableWithPics.php?order="+picsAscOrDesc+"&&sortby="+orderPicsBy+"&&limit="+amountOfPicsDisplayed+"",
-       data: { 	selectedPictures : selectedPicture_ids },
+       url: "loadPicturesFromDBreturningHTMLtableWithPics.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
        success: function(result){
             $("#pictures").html(result);
         }
@@ -48,11 +45,31 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed) {
     selectedPicture_ids = {};
 }
 
-function deletePicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed) {
+function deletePicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics) {
 
-	listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed);
+	$.ajax({
+       type: "POST",
+       url: "loadPicturesFromDBreturningHTMLtableWithPics.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
+       data: { 	selectedPictures : selectedPicture_ids },
+       success: function(result){
+            $("#pictures").html(result);
+        }
+    });
+
+    selectedPicture_ids = {};
+
 }
 
+function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics) {
+
+	$.ajax({
+       type: "POST",
+       url: "rotate.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
+       success: function(result){
+            $("#pictureViewer").html(result);
+        }
+    });
+}
 
 
 
@@ -77,8 +94,6 @@ function selected(image_CSS_id, db_picture_id) {
 
 		$(''+image_CSS_id+'').addClass('selected');
 
-
-
 		selectedPicture_ids[''+db_picture_id+''] = db_picture_id;
 	}
 }
@@ -98,7 +113,7 @@ function sortBy(sortingType) {
 					$('#sted').removeClass('active');
 
 					orderPicsBy = 'upload_date';
-					listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed);
+					listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
 
 				}
 				break;
@@ -112,7 +127,7 @@ function sortBy(sortingType) {
 					$('#sted').removeClass('active');
 
 					orderPicsBy = 'filename';
-					listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed);
+					listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
 				}
 				break;
 
@@ -125,7 +140,7 @@ function sortBy(sortingType) {
 					$('#sted').addClass('active');
 
 					orderPicsBy = 'place';
-					listPicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed);
+					listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
 				}
 				break;
 		}

@@ -13,11 +13,7 @@ class Picture {
         }
     }
     function loadPicture($picture_id) {
-        $picture = array(
-            'picture_id' => 0,
-            'filename' => "",
-            'extension' => "",
-        );
+        $picture = array();
         if ($picture_id > 0) {
             $sql = "SELECT *
                     FROM pictures
@@ -59,12 +55,12 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($order, $value, $amount) {
-        if ($amount == 0) {$amount = "";}
-        else {$amount = "LIMIT $amount";}
+    function sortedPictures($order, $value, $startIndex, $amount) {
+        if ($amount == 0) {$limit = "";}
+        else {$limit = "LIMIT $startIndex, $amount";}
         if ($order == 0) {$order = "DESC";}
         else if ($order > 0) {$order = "ASC";}
-        $sql = "SELECT * FROM pictures ORDER BY $value $order $amount";
+        $sql = "SELECT * FROM pictures ORDER BY $value $order $limit";
         return $this->listPictures($sql);
     }
     function addPicture($filename, $extension, $path) {
@@ -86,27 +82,59 @@ class Picture {
         if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
     }
     function removePicture($picture_id){
+        mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 0;");
+        mysqli_query($this->connection,"DELETE FROM has_tags WHERE picture_id=$picture_id");
+        mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 1;");
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
-        if (mysqli_query($this->connection, $sql)!==TRUE){
+        $tmp_array = $this->loadPicture($picture_id);
+        unlink("images/".$tmp_array["filename"]);
+        if (mysqli_query($this->connection, $sql)!==TRUE) {
             echo "failed at removing file" . $sql;
+        }
+    }
+    function getTags($picture_id){
+        // TODO: return array of all the tags with id's
+        $temp = "CREATE VIEW temp AS SELECT * FROM pictures WHERE picture_id=$picture_id";
+        mysqli_query($this->connection, $temp);//temp view to select from JOIN
+        $sql = "SELECT *
+                FROM has_tags
+                INNER JOIN temp
+                  ON has_tags.picture_id = temp.picture_id
+                INNER JOIN tags
+                  ON has_tags.tags_id = tags.tags_id";
+        $result = mysqli_query($this->connection,$sql);
+        $this->tags = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $this->tags[] = $row['tags'];
+        }
+        mysqli_query($this->connection, "DROP VIEW temp");
+        mysqli_free_result($result);
+        return $this->tags;
+    }
+    function removeTag($tag,$picture_id){
+        $tags_id = $this->hasTag($tag);
+        $sql = "DELETE FROM has_tags WHERE tags_id=$tags_id AND picture_id=$picture_id";
+        if(mysqli_query($this->connection,$sql)!==TRUE){
+            echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection";
         }
     }
     function hasTag($tag){
         // TODO: logic for checking if tag exists in db. in SQL!
-    }
-    function getTags(){
-        // TODO: return array of all the tags with id's
+        $sql = "SELECT tags_id AS ANS FROM tags WHERE tags LIKE '$tag'";
+        $result = mysqli_query($this->connection, $sql);
+        while($row = mysqli_fetch_assoc($result)){$ans = $row['ANS'];}
+        return $ans;
     }
     function addTag($tag,$picture_id) {
         if(!$this->hasTag($tag)){
-            $sql = "INSERT INTO tags (tags) VALUES ($tag)";
+            $sql = "INSERT INTO tags (tags) VALUES ('$tag')";
             if (mysqli_query($this->connection, $sql)!==TRUE){
                 echo "failed at inserting tag " . $sql;
             }
         }
-        $sql = "SELECT tags_id FROM tags WHERE tags='$tag'";
+        $sql = "SELECT tags_id FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
-        if ($result!==TRUE){
+        if ($result!=TRUE){
             echo "failed at getting tagID wtf " . $sql;
         }
         while($row = mysqli_fetch_assoc($result)){$tags_id = $row['tags_id'];}

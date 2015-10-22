@@ -31,7 +31,7 @@
         		<li role="presentation" id="dato" onclick="sortBy('upload_date')"><a role="button">Dato</a></li>
         		<li role="presentation" id="navn" onclick="sortBy('filename')"><a role="button">Navn</a></li>
         		<li role="presentation" id="sted" onclick="sortBy('place')"><a role="button">Sted</a></li>
-				<button id="trash" type="button" class="btn btn-default" onclick="deletePicsFromDB(picsAscOrDesc, orderPicsBy, amountOfPicsDisplayed)">
+				<button id="trash" type="button" class="btn btn-default" onclick="deletePicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics)">
   					<span class="glyphicon glyphicon-trash"></span>
 				</button>
         		<button id="sort" type="button" class="btn btn-default" onclick="toggleAscDesc()">
