@@ -20,7 +20,7 @@ switch($page) {
 		break;
 
 	default:
-	
+
 		$smarty->display('frontPage.tpl');
 		break;
 	}

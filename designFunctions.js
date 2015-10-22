@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
-var amountOfPicsDisplayed = '9';
+var amountOfPicsDisplayed = '100';
 
 var selectedPicture_ids = {};
 
