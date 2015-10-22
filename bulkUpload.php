@@ -18,16 +18,23 @@ if(!empty($_FILES['myPic']['name'][0])) {
     $file_tmp = $myPic['tmp_name'][$position];
     $file_size = $myPic['size'][$position];
     $file_error = $myPic['error'][$position];
+    $name = $filename;
+    $name_ext = pathinfo($name);
 
     $extension = explode('.', $filename);
     $extension = strtolower(end($extension));
+    $i=1;
 
     if(in_array($extension, $allowed)) {
 
       if($file_error === 0) {
 
           $file_dir = "images/" . $filename;
-
+          while(file_exists("images/" . $filename)){
+            $filename = $name_ext["filename"] . "_" . $i++ . "." . $name_ext["extension"];
+          }
+            $file_dir = "images/" . $filename;
+            $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, $file_dir)) {
 
             $uploaded[$position] = $file_dir;
@@ -48,14 +55,14 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
       echo "$filename has been successfully uploaded!.";
 
-      
+
       $picture->addPicture($filename, $extension, $file_dir);
 
     // set proper permissions on the new file
 
       //chmod(UPLOAD.DIR . $filename, 0644);
-      
-    
+
+
     } else if(!empty($failed)) {
 
       print_r($failed);
@@ -65,4 +72,3 @@ if(!empty($_FILES['myPic']['name'][0])) {
 }
 
   header('Location: '.'index.php');
-
