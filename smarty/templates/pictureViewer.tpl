@@ -1,8 +1,8 @@
 {include file="headerPictureViewer.tpl"}
 
-		<div id="topArea">
+		<!--<div id="topArea">
 			<button id="toFrontPageButton" type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='index.php'">Front Page
-			</button>
+			</button>-->
 
 
 		<script language="JavaScript" type="text/javascript">

@@ -1,0 +1,30 @@
+body {
+
+	height: 100%;
+	margin: 0 0 0 0;
+}
+
+#img {
+	float: none;
+}
+
+#parent {
+
+	position: relative;
+}
+
+#leftChild {
+
+	position: absolute;
+	background-color: blue;
+	opacity: 0;
+	
+	
+}
+
+#rightChild {
+
+	position: absolute;
+	background-color: red;
+	opacity: 0;
+}
