@@ -32,6 +32,8 @@ class Picture {
             return $picture;
         }
     }
+
+
     function listPictures($sql = "SELECT * FROM pictures") {
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}

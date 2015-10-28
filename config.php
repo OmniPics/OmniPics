@@ -11,6 +11,4 @@
 	$allowed_image_types = array("jpeg","jpg");
 	$desired_image_tags = array("FileName","Width","Height","FileSize");
 
-
-
 ?>

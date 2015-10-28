@@ -1,27 +1,25 @@
 <?php
 
 
-	include("config.php");
+	/*
+		config file for the meta data
+		The desired tags are the tags that will be collected and send over
+		and handled by the db.
 
+		If you wish to implement other tags, add them here.
 
+	*/
+	$allowed_image_types = array("jpeg","jpg");
+	$desired_image_tags = array("FileName","Width","Height","FileSize");
 
 	function process($data) {
 		foreach($data as $point) {
 			foreach($point as $tag=>$value) {
 
-
-				/*
-					using the desired_image_tags we can get the meta we want
-				*/
-
-				foreach($file)
-
-
 				print $tag . " : " . $value . "<br>";
 			}
 		}
 	}
-
 
 	function getImageMeta($dir, $filename) {
 

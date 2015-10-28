@@ -2,6 +2,8 @@
 define("UPLOAD_DIR", "images/");
 require("setup.php");
 require("Picture.php");
+require("getImageMeta.php");
+
 
 $picture = new Picture($local_database, $local_username, $local_password);
 
@@ -57,6 +59,9 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
 
       $picture->addPicture($filename, $extension, $file_dir);
+
+
+
 
     // set proper permissions on the new file
 
