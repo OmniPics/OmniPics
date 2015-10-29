@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		
+        <script src="./bin/jquery.Jcrop.min.js"></script>
+		<link href="./bin/jquery.Jcrop.min.css" type="tex/css" rel="stylesheet">
+        
+
+        <title>
+        Cropping av bilder
+        </title>
+    </head>
+    <body>
+
+	    <div>
+	    	<img id="target" src="img.jpg">
+	    	<button>Crop</button>
+	    </div>
+
+    </body>
+    <script>
+
+	    window.onload = function() {
+
+	    }
+
+	    $("#target").Jcrop({
+	    	onChange: showCoords,
+	    	onSelect: showCoords,
+	    	onRelease: sendCoords
+	    },function() {
+	    	jcrop_api = this;
+	    })
+
+
+	    $('#coords').on('change','input',function(e){
+	      var x1 = $('#x1').val(),
+	          x2 = $('#x2').val(),
+	          y1 = $('#y1').val(),
+	          y2 = $('#y2').val();
+	      jcrop_api.setSelect([x1,y1,x2,y2]);
+	    });
+	  });
+
+
+    </script>
+
+</html>
