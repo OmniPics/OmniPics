@@ -24,14 +24,28 @@ PRIMARY KEY (meta_id)
 
 CREATE TABLE has_album
 (
-album_id INT REFERENCES Album(picture_id),
 picture_id INT REFERENCES Picture(picture_id),
+album_id INT REFERENCES Album(picture_id),
 CONSTRAINT has_album_pkey PRIMARY KEY (album_id, picture_id)
 );
 
 CREATE TABLE has_meta
 (
-meta_id INT REFERENCES Meta(meta_id),
 picture_id INT REFERENCES Pictures(picture_id),
+meta_id INT REFERENCES Meta(meta_id),
 CONSTRAINT has_meta_pkey PRIMARY KEY (meta_id, picture_id)
+);
+
+CREATE TABLE tags
+(
+tags_id INT AUTO_INCREMENT,
+tags VARCHAR(255),
+PRIMARY KEY (tags_id)
+);
+
+CREATE TABLE has_tags
+(
+picture_id INT REFERENCES Pictures(picture_id),
+tags_id INT REFERENCES Tags(tags_id),
+CONSTRAINT has_tags_pkey PRIMARY KEY (tags_id, picture_id)
 );

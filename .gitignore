@@ -1,5 +1,4 @@
 # list fo files to ignore
-
 setup.php
-
+test.php
 .idea/
