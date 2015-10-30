@@ -24,16 +24,18 @@ if(!empty($_FILES['myPic']['name'][0])) {
     $extension = explode('.', $filename);
     $extension = strtolower(end($extension));
     $i=1;
+    $pieces = explode('.',$name);
+    $filename= $pieces[0];
 
     if(in_array($extension, $allowed)) {
 
       if($file_error === 0) {
 
-          $file_dir = "images/" . $filename;
-          while(file_exists("images/" . $filename)){
-            $filename = $name_ext["filename"] . "_" . $i++ . "." . $name_ext["extension"];
+          $file_dir = "images/" . $filename . "." .$pieces[1];
+          while(file_exists("images/" . $filename . "." . $pieces[1])){
+            $filename = $name_ext["filename"] . "_" . $i++;
           }
-            $file_dir = "images/" . $filename;
+            $file_dir = "images/" . $filename . "." . $pieces[1];
             $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, $file_dir)) {
 
