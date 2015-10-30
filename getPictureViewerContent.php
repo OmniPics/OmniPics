@@ -5,19 +5,46 @@ require("Picture.php");
 $pictures = new Picture($local_database, $local_username, $local_password);
 
 $filepath = isset($_REQUEST["rotatePath"]) ? $_REQUEST["rotatePath"] : "";
+$picture_id = isset($_REQUEST["picture_id"]) ? $_REQUEST["picture_id"] : "";
 
 if($filepath != "") {
 
  	$degrees = -90;  
 
-	header('Content-type: image/JPG');
-	$source = imagecreatefromjpeg($filepath);
-	$rotate = imagerotate($source,$degrees,0);
+	
 
-	imagejpeg($rotate, $filepath); //save the new image
+	$rotatedBy = substr ($filepath , strlen($filepath)-3, 2);
+	$coreFilepath = substr ($filepath , 0, strlen($filepath)-3);
 
-	imagedestroy($source); //free up the memory
-	imagedestroy($rotate);  //free up the memory
+	switch($rotatedBy) {
+
+		case '_a':
+			 $newFilepath = str_replace($coreFilepath, "", $coreFilepath.'_b');
+			 break;
+		case '_b':
+			 $newFilepath = str_replace($coreFilepath, "", $coreFilepath.'_c');
+			 break;
+		case '_c':
+			 $newFilepath = str_replace($coreFilepath, "", $coreFilepath.'_a');
+			 break;
+		default:
+			$newFilepath = $filepath . '_a';
+
+			header('Content-type: image/JPG');
+			$source = imagecreatefromjpeg($filepath);
+			$rotate = imagerotate($source,$degrees,0);
+
+			imagejpeg($rotate, $newFilepath); //save the new image
+
+			imagedestroy($source); //free up the memory
+			imagedestroy($rotate);  //free up the memory
+
+	}
+
+
+		$pictures->updateFilepath($picture_id, $newFilepath);
+	
+
 }
 
 $deletePic = isset($_REQUEST["deletePic"]) ? $_REQUEST["deletePic"] : "";
@@ -66,41 +93,38 @@ if(!isset($pictureArray[1])) {
 
 
 ?>
-		
+			<?php echo '<img id="retrieveImgInfo" src="' . $pictureArray[0]["path"] . '" style="display: none;" >';?>
 
-		<ul class="nav nav-tabs">
-	        		<button id="pnecil" type="button" class="btn btn-default">
-	  					<span class="glyphicon glyphicon-pencil" ></span>
+			<?php if ($picsIndexStart>0) {
+
+			echo '<div class="col-md-1" id="leftChild" onclick="previousPic()"></div>';
+			}?>
+			<?php echo '<img id="img" src="' . $pictureArray[0]["path"] .'?x=' . $num . '">';?>
+			<?php if (isset($pictureArray[1]) ) {
+				echo '<div id="rightChild" class="col-md-1" onclick="nextPic()" ><span id="right" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>';
+			}?>
+				<div id ="topMenuRight">
+					<button type="button" class="btn btn-default">
+		  					<span class="glyphicon glyphicon-pencil" ></span>
 					</button>
-					<button id="trash" type="button" class="btn btn-default" <?php echo 'onclick="deletePic('; echo "'" . $pictureArray[0]['picture_id'] . "'," . $picsIndexStart . ", ".$noMorePics.")"; echo '">'; ?>
-	  					<span class="glyphicon glyphicon-trash" ></span>
-					</button>
-					<?php echo '<button id="sort" type="button" class="btn btn-default" onclick="rotate('; echo "'" . $pictureArray[0]['path'] . "'"; echo  ')">';
+					
+					<?php echo 
+					'<button type="button" class="btn btn-default" onclick="rotate('; echo "'" . $pictureArray[0]['picture_id'] . "',";	 echo "'" . $pictureArray[0]['path'] . "'"; echo  ')">';
 					?>
-					<span class="glyphicon glyphicon-repeat"></span>
-			</button>
-		</ul>
-
-		<!--<div id="ViewerRow" class="row">-->
-		<?php if ($picsIndexStart>0) {
-
-			echo '<div class="col-md-1" id="tilbakeBlokk" onclick="previousPic()"></div>';
-		}?>
-
-		<div class="col-md-7" id="pictureViewerImg">
-			<?php echo '<img class="img-responsive img-pictureViewer" src="' . $pictureArray[0]["path"] .'?x=' . $num . '">';?>
-		</div>
+		  					<span class="glyphicon glyphicon-repeat" ></span>
+					</button>
+					<button type="button" class="btn btn-default" <?php echo 'onclick="deletePic('; echo "'" . $pictureArray[0]['picture_id'] . "'," . $picsIndexStart . ", ".$noMorePics.")"; echo '">'; ?>
+		  					<span class="glyphicon glyphicon-trash" ></span>
+					</button>
+				</div>
+				<div id ="topMenuLeft">
+					<button id="toFrontPageButton" type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='index.php'">Front Page
+					</button>
+				</div>
+				
 
 
-		<?php if (isset($pictureArray[1]) ) {
-			echo '<div class="col-md-1" id="nesteBlokk" onclick="nextPic()"></div>';
-		}?>
-
-		<div class="col-md-3">
-						Metadata kommer her
-
-						<!--<p>{$pictures[$i+$j].filename}</p>-->
-		</div>
+	  
 
 
 <!--<a href ="rotate.php?filepath={$pictures[$picture_id].path}&&picture_id={$picture_id}"> baller </a>

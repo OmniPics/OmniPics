@@ -73,12 +73,9 @@ function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics)
 
 
 
-function pictureLink(link_path, link_CSS_id) {
+function pictureLink(startIndex) {
 
-	$(''+link_CSS_id+'').dblclick(function() {
-
-		window.location = link_path;
-	});
+		window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"&&amountOfPics=1"; 
 }
 
 function selected(image_CSS_id, db_picture_id) {
