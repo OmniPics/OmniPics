@@ -64,7 +64,6 @@ class Picture {
         return $this->listPictures($sql);
     }
     function addPicture($filename, $extension, $path) {
-        // TODO: fix $this->place !!!
         $sql = "INSERT INTO pictures (filename, extension, path, place, upload_date)
                 VALUES ('$filename', '$extension','$path','abc',NOW());";
         if (mysqli_query($this->connection,$sql) === TRUE) {
@@ -105,9 +104,39 @@ class Picture {
         }
     }
 
- 
+    function searchTags(){
+        $tagid = $this->hasTag(func_get_args()[0]);
+        if (func_num_args() > 0) {
+            $wheretag = "tags_id=$tagid";
+            for ($i=1;$i<func_num_args();$i++){
+                if (!$this->hasTag(func_get_args()[$i])){continue;}
+                $tagid = $this->hasTag(func_get_args()[$i]);
+                $wheretag .= " OR tags_id=$tagid";
+            }
+        }
+        $temp = "CREATE VIEW tags_ids AS SELECT * FROM tags WHERE " . $wheretag;
+        mysqli_query($this->connection, $temp);//temp view to select from JOIN
+        $sql = "SELECT DISTINCT(pictures.picture_id) AS id
+                FROM has_tags
+	            INNER JOIN tags_ids
+		          ON has_tags.tags_id=tags_ids.tags_id
+                INNER JOIN pictures
+		          ON has_tags.picture_id=pictures.picture_id";
+        $result = mysqli_query($this->connection, $sql);
+        $new_array = array();
+        while ($row = mysqli_fetch_assoc($result)){
+            $new_array[] = $row['id'];
+        }
+        $sql_pics = "SELECT * FROM pictures WHERE ";
+        $sql_pics .= "picture_id=$new_array[0] ";
+        for ($i=1;$i<sizeof($new_array); $i++){
+            $sql_pics .= "OR picture_id=$new_array[$i] ";
+        }
+        mysqli_query($this->connection, "DROP VIEW tags_ids");
+        return $this->listPictures($sql_pics);
+    }
+
     function getTags($picture_id){
-        // TODO: return array of all the tags with id's
         $temp = "CREATE VIEW temp AS SELECT * FROM pictures WHERE picture_id=$picture_id";
         mysqli_query($this->connection, $temp);//temp view to select from JOIN
         $sql = "SELECT *
@@ -133,7 +162,6 @@ class Picture {
         }
     }
     function hasTag($tag){
-        // TODO: logic for checking if tag exists in db. in SQL!
         $sql = "SELECT tags_id AS ANS FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
         while($row = mysqli_fetch_assoc($result)){$ans = $row['ANS'];}
@@ -160,5 +188,4 @@ class Picture {
     function closeConnection() {
         mysqli_close($this->connection);
     }
-    // TODO : add funcitons for EDITING pictures from database
 }
