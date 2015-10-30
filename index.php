@@ -12,6 +12,16 @@ $picture_id =  isset($_REQUEST["picture_id"]) ? $_REQUEST["picture_id"] : "";
 $sortedPictureArray = isset($_REQUEST["sortedPictureArray"]) ? $_REQUEST["sortedPictureArray"] : "";
 $startIndex = isset($_REQUEST["startIndex"]) ? $_REQUEST["startIndex"] : "";
 
+$picsAscDescString = isset($_REQUEST["picsAscOrDesc"]) ? $_REQUEST["picsAscOrDesc"] : "";
+$picsAscDesc = intval($picsAscDescString);
+
+$picsIndexStartString = isset($_REQUEST["picsIndexStart"]) ? $_REQUEST["picsIndexStart"] : "";
+$picsIndexStart = intval($picsIndexStartString);
+
+$amountOfPicsString = isset($_REQUEST["amountOfPics"]) ? $_REQUEST["amountOfPics"] : "";
+$amountOfPics = intval($amountOfPicsString);
+
+$orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
 
 
@@ -20,13 +30,12 @@ switch($page) {
 
 	case 'pictureViewer':
 
-		//$picture = $pictures->getPictureById($picture_id);
+		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 3);
 
-		if($sortedPictureArray != "") {
-			$smarty->assign("sortedPictureArray", $picsAscDesc);
-		}
 		$smarty->assign("picture", $picture);
-		
+		$smarty->assign("picsAscDesc", $picsAscDesc);
+		$smarty->assign("orderPicsBy", $orderPicsBy);
+		$smarty->assign("picsIndexStart", $picsIndexStart);
 		$smarty->display('pictureViewer.tpl');
 		break;
 

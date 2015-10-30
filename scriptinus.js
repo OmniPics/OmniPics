@@ -14,8 +14,8 @@ $(document).ready(function() {
 	$('body').height(height);
 	$('div').height(height);
 
-	var x = document.getElementById("retrieveImgInfo").naturalWidth;
-	var y = document.getElementById("retrieveImgInfo").naturalHeight;
+	var x = document.getElementById("img").naturalWidth;
+	var y = document.getElementById("img").naturalHeight;
 
 	var perfRatio = width/height;
 	var imgRatio = x/y;

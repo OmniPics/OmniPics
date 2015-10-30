@@ -74,13 +74,15 @@ class Picture {
         }
     }
     function updateFilepath($picture_id, $newFilepath) {
-        $sql = "UPDATE pictures SET filepath = $newFilepath WHERE picture_id = $picture_id";
+        $sql = "UPDATE pictures SET path ='" . $newFilepath . "' WHERE picture_id = $picture_id";
+
 
         if (mysqli_query($this->connection,$sql) === TRUE) {
-            echo "picture filepath changed successfully";
+            //echo "picture filepath changed successfully";
         } else {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
+
 
     }
     function dumpDatabase(){
@@ -103,25 +105,7 @@ class Picture {
         }
     }
 
-    function getPictureById($picture_id) {
-
-        $sql = "SELECT * FROM pictures WHERE picture_id = $picture_id";
-
-        $result = mysqli_query($this->connection,$sql);
-
-        if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
-        while($row = mysqli_fetch_assoc($result))
-        {
-            $this->picture_array[$row["picture_id"]] =  array(
-                "picture_id" => $row["picture_id"],
-                "filename" => $row["filename"],
-                "extension" => $row["extension"],
-                "path" => $row["path"],
-                "place" => $row["place"],
-                "upload_date" => $row["upload_date"],
-            );
-        }
-    }
+ 
     function getTags($picture_id){
         // TODO: return array of all the tags with id's
         $temp = "CREATE VIEW temp AS SELECT * FROM pictures WHERE picture_id=$picture_id";
