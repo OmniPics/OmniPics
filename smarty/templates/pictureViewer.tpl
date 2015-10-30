@@ -55,7 +55,7 @@
 			       success: function(result){
 			            $('#img').attr('src', result);
 			            console.log(result);
-			        }
+			          	rotate();
 			    });
 			}
 
