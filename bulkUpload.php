@@ -2,6 +2,7 @@
 define("UPLOAD_DIR", "images/");
 require("setup.php");
 require("Picture.php");
+require("backend/functions.php");
 
 $picture = new Picture($local_database, $local_username, $local_password);
 
@@ -36,7 +37,7 @@ if(!empty($_FILES['myPic']['name'][0])) {
             $file_dir = "images/" . $filename;
             $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, $file_dir)) {
-
+            createThumbnail($filename);
             $uploaded[$position] = $file_dir;
           } else {
 
