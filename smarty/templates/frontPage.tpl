@@ -13,7 +13,7 @@
 </form>
 
 	<div id="search" class="input-group">
-	    <input type="text" class="form-control" placeholder="Søk">
+	    <input type="text" class="form-control" placeholder="Søk" onclick="complete(this.text)">
 	    <span class="input-group-btn">
 	        <button class="btn btn-default" type="button">
 	        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
