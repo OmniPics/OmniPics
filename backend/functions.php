@@ -2,7 +2,7 @@
 function createThumbnail($filename) {
     $path_to_image_directory = "images/";
     $path_to_thumbs_directory = "images/thumbs/";
-    $final_width_of_image = 50;
+    $final_width_of_image = 30;
 
     if(preg_match('/[.](jpg)$/', $filename)) {
         $im = imagecreatefromjpeg($path_to_image_directory . $filename);
@@ -10,7 +10,9 @@ function createThumbnail($filename) {
         $im = imagecreatefromgif($path_to_image_directory . $filename);
     } else if (preg_match('/[.](png)$/', $filename)) {
         $im = imagecreatefrompng($path_to_image_directory . $filename);
-    }
+    } else if (preg_match('/[.](jpeg)$/', $filename)) {
+        $im = imagecreatefromjpeg($path_to_image_directory . $filename);
+    };
 
     $ox = imagesx($im);
     $oy = imagesy($im);
