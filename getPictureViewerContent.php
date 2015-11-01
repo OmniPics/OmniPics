@@ -13,39 +13,62 @@ $picName = $rotatedPic['filename'];
 $extension = $rotatedPic['extension'];
 $filepath =  $rotatedPic['path'];
 
-	
- 	$degrees = -90;  
+	if(strlen($picName)<3) {
 
-	$rotatedBy = substr ($picName, strlen($picName)-2, 2);
-	$coreFilename = substr ($picName , 0, strlen($picName)-2);
+		$rotatedBy = "";
+		$coreName = $picName;
+	}else {
+		$rotatedBy = substr ($picName, strlen($picName)-2, 2);
+		if($rotatedBy == '_a' || $rotatedBy == '_b' || $rotatedBy == '_c') {
+
+			$coreName = substr ($picName , 0, strlen($picName)-2);
+		}else{
+			$coreName = $picName;
+		}
+	}
+
+function ifFileDoesntExistRotate($newFilepath, $filepath) {
+
+	if(!file_exists($newFilepath)) {
+ 		$degrees = -90;
+
+		header('Content-type: image/JPG');
+		$source = imagecreatefromjpeg($filepath);
+		$rotate = imagerotate($source,$degrees,0);
+
+		imagejpeg($rotate, $newFilepath); //save the new image
+
+		imagedestroy($source); //free up the memory
+		imagedestroy($rotate);  //free up the memory
+	}
+}
+
 
 	switch($rotatedBy) {
 
 		case '_a':
-			 $newFilepath = 'images/'. $coreFilename.'_b.'.$extension.'';
+			 $newFilepath = 'images/'. $coreName.'_b.'.$extension.'';
+			 $coreName = $coreName .'_b';
+			 ifFileDoesntExistRotate($newFilepath, $filepath);
 			 break;
 		case '_b':
-			 $newFilepath = 'images/'. $coreFilename.'_c.'.$extension.'';
+			 $newFilepath = 'images/'. $coreName.'_c.'.$extension.'';
+			 $coreName = $coreName .'_c';
+			 ifFileDoesntExistRotate($newFilepath, $filepath);
 			 break;
 		case '_c':
-			 $newFilepath = 'images/'. $coreFilename.'.'.$extension.'';
+			 $newFilepath = 'images/'. $coreName.'.'.$extension.'';
+			 ifFileDoesntExistRotate($newFilepath, $filepath);
 			 break;
 		default:
-			$newFilepath = 'images/'. $coreFilename.'_a.'.$extension.'';
-
-			header('Content-type: image/JPG');
-			$source = imagecreatefromjpeg($filepath);
-			$rotate = imagerotate($source,$degrees,0);
-
-			imagejpeg($rotate, $newFilepath); //save the new image
-
-			imagedestroy($source); //free up the memory
-			imagedestroy($rotate);  //free up the memory
-
+			$newFilepath = 'images/'. $coreName.'_a.'.$extension.'';
+			$coreName = $coreName . '_a';
+			ifFileDoesntExistRotate($newFilepath,$filepath);
 	}
 
 
 		$pictures->updateFilepath($picture_id, $newFilepath);
+		$pictures->updatePicName($picture_id, $coreName);
 	
 
 $deletePic = isset($_REQUEST["deletePic"]) ? $_REQUEST["deletePic"] : "";
@@ -63,7 +86,7 @@ if($deletePic != "") {
 To do this i add a ?x=$num to source*/
 
 $num = rand(0,1000);
-
+	
 //When deleting pictures I immediately get the next picture. This is to avoid trying to retrieve a next picture which doesn't exist.
 
 $noMorePics = 0;

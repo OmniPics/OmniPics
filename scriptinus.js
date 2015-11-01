@@ -83,6 +83,7 @@ $(document).ready(function() {
 
 
 
+
 	
 	$(window).resize(function() {
 
@@ -95,7 +96,7 @@ $(document).ready(function() {
 	    $('#img').height(height);
 		$('#img').width(width);
 
-		//$('body').height(height);
+		$('body').height(height);
 		$('#parent').height(height);
 
 		if( (width > x) && (height > y) ) {
@@ -138,41 +139,4 @@ $(document).ready(function() {
 
 });
 
-function rotate() {
-
-
-		$('#img').css('height', height+'px');
-		$('#img').css('width', width+'px');
-
-		var x = document.getElementById("img").naturalWidth;
-		var y = document.getElementById("img").naturalHeight;
-
-		
-		var imgRatio = x/y;
-
-		if( (width > x) && (height > y) ) {
-
-		
-		$('#img').css('max-width', x);
-		$('#img').css('max-height', y);
-
-		var centerVertically=(height- y)/2;
-		$('#img').css('top', centerVertically+'px');
-
-		}else {
-
-
-			
-			if(imgRatio > perfRatio) {
-				var centerVertically=(height- width/imgRatio)/2;
-				$('#img').css('top', centerVertically+'px');
-				$('#img').css('max-height', width/imgRatio);
-
-			}else {
-
-				
-				$('#img').css('max-width', height*imgRatio);
-			}
-
-		}
-	}
+	

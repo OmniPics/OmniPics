@@ -20,42 +20,16 @@
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
 			var amountOfPics = '3'; //Need two pictures to check if the next pic exists
 
-			/*$(document).ready(function() {
-				pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics);
-			});*/
-
-			function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics) {
-
-				$.ajax({
-			       type: "POST",
-			       url: "getPictureViewerContent.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
-			       success: function(result){
-			            $("#parent").html(result);
-			         },
-			       complete: function() {
-
-			       	$.getScript( "scriptinus.js", function( data, textStatus, jqxhr ) {
-					  $('#script').append(data); // Data returned
-					  console.log( textStatus ); // Success
-					  console.log( jqxhr.status ); // 200
-					  console.log( "Load was performed." );
-					});
-
-			       }
-			       
-			    });
-
-			}
-
+		
 			function rotate(picture_id) {
 
 				$.ajax({
 			       type: "POST",
 			       url: "getPictureViewerContent.php?picture_id="+picture_id+"",
 			       success: function(result){
-			            $('#img').attr('src', result);
+			            window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
 			            console.log(result);
-			          	rotate();
+			        }
 			    });
 			}
 
@@ -76,17 +50,7 @@
 
 			}
 
-			function getScript() {
-
-				$.ajax({
-			       type: "POST",
-			       url: "getScript.php",
-			       success: function(result){
-			            $("#script").html(result);
-			        }
-			    });
-
-			}
+			
 
 			function nextPic() {
 
@@ -127,7 +91,6 @@
 					<button id="toFrontPageButton" type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='index.php'">Front Page
 					</button>
 				</div>
-		}
 		</div>
 		<div id="metadata" class="col-md-4"></div>
 

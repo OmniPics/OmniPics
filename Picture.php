@@ -82,6 +82,16 @@ class Picture {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
 
+    }
+     function updatePicName($picture_id, $coreName) {
+        $sql = "UPDATE pictures SET filename ='" . $coreName . "' WHERE picture_id = $picture_id";
+
+
+        if (mysqli_query($this->connection,$sql) === TRUE) {
+            //echo "picture filepath changed successfully";
+        } else {
+            echo "err: " . $sql . "<br>" . $this->connection->error;
+        }
 
     }
     function dumpDatabase(){
@@ -98,7 +108,7 @@ class Picture {
         mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 1;");
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         $tmp_array = $this->loadPicture($picture_id);
-        unlink("images/".$tmp_array["filename"]);
+        unlink($tmp_array["path"]);
         if (mysqli_query($this->connection, $sql)!==TRUE) {
             echo "failed at removing file" . $sql;
         }
