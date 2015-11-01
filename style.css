@@ -69,7 +69,7 @@ body {
 
 .yeBoy {
 
-    height: ;
+    height:0;
 }
 #topArea {
 
@@ -82,15 +82,31 @@ body {
 
 #submit {
 
-    float: left;
-}
-
-#search {
-    margin:0 auto;
-    width:40%;
     float: none;
 }
-
+#searcharea {
+    position: relative;
+    margin:0 auto;
+    width:40%;
+}
+.media {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    margin:0 auto;
+    z-index: 2;
+    float:right;
+}
+.media-left {
+    display: inline-block;
+    border: #fafafa;
+    height: 100%;
+    width: 100%;
+}
+.media-object {
+    float: left;
+}
 
 .toTheRight {
 
