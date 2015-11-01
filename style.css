@@ -72,7 +72,6 @@ body {
     height:0;
 }
 #topArea {
-
     padding-top: 30px;
     width: 900px;
     margin: 0 auto;
@@ -84,6 +83,9 @@ body {
 
     float: none;
 }
+/*
+    tomasz
+*/
 #searcharea {
     position: relative;
     margin:0 auto;
@@ -91,23 +93,25 @@ body {
 }
 .media {
     display: inline-block;
-    height: 100%;
     width: 100%;
     position: absolute;
     margin:0 auto;
     z-index: 2;
     float:right;
+    background-color: white;
 }
 .media-left {
-    display: inline-block;
-    border: #fafafa;
-    height: 100%;
-    width: 100%;
+    /* reserved for future */
+    display: block;
 }
-.media-object {
-    float: left;
+#livesearch {
 }
-
+.media-object:hover {
+    background-color: #e5e5e5;
+}
+/*
+    end tomasz
+*/
 .toTheRight {
 
     float: right;

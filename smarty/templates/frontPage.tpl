@@ -21,7 +21,9 @@
         </div>
         <div class="media">
             <div class="media-left">
-                <div id="livesearch"></div> <!-- updated by javascript -->
+                <div id="livesearch">
+
+                </div> <!-- updated by javascript -->
             </div>
         </div>
     </div>
