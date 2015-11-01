@@ -100,7 +100,15 @@
 					</button>
 				</div>
 		</div>
-		<div id="metadata" class="col-md-4"></div>
+		<div id="metadata" class="col-md-4">
+
+			<ul class="list-group">
+			  <li class="list-group-item">Name: {$picture[0].filename}</li>
+			  <li class="list-group-item">Place: {$picture[0].place}</li>
+			  <li class="list-group-item">Third item</li>
+			</ul>
+
+		</div>
 
 
 	

@@ -69,22 +69,9 @@ function ifFileDoesntExistRotate($newFilepath, $filepath) {
 
 		$pictures->updateFilepath($picture_id, $newFilepath);
 		$pictures->updatePicName($picture_id, $coreName);
+
+		$pictures->closeConnection();
 	
-
-
-/*In order to make the picture refresh immediately after rotating picture, the img src needs to differ from it's previous src.
-To do this i add a ?x=$num to source*/
-
-$num = rand(0,1000);
-
-
-$rotatedPic = $pictures->loadPicture($picture_id);
-
-$pictures->closeConnection();
-
-echo "" . $rotatedPic['path']."?x=".$num."";
-
-
-?>
+		echo $newFilepath;
 
 			
