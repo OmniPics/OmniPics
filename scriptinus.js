@@ -3,7 +3,7 @@
 
 
 
-$(document).ready(function() {
+$(document).load(function() {
 
 	$('#topMenuRight').hide();
 	$('#topMenuLeft').hide();
@@ -18,6 +18,7 @@ $(document).ready(function() {
 
 	$('body').height(height);
 	$('div').height(height);
+
 
 	var x = document.getElementById("img").naturalWidth;
 	var y = document.getElementById("img").naturalHeight;
@@ -76,6 +77,8 @@ $(document).ready(function() {
 		$('#topMenuRight').fadeOut();
 		$('#topMenuLeft').fadeOut();
 	});
+
+	$('#right').height($('#right').height()/2);
 
 	var top = ( $('#rightChild').height() - $('#right').height() ) / 2;
 
