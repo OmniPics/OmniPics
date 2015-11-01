@@ -19,13 +19,15 @@
 			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
 			var amountOfPics = '3'; //Need two pictures to check if the next pic exists
+			var nextPicExists = {/literal}{$nextPicExists}{literal};
+			var prevPicExists = {/literal}{$prevPicExists}{literal};
 
 		
 			function rotate(picture_id) {
 
 				$.ajax({
 			       type: "POST",
-			       url: "getPictureViewerContent.php?picture_id="+picture_id+"",
+			       url: "rotate.php?picture_id="+picture_id+"",
 			       success: function(result){
 			            window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
 			            console.log(result);
@@ -33,24 +35,6 @@
 			    });
 			}
 
-			function deletePic(pictureId, picsIndexStart, noMorePics) {
-				
-				if(noMorePics) {
-
-					window.location = "index.php"; 
-				}
-
-				$.ajax({
-			       type: "POST",
-			       url: "getPictureViewerContent.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"&&deletePic="+pictureId+"",
-			       success: function(result){
-			            $("#parent").html(result);
-			        }
-			    });
-
-			}
-
-			
 
 			function nextPic() {
 
@@ -63,15 +47,39 @@
 				picsIndexStart--;
 				window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
 			}
-			
+
+			function pictureDelete(picture_id) {
+				
+			      
+				$.ajax({
+			       type: "POST",
+			       url: "delete.php?picture_id="+picture_id+"",
+			       complete: function() {
+			       	
+					    if(nextPicExists == 1) {
+					    	window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+						}else {
+
+					    	if(prevPicExists == 1) { 
+					    		previousPic();
+					    	}else {
+				    			window.location = "index.php";
+					    	}	    		
+						}
+			       }
+
+			    });
+
+			}
+
 		{/literal}
 		</script>
 		<div id="parent" class="col-md-8">
-		{if $picsIndexStart gt 0}
+		{if $prevPicExists eq true}
 			<div id="leftChild" class="col-md-1" onclick="previousPic()"></div>
 		{/if}
 			<img id="img" src="{$picture[0].path}?x= {php}date('H:i:s'){/php}">
-		{if isset($picture[1])}
+		{if $nextPicExists eq true}
 			<div id="rightChild" class="col-md-1" onclick="nextPic()"><span id="right" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
 		{/if}
 			
@@ -83,8 +91,8 @@
 					<button type="button" class="btn btn-default" onclick="rotate({$picture[0].picture_id})"> 
 		  					<span class="glyphicon glyphicon-repeat" ></span>
 					</button>
-					<button  type="button" class="btn btn-default">
-		  					<span class="glyphicon glyphicon-trash" onclick="deletePic( {$picture[0].picture_id} )" ></span>
+					<button  type="button" class="btn btn-default" onclick="pictureDelete({$picture[0].picture_id})">
+		  					<span class="glyphicon glyphicon-trash"  ></span>
 					</button>
 				</div>
 				<div id ="topMenuLeft">

@@ -71,49 +71,20 @@ function ifFileDoesntExistRotate($newFilepath, $filepath) {
 		$pictures->updatePicName($picture_id, $coreName);
 	
 
-$deletePic = isset($_REQUEST["deletePic"]) ? $_REQUEST["deletePic"] : "";
-
-if($deletePic != "") {
-
-	$pictures->removePicture($deletePic);
-}
-
-
-
-
 
 /*In order to make the picture refresh immediately after rotating picture, the img src needs to differ from it's previous src.
 To do this i add a ?x=$num to source*/
 
 $num = rand(0,1000);
-	
-//When deleting pictures I immediately get the next picture. This is to avoid trying to retrieve a next picture which doesn't exist.
 
-$noMorePics = 0;
-
-//Checks if next picture exists
-/*if(!isset($pictureArray[1])) {
-
-	$picsIndexStart--;
-
-	if($picsIndexStart<0) {
-		$noMorePics = 1;
-	}
-} */
 
 $rotatedPic = $pictures->loadPicture($picture_id);
 
+$pictures->closeConnection();
+
 echo "" . $rotatedPic['path']."?x=".$num."";
+
 
 ?>
 
 			
-				
-
-
-	  
-
-
-<!--<a href ="rotate.php?filepath={$pictures[$picture_id].path}&&picture_id={$picture_id}"> baller </a>
-//for å sender meg til rotate siden min, med også.. vil den gå på en reise gjennom php hvor blir snudd nitti grader med klokken
-// og lagret til samme posisjon den har lagret på forhånd ehhm også maximum upload exceeded.-->

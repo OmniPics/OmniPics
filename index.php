@@ -8,6 +8,7 @@ session_start();
 $pictures = new Picture($local_database, $local_username, $local_password);
 
 $page = isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
+
 $picture_id =  isset($_REQUEST["picture_id"]) ? $_REQUEST["picture_id"] : "";
 $sortedPictureArray = isset($_REQUEST["sortedPictureArray"]) ? $_REQUEST["sortedPictureArray"] : "";
 $startIndex = isset($_REQUEST["startIndex"]) ? $_REQUEST["startIndex"] : "";
@@ -23,7 +24,8 @@ $amountOfPics = intval($amountOfPicsString);
 
 $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
-
+$nextPicExists = 1;
+$prevPicExists = 1;
 
 switch($page) {
 
@@ -32,10 +34,22 @@ switch($page) {
 
 		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 3);
 
+		if (!isset($picture[1])) {
+
+			$nextPicExists = 0;
+		}
+		if ($picsIndexStart == 0) {
+
+			$prevPicExists = 0;
+		}
+
+		$smarty->assign("nextPicExists", $nextPicExists);
+		$smarty->assign("prevPicExists", $prevPicExists);
 		$smarty->assign("picture", $picture);
 		$smarty->assign("picsAscDesc", $picsAscDesc);
 		$smarty->assign("orderPicsBy", $orderPicsBy);
 		$smarty->assign("picsIndexStart", $picsIndexStart);
+
 		$smarty->display('pictureViewer.tpl');
 		break;
 
