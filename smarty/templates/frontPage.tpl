@@ -21,7 +21,7 @@
         </div>
         <div class="media">
             <div class="media-left">
-                <div id="livesearch"></div> <!-- updated by searchAutoFill.showResult()-->
+                <div id="livesearch"></div> <!-- updated by javascript -->
             </div>
         </div>
     </div>
