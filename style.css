@@ -47,7 +47,6 @@ body {
 }
 
 #wrapper  {
-   
     text-align: center;
     margin: auto;
     width: 60%;
@@ -98,16 +97,26 @@ body {
     margin:0 auto;
     z-index: 2;
     float:right;
-    background-color: white;
 }
 .media-left {
     /* reserved for future */
-    display: block;
+    display: inline;
 }
 #livesearch {
+    display:block;
+}
+.media-object {
+    cursor: pointer;
+    background-color: white;
+    min-height: 30px;
+    padding: 3px 0px 3px;
+    font-size: 70%;
 }
 .media-object:hover {
-    background-color: #e5e5e5;
+    background-color: #80B2FF;
+}
+.thumb-image {
+    background-color: #222222;
 }
 /*
     end tomasz
