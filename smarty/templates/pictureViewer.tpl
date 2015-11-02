@@ -9,13 +9,6 @@
 	</head>
 	<body>
 
-<<<<<<< HEAD
-	
-=======
-		<!--<div id="topArea">
-			<button id="toFrontPageButton" type="button" class="btn btn-default" aria-label="Left Align" onclick="location.href='index.php'">Front Page
-			</button>-->
->>>>>>> dev
 
 
 		<script language="JavaScript" type="text/javascript">
