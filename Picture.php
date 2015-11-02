@@ -111,8 +111,8 @@ class Picture {
         if (mysqli_query($this->connection, $sql)!==TRUE) {
             echo "failed at removing file" . $sql;
         }else {
-            unlink("images/".$tmp_array["filename"]);
-            unlink("images/thumbs/".$tmp_array["filename"]);
+            unlink("images/".$tmp_array["filename"].".".$tmp_array["extension"]);
+            unlink("images/thumbs/".$tmp_array["filename"].".".$tmp_array["extension"]);
         }
     }
 
