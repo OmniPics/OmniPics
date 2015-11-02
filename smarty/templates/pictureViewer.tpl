@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="stylingz.css" style="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script type="text/javascript" src="scriptinus.js"></script>
+		<script type="text/javascript" src="functionsPictureViewer.js"></script>
 		
 	</head>
 	<body>
@@ -82,7 +82,7 @@
 		{if $prevPicExists eq true}
 			<div id="leftChild" class="col-md-1" onclick="previousPic()"><span id="leftLogo" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></div>
 		{/if}
-			<img id="img" src="{$picture[0].path}?x= {php}date('H:i:s'){/php}">
+			<img id="img" style="display: none;" src="{$picture[0].path}?x= {php}date('H:i:s'){/php}">
 		{if $nextPicExists eq true}
 			<div id="rightChild" class="col-md-1" onclick="nextPic()"><span id="rightLogo" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
 		{/if}
@@ -108,7 +108,7 @@
 
 		<h3>{$picture[0].filename}</h3>
 			<ul class="list-group">
-			  <li class="list-group-item">Filepath: {$picture[0].path} </li>
+			  <li class="list-group-item">Filepath <input class="form-control" type="text" value="{$picture[0].path}"></li>
 			  <li class="list-group-item">Place: {$picture[0].place}</li>
 			  <li class="list-group-item">Date: {$picture[0].upload_date}</li>
 			</ul>

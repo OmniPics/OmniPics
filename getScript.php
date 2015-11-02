@@ -1,1 +1,0 @@
-<script src="scriptinus.js"></script>

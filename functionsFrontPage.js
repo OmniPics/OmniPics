@@ -36,7 +36,7 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics
 
 	$.ajax({
        type: "POST",
-       url: "loadPicturesFromDBreturningHTMLtableWithPics.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
+       url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
        success: function(result){
             $("#pictures").html(result);
         }
@@ -49,7 +49,7 @@ function deletePicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPi
 
 	$.ajax({
        type: "POST",
-       url: "loadPicturesFromDBreturningHTMLtableWithPics.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
+       url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPics+"",
        data: { 	selectedPictures : selectedPicture_ids },
        success: function(result){
             $("#pictures").html(result);

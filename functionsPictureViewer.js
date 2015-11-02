@@ -17,25 +17,22 @@ $(document).ready(function() {
 	$('body').height(height);
 	$('div').height(height);
 
-
-	var x = document.getElementById("img").naturalWidth;
-	var y = document.getElementById("img").naturalHeight;
+	var x;
+	var y;
 
 	var perfRatio = width/height;
+	
+	var image = new Image();
+	image.src = $("#img").attr("src");
+	image.onload = function() {
+
+	x = this.width;
+	y = this.height;
+
 	var imgRatio = x/y;
 
-
-
-	$('#rightChild').css('height', (height-38)+'px');
-	$('#leftChild').css('height', (height-38)+'px');
-
-	console.log('height:' +height);
-	console.log('width:' +width);
-
-	console.log('nat-height:' +y);
-	console.log('nat-width:' +x);
-
-
+	console.log('height: ' + y);
+	console.log('width: ' + x);
 	if( (width > x) && (height > y) ) {
 
 		
@@ -61,6 +58,25 @@ $(document).ready(function() {
 		}
 
 	}
+
+	$('#img').fadeIn('fast');
+
+
+	};
+
+
+
+
+	$('#rightChild').css('height', (height-38)+'px');
+	$('#leftChild').css('height', (height-38)+'px');
+
+	console.log('height:' +height);
+	console.log('width:' +width);
+
+	console.log('nat-height:' +y);
+	console.log('nat-width:' +x);
+
+
 
 	$('#parent').hover(function() {
 
@@ -103,39 +119,7 @@ $(document).ready(function() {
 	
 	$(window).resize(function() {
 
-		height = $(window).height();
-	    width = $('#parent').width();
-
-		$('#rightChild').css('height', (height-38)+'px');
-		$('#leftChild').css('height', (height-38)+'px');
-
-	    $('#img').height(height);
-		$('#img').width(width);
-
-		$('body').height(height);
-		$('#parent').height(height);
-
-		if( (width > x) && (height > y) ) {
-
-		
-			$('#img').css('max-width', x);
-			$('#img').css('max-height', y);
-
-			var centerVertically=(height- y)/2;
-			$('#img').css('top', centerVertically+'px');
-		}else {
-
-			if(imgRatio > perfRatio) {
-				var centerVertically=(height- width/imgRatio)/2;
-			$('#img').css('top', centerVertically+'px');
-
-				$('#img').css('max-height', width/imgRatio);
-			}else {
-
-				$('#img').css('max-width', height*imgRatio);
-			}
-				
-		}
+	window.location = this.location;
 		
 	});
 
@@ -154,7 +138,7 @@ $(document).ready(function() {
 	});
 
 	$(document).keydown(function(e) {
-		
+
 	    switch(e.which) {
 	        case 37: 
 	        	previousPic();
