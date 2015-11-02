@@ -2,56 +2,35 @@ body {
 
 	height: 100%;
 	margin: 0 0 0 0;
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 }
 
 #img {
 	float: none;
-<<<<<<< HEAD
 	display: block;
 	z-index: 1;
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
-=======
->>>>>>> dev
 }
 
 #parent {
-
-<<<<<<< HEAD
-
 	position: relative;
 	padding: 0 0 0 0;
 	background-color: black;
-
-=======
-	position: relative;
->>>>>>> dev
 }
 
 #leftChild {
 
 	position: absolute;
-<<<<<<< HEAD
 	background-color: gray;
 	opacity: 0;
 	z-index: 3;
 	float: left;
 	top: 35px;
 	text-align: center;
-=======
-	background-color: blue;
-	opacity: 0;
->>>>>>> dev
-	
 	
 }
 
-<<<<<<< HEAD
 #hidden {
 
 	position: absolute;
@@ -96,13 +75,3 @@ body {
 	opacity: 0.25;
 	max-height: 50px;
 }
-
-
-=======
-#rightChild {
-
-	position: absolute;
-	background-color: red;
-	opacity: 0;
-}
->>>>>>> dev
