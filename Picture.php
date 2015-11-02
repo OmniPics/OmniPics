@@ -108,9 +108,11 @@ class Picture {
         mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 1;");
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         $tmp_array = $this->loadPicture($picture_id);
-        unlink($tmp_array["path"]);
         if (mysqli_query($this->connection, $sql)!==TRUE) {
             echo "failed at removing file" . $sql;
+        }else {
+            unlink("images/".$tmp_array["filename"]);
+            unlink("images/thumbs/".$tmp_array["filename"]);
         }
     }
 
