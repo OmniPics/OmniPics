@@ -1,0 +1,77 @@
+body {
+
+	height: 100%;
+	margin: 0 0 0 0;
+}
+
+#img {
+	float: none;
+	display: block;
+	z-index: 1;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#parent {
+	position: relative;
+	padding: 0 0 0 0;
+	background-color: black;
+}
+
+#leftChild {
+
+	position: absolute;
+	background-color: gray;
+	opacity: 0;
+	z-index: 3;
+	float: left;
+	top: 35px;
+	text-align: center;
+	
+}
+
+#hidden {
+
+	position: absolute;
+	background-color: gray;
+	top: 35px;
+	float: top;
+	max-height: 30px;
+}
+
+#rightChild {
+
+	position: absolute;
+	background-color: gray;
+	opacity: 0;
+	z-index: 3;
+	top: 35px;
+	right: 0px;
+	text-align: center;
+
+}
+
+#right {
+
+}
+
+#topMenuRight {
+	position: absolute;
+	z-index: 1;
+	float: right;
+	top: 0px;
+	right: 0px;
+	opacity: 0.25;
+	max-height: 50px;
+
+}
+#topMenuLeft{
+	position: absolute;
+	z-index: 1;
+	float: left;
+	top: 0px;
+	left: 0px;
+	opacity: 0.25;
+	max-height: 50px;
+}

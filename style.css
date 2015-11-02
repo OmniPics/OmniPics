@@ -69,10 +69,9 @@ body {
 
 .yeBoy {
 
-    height: ;
+    height:0;
 }
 #topArea {
-
     padding-top: 30px;
     width: 900px;
     margin: 0 auto;
@@ -82,16 +81,37 @@ body {
 
 #submit {
 
-    float: left;
-}
-
-#search {
-    margin:0 auto;
-    width:40%;
     float: none;
 }
-
-
+/*
+    tomasz
+*/
+#searcharea {
+    position: relative;
+    margin:0 auto;
+    width:40%;
+}
+.media {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    margin:0 auto;
+    z-index: 2;
+    float:right;
+    background-color: white;
+}
+.media-left {
+    /* reserved for future */
+    display: block;
+}
+#livesearch {
+}
+.media-object:hover {
+    background-color: #e5e5e5;
+}
+/*
+    end tomasz
+*/
 .toTheRight {
 
     float: right;
