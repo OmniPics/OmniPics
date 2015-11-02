@@ -3,12 +3,10 @@
 
 
 
-$(document).load(function() {
+$(document).ready(function() {
 
 	$('#topMenuRight').hide();
 	$('#topMenuLeft').hide();
-
-
 
 	var width = $('#parent').width();
 	var height = $(window).height();
@@ -78,11 +76,26 @@ $(document).load(function() {
 		$('#topMenuLeft').fadeOut();
 	});
 
-	$('#right').height($('#right').height()/2);
+	var rightHoyden = $('#rightChild').height();
+	var leftHoyden = $('#leftChild').height();
 
-	var top = ( $('#rightChild').height() - $('#right').height() ) / 2;
+	var rightCenter = rightHoyden/2.5;
+	var leftCenter = leftHoyden/2.5;
 
-	$('#right').css('top', top+'px');
+	var rightHalf = rightHoyden/4;
+	var leftHalf = leftHoyden/4;
+
+	$('#rightChild').height(rightHalf);
+	$('#leftChild').height(leftHalf);
+
+	$('#rightChild').css('top', rightCenter+'px');
+	$('#leftChild').css('top', leftCenter+'px');
+
+	var rightTop = ( $('#rightChild').height() - $('#rightLogo').height() ) / 2;
+	var leftTop = ( $('#leftChild').height() - $('#leftLogo').height() ) / 2;
+
+	$('#rightLogo').css('top', rightTop+'px');
+	$('#leftLogo').css('top', leftTop+'px');
 
 
 
@@ -127,7 +140,7 @@ $(document).load(function() {
 	});
 
 	$('#leftChild').hover(function() {
-			$(this).css('opacity', '0.25');
+			$(this).css('opacity', '0.5');
 	}, function() {
 			$(this).css('opacity', '0');
 
@@ -138,6 +151,22 @@ $(document).load(function() {
 	}, function() {
 			$(this).css('opacity', '0');
 
+	});
+
+	$(document).keydown(function(e) {
+		
+	    switch(e.which) {
+	        case 37: 
+	        	previousPic();
+	        break;
+
+	        case 39:
+	        	nextPic();
+	        break;
+
+	        default: return; 
+	    }
+	    e.preventDefault(); 
 	});
 
 });

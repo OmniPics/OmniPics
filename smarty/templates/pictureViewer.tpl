@@ -38,14 +38,18 @@
 
 			function nextPic() {
 
-				picsIndexStart++;
-				window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+				if(nextPicExists == 1){
+					picsIndexStart++;
+					window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+				}
 			}
 
 			function previousPic() {
 
-				picsIndexStart--;
-				window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+				if(prevPicExists == 1) {
+					picsIndexStart--;
+					window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+				}
 			}
 
 			function pictureDelete(picture_id) {
@@ -76,11 +80,11 @@
 		</script>
 		<div id="parent" class="col-md-8">
 		{if $prevPicExists eq true}
-			<div id="leftChild" class="col-md-1" onclick="previousPic()"></div>
+			<div id="leftChild" class="col-md-1" onclick="previousPic()"><span id="leftLogo" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></div>
 		{/if}
 			<img id="img" src="{$picture[0].path}?x= {php}date('H:i:s'){/php}">
 		{if $nextPicExists eq true}
-			<div id="rightChild" class="col-md-1" onclick="nextPic()"><span id="right" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
+			<div id="rightChild" class="col-md-1" onclick="nextPic()"><span id="rightLogo" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
 		{/if}
 			
 				<div id ="topMenuRight">
@@ -102,10 +106,11 @@
 		</div>
 		<div id="metadata" class="col-md-4">
 
+		<h3>{$picture[0].filename}</h3>
 			<ul class="list-group">
-			  <li class="list-group-item">Name: {$picture[0].filename}</li>
+			  <li class="list-group-item">Filepath: {$picture[0].path} </li>
 			  <li class="list-group-item">Place: {$picture[0].place}</li>
-			  <li class="list-group-item">Third item</li>
+			  <li class="list-group-item">Date: {$picture[0].upload_date}</li>
 			</ul>
 
 		</div>
