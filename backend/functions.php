@@ -1,9 +1,10 @@
 <?php
 function createThumbnail($filename) {
-    $path_to_image_directory = "images/";
-    $path_to_thumbs_directory = "images/thumbs/";
+    require("setup.php");
+    $path_to_image_directory = $local_project_dir . "images/";
+    $path_to_thumbs_directory = $local_project_dir . "images/thumbs/";
     $final_width_of_image = 30;
-
+    $filename = strtolower($filename);
     if(preg_match('/[.](jpg)$/', $filename)) {
         $im = imagecreatefromjpeg($path_to_image_directory . $filename);
     } else if (preg_match('/[.](gif)$/', $filename)) {
@@ -13,7 +14,7 @@ function createThumbnail($filename) {
     } else if (preg_match('/[.](jpeg)$/', $filename)) {
         $im = imagecreatefromjpeg($path_to_image_directory . $filename);
     };
-
+    echo $filename;
     $ox = imagesx($im);
     $oy = imagesy($im);
 
