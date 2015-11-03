@@ -9,7 +9,10 @@ $tags = isset($_REQUEST["tags"]) ? $_REQUEST["tags"] : "";
 $picture_id = isset($_REQUEST["picture_id"]) ? $_REQUEST["picture_id"] : "";
 
 if($tags != "") {
+
+	$pictures->removePictureTags($picture_id);
+	
 	foreach ($tags as $tag) {
-			$pictures->removeTag($picture_id);
+			$pictures->addTag($tag, $picture_id);
 		}
 }

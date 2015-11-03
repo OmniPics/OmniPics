@@ -187,7 +187,15 @@ $(document).ready(function() {
        	singleField: true,
        	singleFieldNode: $('#mySingleField')
    	});
-   	
+
+   	function editTags(picture_id){
+   		$.ajax({
+        	type: "POST",
+       		url: "editTags.php?picture_id="+picture_id+"",  // configure the name of the input field (will be submitted with form), default: item[tags]
+       		data: { tags : item }
+    	});
+   	}
+
 });
 
 	

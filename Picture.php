@@ -173,9 +173,8 @@ class Picture {
             echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection";
         }
     }
-    function removeTag($tag,$picture_id){
-        $tags_id = $this->hasTag($tag);
-        $sql = "DELETE FROM has_tags WHERE tags_id=$tags_id AND picture_id=$picture_id";
+    function removePictureTags($picture_id){
+        $sql = "DELETE FROM has_tags WHERE picture_id=$picture_id";
         if(mysqli_query($this->connection,$sql)!==TRUE){
             echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection";
         }

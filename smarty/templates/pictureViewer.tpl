@@ -85,18 +85,7 @@
 
 			}
 
-			$(function(){
-
-				var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
-
-			 	$('#myTags').tagit({ 
-			 		availableTags: sampleTags,
-                	itemName: 'item',
-                	fieldName: 'tags',
-                	singleField: true,
-                	singleFieldNode: $('#mySingleField')
-            	});
-			});
+			
 
 		{/literal}
 		</script>
@@ -143,7 +132,7 @@
 
 			<h4>Tags</h4>
 				<input name="tags" id="mySingleField" value="{$existingTags}" disabled="true" style="display: none;">
-				<ul id="myTags"></ul>
+				<ul id="myTags" onchange="editTags()"></ul>
 
 		</div>
 
