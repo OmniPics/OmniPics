@@ -3,8 +3,13 @@
 	<head>
 		<link rel="stylesheet" href="stylingPictureViewer.css" style="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
+    	<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
+		<script type="text/javascript" src="jQueryRotate.js"></script>
+		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
 		
 	</head>
 	<body>
@@ -17,9 +22,14 @@
 			var picsAscOrDesc = {/literal}{$picsAscDesc}{literal};
 			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
-			var amountOfPics = '3'; //Need two pictures to check if the next pic exists
+			var amountOfPics = 3; //Need two pictures to check if the next pic exists
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
+
+			$(function() {
+
+				$('#img').rotate(90);
+			});
 
 		
 			function rotate(picture_id) {
@@ -75,6 +85,11 @@
 
 			}
 
+			$(function(){
+
+			 	 $('#myTags').tagit();
+			});
+
 		{/literal}
 		</script>
 		<div id="parent" class="col-md-8">
@@ -110,6 +125,9 @@
 			  <li class="list-group-item">Filepath <input class="form-control" type="text" value="{$picture[0].path}"></li>
 			  <li class="list-group-item">Place: {$picture[0].place}</li>
 			  <li class="list-group-item">Date: {$picture[0].upload_date}</li>
+
+			  <ul id="myTags"></ul>
+
 			</ul>
 
 		</div>
