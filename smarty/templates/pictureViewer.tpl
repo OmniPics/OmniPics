@@ -138,7 +138,7 @@
 
 			</ul>
 			<h4>Tags</h4>
-				<input name="tags" id="mySingleField" value="Apple, Orange" disabled="true" style="display: none;">
+				<input name="tags" id="mySingleField" value="{$existingTags}" disabled="true" style="display: none;">
 				<ul id="myTags"></ul>
 
 		</div>

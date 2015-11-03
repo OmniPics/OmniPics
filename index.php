@@ -27,12 +27,29 @@ $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 $nextPicExists = 1;
 $prevPicExists = 1;
 
+
+
 switch($page) {
 
 
 	case 'pictureViewer':
+		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
+		$picture_id = $picture[0]['picture_id'];
 
-		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 3);
+
+		$array = $pictures->getTags($picture_id);
+
+		$existingTags = "";
+
+
+		for($i = 0; $i < count($array); $i++){
+		    if($i == 0) {
+		    	$existingTags = $array[0];
+		    }else {
+		    	$existingTags = $existingTags . ', ' . $array[$i];
+		    }
+		}
+
 
 		if (!isset($picture[1])) {
 
@@ -43,6 +60,7 @@ switch($page) {
 			$prevPicExists = 0;
 		}
 
+		$smarty->assign("existingTags", $existingTags);
 		$smarty->assign("nextPicExists", $nextPicExists);
 		$smarty->assign("prevPicExists", $prevPicExists);
 		$smarty->assign("picture", $picture);
