@@ -90,8 +90,7 @@
 				var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
 
 			 	$('#myTags').tagit({ 
-			 		availableTags: sampleTags, // this param is of course optional. it's for autocomplete.
-                	// configure the name of the input field (will be submitted with form), default: item[tags]
+			 		availableTags: sampleTags,
                 	itemName: 'item',
                 	fieldName: 'tags',
                 	singleField: true,
@@ -131,12 +130,17 @@
 
 		<h3>{$picture[0].filename}</h3>
 			<ul class="list-group">
-			  <li class="list-group-item">Filepath <input class="form-control" type="text" value="{$picture[0].path}"></li>
-			  <li class="list-group-item">Place: {$picture[0].place}</li>
-			  <li class="list-group-item">Date: {$picture[0].upload_date}</li>
-
-
+			  <li class="list-group-item">Filepath <span id="filepath">{$picture[0].path}</span><input style="display: none;" id="inputFilepath" class="form-control" type="text" value="{$picture[0].path}"></li>
+			  <li class="list-group-item">Place: <span id="place">{$picture[0].place}</span><input style="display: none;" id="inputPlace" class="form-control" type="text" value="{$picture[0].place}"></li>
+			  <li class="list-group-item">Date: <span id="date">{$picture[0].upload_date}</span><input style="display: none;" id="inputDate" class="form-control" type="text" value="{$picture[0].upload_date}"></li>
 			</ul>
+			<button id="edit" type="button" class="btn btn-default">
+		  		Edit
+			</button>
+			<button id="save" type="button" class="btn btn-default" style="display: none;">
+		  		Save
+			</button>
+
 			<h4>Tags</h4>
 				<input name="tags" id="mySingleField" value="{$existingTags}" disabled="true" style="display: none;">
 				<ul id="myTags"></ul>

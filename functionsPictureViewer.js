@@ -114,8 +114,7 @@ $(document).ready(function() {
 	
 	$(window).resize(function() {
 
-	window.location = this.location;
-		
+		window.location = this.location;
 	});
 
 	$('#leftChild').hover(function() {
@@ -148,7 +147,47 @@ $(document).ready(function() {
 	    e.preventDefault(); 
 	});
 
+	$('#edit').click(function() {
+
+
+		$('#filepath').hide();
+		$('#date').hide();
+		$('#place').hide();
+
+		$('#inputFilepath').show();
+		$('#inputDate').show();
+		$('#inputPlace').show();
+
+		
+		$(this).hide();
+		$('#save').show();
+	});
+
+	$('#save').click(function() {
+
+		
+		$('#inputFilepath').hide();
+		$('#inputDate').hide();
+		$('#inputPlace').hide();
+		
+		$('#filepath').show();
+		$('#date').show();
+		$('#place').show();
+
+		$(this).hide();
+		$('#edit').show();
+	});
+
+	var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+
+	$('#myTags').tagit({ 
+		availableTags: sampleTags,
+    	itemName: 'item',
+       	fieldName: 'tags',
+       	singleField: true,
+       	singleFieldNode: $('#mySingleField')
+   	});
+   	
 });
 
 	
-
