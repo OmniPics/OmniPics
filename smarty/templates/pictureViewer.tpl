@@ -26,11 +26,11 @@
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
 
-			$(function() {
+			/*$(function() {
+
 
 				$('#img').rotate(90);
-			});
-
+			});*/
 		
 			function rotate(picture_id) {
 
@@ -87,7 +87,16 @@
 
 			$(function(){
 
-			 	 $('#myTags').tagit();
+				var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+
+			 	$('#myTags').tagit({ 
+			 		availableTags: sampleTags, // this param is of course optional. it's for autocomplete.
+                	// configure the name of the input field (will be submitted with form), default: item[tags]
+                	itemName: 'item',
+                	fieldName: 'tags',
+                	singleField: true,
+                	singleFieldNode: $('#mySingleField')
+            	});
 			});
 
 		{/literal}
@@ -126,9 +135,11 @@
 			  <li class="list-group-item">Place: {$picture[0].place}</li>
 			  <li class="list-group-item">Date: {$picture[0].upload_date}</li>
 
-			  <ul id="myTags"></ul>
 
 			</ul>
+			<h4>Tags</h4>
+				<input name="tags" id="mySingleField" value="Apple, Orange" disabled="true" style="display: none;">
+				<ul id="myTags"></ul>
 
 		</div>
 
