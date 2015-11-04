@@ -94,25 +94,6 @@
 			}
 
 
-
-			$(document).keydown(function(e) {
-
-			    switch(e.which) {
-			        case 37: 
-			        	previousPic();
-			        break;
-
-			        case 39:
-			        	nextPic();
-			        break;
-			   
-			        default: return; 
-			    }
-			    e.preventDefault(); 
-			});
-
-			var tags = {};
-
 			function editTags() {
 
 				$.ajax({
@@ -130,14 +111,28 @@
 				});
 			}
 
+			$(document).keydown(function(e) {
+
+			    switch(e.which) {
+			        case 37: 
+			        	previousPic();
+			        break;
+
+			        case 39:
+			        	nextPic();
+			        break;
+			   
+			        default: return; 
+			    }
+			    e.preventDefault(); 
+			});
+
 
 
 			$(function(){ 
 
 				$('#myTags').tagit({
                 	availableTags: allExistingTags,
-                	itemName: 'item',
-                	fieldName: 'tags',
                 	singleField: true,
                 	singleFieldNode: $('#mySingleField'),
                 	removeConfirmation: true,
@@ -156,7 +151,6 @@
 
               	});
             });
-
 
 			
 
