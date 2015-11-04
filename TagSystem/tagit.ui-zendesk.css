@@ -3,10 +3,8 @@
 
 
 ul.tagit {
-    border-width: 1px;
-    border-color: #C6C6C6;
     background: #FBFBFB;
-    border-radius: 20px;
+    border-radius: 4px;
 }
 ul.tagit li.tagit-choice {
     -moz-border-radius: 6px;
