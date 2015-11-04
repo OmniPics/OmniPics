@@ -134,6 +134,7 @@
                 	fieldName: 'tags',
                 	singleField: true,
                 	singleFieldNode: $('#mySingleField'),
+                	removeConfirmation: true,
 					afterTagAdded: function(evt, ui) {
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
