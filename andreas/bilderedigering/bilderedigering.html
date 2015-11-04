@@ -17,34 +17,36 @@
 		   <!-- Område for knapper  -->
 		   
 			<div class="row docs-actions">
-				  <div class="col-md-4"> <!-- posisjonering knapper -->
+				  <div class="col-md-9"> <!-- posisjonering knapper -->
 				   
 										
 					  
-					  <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate venstre">  <!-- roter 45 grader venstre. Endre data-option for antall grader -->
+					  <button type="button" class="btn" data-method="rotate" data-option="-45" title="Rotate venstre">  <!-- roter 45 grader venstre. Endre data-option for antall grader -->
 						<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -45)">
 						  <span class="fa fa-rotate-left"></span>
 						</span>
 					  </button>
-					  <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Roter høyre">  <!-- roter 45 grader høyre. Endre data-option for antall grader -->
+					
+					  
+					  <button type="button" class="btn" data-method="rotate" data-option="45" title="Rotate høyre">  <!-- roter 45 grader venstre. Endre data-option for antall grader -->
 						<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, 45)">
 						  <span class="fa fa-rotate-right"></span>
 						</span>
 					  </button>
 					  
-					  <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">     <!-- lagre croppet del av bilde.  For testing. Kan fjernes  -->
+					  <button type="button" class="btn" data-method="getCroppedCanvas">     <!-- lagre croppet del av bilde.  For testing. Kan fjernes  -->
 						<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)">
 						  Cropped  <!-- tekst på knapp-->
 						</span>
 					  </button> 
 					  
-					   <button type="button" class="btn btn-primary" data-method="clear" title="Clear"> <!-- clearer bilde. fjerner cropping box -->
+					   <button type="button" class="btn" data-method="clear" title="Clear"> <!-- clearer bilde. fjerner cropping box -->
 						<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)"> <!-- forklarende tekst over knapp. Endre title for å endre tekst -->
 						  <span class="fa fa-remove"></span>
 						</span>
 					  </button>  <!-- clear button -->
 					  
-					    <button type="button" class="btn btn-primary" data-method="reset" title="Reset"> <!-- undoer alle bildeoperasjoner. Istedet for redo/undo som blir upraktisk -->
+					    <button type="button" class="btn" data-method="reset" title="Reset"> <!-- undoer alle bildeoperasjoner. Istedet for redo/undo som blir upraktisk -->
 						<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;reset&quot;)"> <!-- forklarende tekst over knapp. Endre title for å endre tekst -->
 						  <span class="fa fa-refresh"></span>
 						</span>
@@ -63,7 +65,7 @@
 						  <div class="modal-body"></div>
 						  <div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<a class="btn btn-primary" id="download" download="cropped.png" href="javascript:void(0);">Download</a>
+							<a class="btn btn-default" id="download" download="cropped.png" href="javascript:void(0);">Download</a>
 						  </div>
 						</div>
 					  </div>
