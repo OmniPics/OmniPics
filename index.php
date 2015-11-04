@@ -36,18 +36,18 @@ switch($page) {
 		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
 		$picture_id = $picture[0]['picture_id'];
 
+		$allExistingTags = $pictures->getAllTags();
+
 		$array = $pictures->getTags($picture_id);
 
-		$existingTags = "";
-
+		$tagsBoundToPic = "";
 		for($i = 0; $i < count($array); $i++){
 		    if($i == 0) {
-		    	$existingTags = $array[0];
+		    	$tagsBoundToPic = $array[0];
 		    }else {
-		    	$existingTags = $existingTags . ', ' . $array[$i];
+		    	$tagsBoundToPic = $tagsBoundToPic . ', ' . $array[$i];
 		    }
 		}
-
 
 		if (!isset($picture[1])) {
 
@@ -58,7 +58,8 @@ switch($page) {
 			$prevPicExists = 0;
 		}
 
-		$smarty->assign("existingTags", $existingTags);
+		$smarty->assign("allExistingTags", $allExistingTags);
+		$smarty->assign("tagsBoundToPic", $tagsBoundToPic);
 		$smarty->assign("nextPicExists", $nextPicExists);
 		$smarty->assign("prevPicExists", $prevPicExists);
 		$smarty->assign("picture", $picture);

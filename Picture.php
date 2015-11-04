@@ -147,6 +147,15 @@ class Picture {
         mysqli_query($this->connection, "DROP VIEW tags_ids");
         return $this->listPictures($sql_pics);
     }
+    function getAllTags() {
+        $sql = "SELECT * FROM tags";
+        $result = mysqli_query($this->connection, $sql);
+        $tag_array = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $tag_array[] = $row['tags'];
+        }
+        return $tag_array;
+    }
 
     function getTags($picture_id){
         $temp = "CREATE VIEW temp AS SELECT * FROM pictures WHERE picture_id=$picture_id";

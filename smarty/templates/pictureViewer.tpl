@@ -26,6 +26,13 @@
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
 
+			var existingTags = []; 
+			{/literal}
+
+			{foreach from=$allExistingTags item=tag}
+    			{literal} existingTags.push('{/literal}{$tag}{literal}');
+			{/literal}{/foreach}{literal}
+
 			/*$(function() {
 
 
@@ -85,8 +92,6 @@
 
 			}
 
-
-			var existingTags = ['lame', 'mel'];
 
 
 			$(document).keydown(function(e) {
@@ -155,6 +160,7 @@
 			
 
 		{/literal}
+
 		</script>
 		<div id="parent" class="col-md-8">
 		{if $prevPicExists eq true}
@@ -198,7 +204,7 @@
 			</button>
 
 			<h4>Tags</h4>
-				<input name="tags" id="mySingleField" value="{$existingTags}" disabled="true" style="display: none;">
+				<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
 				<ul id="myTags" onchange="editTags({$picture[0].picture_id})"></ul>
 
 		</div>
