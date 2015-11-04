@@ -182,7 +182,8 @@ class Picture {
     function hasTag($tag){
         $sql = "SELECT tags_id AS ANS FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
-        while($row = mysqli_fetch_assoc($result)){$ans = $row['ANS'];}
+        $ans = false;
+        while($row = mysqli_fetch_assoc($result)){$ans =$row['ANS'];}    
         return $ans;
     }
     function addTag($tag,$picture_id) {

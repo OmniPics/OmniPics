@@ -36,11 +36,9 @@ switch($page) {
 		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
 		$picture_id = $picture[0]['picture_id'];
 
-
 		$array = $pictures->getTags($picture_id);
 
 		$existingTags = "";
-
 
 		for($i = 0; $i < count($array); $i++){
 		    if($i == 0) {

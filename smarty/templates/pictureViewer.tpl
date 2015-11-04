@@ -85,6 +85,72 @@
 
 			}
 
+
+			var existingTags = ['lame', 'mel'];
+
+
+			$(document).keydown(function(e) {
+
+			    switch(e.which) {
+			        case 37: 
+			        	previousPic();
+			        break;
+
+			        case 39:
+			        	nextPic();
+			        break;
+			   
+			        default: return; 
+			    }
+			    e.preventDefault(); 
+			});
+
+			var tags = {};
+
+			function editTags(picture_id) {
+
+				$.ajax({
+			       type: "POST",
+			       url: "editTags.php?picture_id="+picture_id+"",
+			       data: { picTags : tags }
+				});
+			}
+
+			function deleteTag(picture_id, tag) {
+
+				$.ajax({
+			       type: "POST",
+			       url: "editTags.php?picture_id="+picture_id+"&&tag="+tag+""
+				});
+			}
+
+
+
+			$(function(){ 
+
+				$('#myTags').tagit({
+                	availableTags: existingTags,
+                	itemName: 'item',
+                	fieldName: 'tags',
+                	singleField: true,
+                	singleFieldNode: $('#mySingleField'),
+					afterTagAdded: function(evt, ui) {
+                    	if (!ui.duringInitialization) {
+                    		var tag = $('#myTags').tagit('tagLabel', ui.tag);
+                        	tags[tag] = tag;
+                        	editTags({/literal}{$picture[0].picture_id}{literal});
+                    	}
+                	},
+                	afterTagRemoved: function(evt, ui) {
+                    	var tag = $('#myTags').tagit('tagLabel', ui.tag);
+                    	delete tags[tag];
+                    	deleteTag({/literal}{$picture[0].picture_id}{literal},tag);
+                	},
+
+              	});
+            });
+
+
 			
 
 		{/literal}
@@ -132,7 +198,7 @@
 
 			<h4>Tags</h4>
 				<input name="tags" id="mySingleField" value="{$existingTags}" disabled="true" style="display: none;">
-				<ul id="myTags" onchange="editTags()"></ul>
+				<ul id="myTags" onchange="editTags({$picture[0].picture_id})"></ul>
 
 		</div>
 

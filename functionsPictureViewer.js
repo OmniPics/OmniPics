@@ -131,22 +131,7 @@ $(document).ready(function() {
 
 	});
 
-	$(document).keydown(function(e) {
-
-	    switch(e.which) {
-	        case 37: 
-	        	previousPic();
-	        break;
-
-	        case 39:
-	        	nextPic();
-	        break;
-
-	        default: return; 
-	    }
-	    e.preventDefault(); 
-	});
-
+	
 	$('#edit').click(function() {
 
 
@@ -178,23 +163,7 @@ $(document).ready(function() {
 		$('#edit').show();
 	});
 
-	var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
 
-	$('#myTags').tagit({ 
-		availableTags: sampleTags,
-    	itemName: 'item',
-       	fieldName: 'tags',
-       	singleField: true,
-       	singleFieldNode: $('#mySingleField')
-   	});
-
-   	function editTags(picture_id){
-   		$.ajax({
-        	type: "POST",
-       		url: "editTags.php?picture_id="+picture_id+"",  // configure the name of the input field (will be submitted with form), default: item[tags]
-       		data: { tags : item }
-    	});
-   	}
 
 });
 
