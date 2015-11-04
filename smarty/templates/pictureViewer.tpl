@@ -25,12 +25,13 @@
 			var amountOfPics = 3; //Need two pictures to check if the next pic exists
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
+			var picture_id = {/literal}{$picture[0].picture_id}{literal};
+			var addTags = {};
+			var allExistingTags = [];
 
-			var existingTags = []; 
 			{/literal}
-
 			{foreach from=$allExistingTags item=tag}
-    			{literal} existingTags.push('{/literal}{$tag}{literal}');
+    			{literal} allExistingTags.push('{/literal}{$tag}{literal}');
 			{/literal}{/foreach}{literal}
 
 			/*$(function() {
@@ -39,7 +40,7 @@
 				$('#img').rotate(90);
 			});*/
 		
-			function rotate(picture_id) {
+			function rotate() {
 
 				$.ajax({
 			       type: "POST",
@@ -68,7 +69,7 @@
 				}
 			}
 
-			function pictureDelete(picture_id) {
+			function pictureDelete() {
 				
 			      
 				$.ajax({
@@ -112,16 +113,16 @@
 
 			var tags = {};
 
-			function editTags(picture_id) {
+			function editTags() {
 
 				$.ajax({
 			       type: "POST",
 			       url: "editTags.php?picture_id="+picture_id+"",
-			       data: { picTags : tags }
+			       data: { picTags : addTags }
 				});
 			}
 
-			function deleteTag(picture_id, tag) {
+			function deleteTag(tag) {
 
 				$.ajax({
 			       type: "POST",
@@ -134,7 +135,7 @@
 			$(function(){ 
 
 				$('#myTags').tagit({
-                	availableTags: existingTags,
+                	availableTags: allExistingTags,
                 	itemName: 'item',
                 	fieldName: 'tags',
                 	singleField: true,
@@ -143,14 +144,14 @@
 					afterTagAdded: function(evt, ui) {
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
-                        	tags[tag] = tag;
-                        	editTags({/literal}{$picture[0].picture_id}{literal});
+                        	addTags[tag] = tag;
+                        	editTags(picture_id);
                     	}
                 	},
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
-                    	delete tags[tag];
-                    	deleteTag({/literal}{$picture[0].picture_id}{literal},tag);
+                    	delete addTags[tag];
+                    	deleteTag(picture_id,tag);
                 	},
 
               	});
@@ -176,10 +177,10 @@
 		  					<span class="glyphicon glyphicon-pencil" ></span>
 					</button>
 					
-					<button type="button" class="btn btn-default" onclick="rotate({$picture[0].picture_id})"> 
+					<button type="button" class="btn btn-default" onclick="rotate()"> 
 		  					<span class="glyphicon glyphicon-repeat" ></span>
 					</button>
-					<button  type="button" class="btn btn-default" onclick="pictureDelete({$picture[0].picture_id})">
+					<button  type="button" class="btn btn-default" onclick="pictureDelete()">
 		  					<span class="glyphicon glyphicon-trash"  ></span>
 					</button>
 				</div>
@@ -205,7 +206,7 @@
 
 			<h4>Tags</h4>
 				<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
-				<ul id="myTags" onchange="editTags({$picture[0].picture_id})"></ul>
+				<ul id="myTags"></ul>
 
 		</div>
 
