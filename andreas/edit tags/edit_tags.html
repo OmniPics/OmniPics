@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<title>Pop up modal</title>
+			<!-- Bootstrap -->
+	
+    <script src="js/jquery.min.js"></script> <!-- jquery for bootstrap -->
+    <script src="js/bootstrap.min.js"></script> <!-- javascript for bootstrap-->
+    <link href="css/bootstrap.min.css" rel="stylesheet"> <!-- stylesheet  -->
+	
+    <link href="tagstyle.css" rel="stylesheet" type="text/css"> <!-- stylingsheet som følger med tag-it pluginen. Kan også implementeres i bootstrap -->
+	<script src="plugin/jquery.js"></script>
+	<script src="plugin/jquery-ui.js"></script>
+	<script src="plugin/tagit.js"></script>
+		
+	<script>
+			$(function () {
+				var availableTags = ["omnipix"]; <!-- legg til stringer for forslag til tags -->
+
+			$('#omnitag').tagit({tagSource:availableTags, select:true, sortable:true});  <!-- definerer  properties til plugin. Sortable betyr at du kan dra og sortere taggene. Forsåvidt bare en kul feature -->
+
+			$("#omniGetTags").click(function () { showTags($("#omnitag").tagit("tags")) });  <!-- henter tagger -->
+			
+			$('#omniResetTags').click(function () {$('#omnitag').tagit('reset')});  <!-- kan implementeres i ui senere. Gjør at du kan resette tagger til opprinnelig -->
+
+			});
+	</script>
+	</head>
+  <body>
+   
+   <button type="button" class="btn btn-pri" data-toggle="modal" data-target="#modal-1">Rediger tags</button> <!-- knapp for å åpne metadata edit -->
+   <div class="modal" id="modal-1">  <!--modal popup for redigering av metadata-->
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h1>Rediger tags </h1>
+					<button type="button" class="close" data-dismiss="modal">X</button <!-- lukk popup -->
+				</div>
+				<div class="modal-body">    <!-- body. content går her -->
+			     <ul class="tagit ui-sortable" id="omnitag" name="omnitag"></ul>  <!-- pluginen kan operere på lister. velg ol for ordnet liste.  targit ui-sortable er stylesheet for elementene i listen -->
+			   </div>
+		</div>
+   </div>
+   
+
+  </body>
+</html>
