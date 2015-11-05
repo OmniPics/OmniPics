@@ -1,6 +1,8 @@
 
 /* Optional scoped theme for tag-it which mimics the zendesk widget. */
-
+element.style {
+    width: 50px;
+}
 
 ul.tagit {
     background: #FBFBFB;
