@@ -26,7 +26,6 @@
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
 			var picture_id = {/literal}{$picture[0].picture_id}{literal};
-			var addTags = {};
 			var allExistingTags = [];
 
 			{/literal}
@@ -99,7 +98,6 @@
 				$.ajax({
 			       type: "POST",
 			       url: "editTags.php?picture_id="+picture_id+"&&tag="+tag+""
-			       /*data: { picTags : addTags }*/
 				});
 			}
 
@@ -139,13 +137,11 @@
 					afterTagAdded: function(evt, ui) {
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
-                        	/*addTags[tag] = tag;*/
                         	addTag(tag);
                     	}
                 	},
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
-                    	delete addTags[tag];
                     	deleteTag(tag);
                 	},
 
