@@ -94,12 +94,12 @@
 			}
 
 
-			function editTags() {
+			function addTag(tag) {
 
 				$.ajax({
 			       type: "POST",
-			       url: "editTags.php?picture_id="+picture_id+"",
-			       data: { picTags : addTags }
+			       url: "editTags.php?picture_id="+picture_id+"&&tag="+tag+""
+			       /*data: { picTags : addTags }*/
 				});
 			}
 
@@ -107,7 +107,7 @@
 
 				$.ajax({
 			       type: "POST",
-			       url: "editTags.php?picture_id="+picture_id+"&&tag="+tag+""
+			       url: "editTags.php?picture_id="+picture_id+"&&tagToDelete="+tag+""
 				});
 			}
 
@@ -139,8 +139,8 @@
 					afterTagAdded: function(evt, ui) {
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
-                        	addTags[tag] = tag;
-                        	editTags(picture_id);
+                        	/*addTags[tag] = tag;*/
+                        	addTag(tag);
                     	}
                 	},
                 	afterTagRemoved: function(evt, ui) {
