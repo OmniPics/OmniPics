@@ -146,7 +146,7 @@
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
                     	delete addTags[tag];
-                    	deleteTag(picture_id,tag);
+                    	deleteTag(tag);
                 	},
 
               	});
