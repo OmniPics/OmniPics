@@ -1,41 +1,25 @@
 <?php
 
-	require_once("metaclass.php");
-	$newMeta = new Meta();
-	init("./samples/","website.jpg", $newMeta);
-	
-	
-	function init($path, $filename,$meta_object){
-		
-		
-		$extracted_meta = array();
-		$size = getimagesize($path . $filename, $extracted_meta);
-		$basic_info = getBasic($size);
-		readAPP($extracted_meta);
-	}
-	
-	function getBasic($basic_size, $meta_object){
-		/*
-			We want the width and the height of the image
-			[0] : width
-			[1] : height
-			[2] : 
-			[3] : HTML-width and height
-			[4] : channels
-			[5] : mime (image/jpeg)
-		*/
-		// image width and height taken out
-		$temp_width = $basic_size[0];
-		$temp_height = $basic_size[1];
-		$temp_channels = $basic_size[4];
-		$temp_mime = $basic_size[5];
-		
-		return array($temp_width, $temp_height, $temp_channels, $temp_mime);
-	}
-	
 	
 
+	getMeta("./samples/","website.jpg");
 	
+	function getMeta($path, $filename) {
+		$iptc_raw = array();
+		$size = getimagesize($path . $filename, $iptc_raw);
+
+		$temp_array = array($size[0],$size[1],$size[2],$size[3]);
+
+
+		foreach($size as $row) {
+			print_r($row);
+			print_r("<br>");
+		}
+	}
+
+
+
+
 	function readAPP($meta, $meta_object) {
 		if(isset($meta['APP13'])) {
 			$iptc = iptcparse($meta['APP13']);
@@ -83,7 +67,5 @@
 			chr(($len ) & 0xff).
 			$val;
 	}
-	
-	
 	
 ?>
