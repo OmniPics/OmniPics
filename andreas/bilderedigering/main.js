@@ -24,7 +24,7 @@ $(function () {
     var $dataScaleX = $('#dataScaleX'); // skala for x, brukt for zoom 
     var $dataScaleY = $('#dataScaleY'); // skala for y, brukt for zoom 
     var options = {    // parametere for bildeoperasjoner, x,y,w,h 
-          aspectRatio: 16 / 9,   // forholdstall mellom bredde høyde
+          //aspectRatio: 16 / 9,   // forholdstall mellom bredde høyde
         //  preview: '.img-preview',
           crop: function (e) {      // 
             $dataX.val(Math.round(e.x));
