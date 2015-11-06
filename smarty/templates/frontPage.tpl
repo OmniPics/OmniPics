@@ -3,14 +3,17 @@
 <div id="topArea">
 
 
-    <form id="submit" action="bulkUpload.php" method="post" enctype="multipart/form-data">
-	<span class="btn btn-default btn-file">
-		<span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Upload
-    	<input type="file" id="input" name="myPic[]" multiple="multiple">
-	</span>
-    </form>
+   
 
     <div id="searcharea">
+
+     <form id="submit" class="col-md-4" action="bulkUpload.php" method="post" enctype="multipart/form-data">
+    <span class="btn btn-default btn-file">
+        <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Upload
+        <input type="file" id="input" name="myPic[]" multiple="multiple">
+    </span>
+    </form>
+
         <div id="search" class="input-group">
             <input type="text" class="form-control" placeholder="Søk" onkeyup="showResult(this.value)" onblur="hideResult()">
         <span class="input-group-btn">
