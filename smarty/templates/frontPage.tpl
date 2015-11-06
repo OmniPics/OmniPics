@@ -3,7 +3,12 @@
 <div id="topArea">
 
 
-   
+    <form id="submit" action="backend/bulkUpload.php" method="post" enctype="multipart/form-data">
+	<span class="btn btn-default btn-file">
+		<span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Upload
+    	<input type="file" id="input" name="myPic[]" multiple="multiple">
+	</span>
+    </form>
 
     <div id="searcharea">
 

@@ -64,7 +64,7 @@ body {
 	float: right;
 	top: 0px;
 	right: 0px;
-	opacity: 0.25;
+	opacity: 0.55;
 	max-height: 50px;
 
 }
@@ -74,6 +74,6 @@ body {
 	float: left;
 	top: 0px;
 	left: 0px;
-	opacity: 0.25;
+	opacity: 0.55;
 	max-height: 50px;
 }
