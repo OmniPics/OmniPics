@@ -236,6 +236,9 @@ body {
     opacity: 0.6;
 }
 
+#filepath{
+    display: inline;
+}
 
 footer {
 

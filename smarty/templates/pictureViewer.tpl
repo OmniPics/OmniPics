@@ -182,8 +182,9 @@
 		<div id="metadata" class="col-md-4">
 
 		<h3>{$picture[0].filename}</h3>
-			<ul class="list-group">
-			  <li class="list-group-item">Filepath <span id="filepath">{$picture[0].path}</span><input style="display: none;" id="inputFilepath" class="form-control" type="text" value="{$picture[0].path}"></li>
+			<ul class="list-group" id="metalist">
+			  <li class="list-group-item">Filepath: <span id="filepath">{$picture[0].path}</span>
+			  <input style="display: none;" id="inputFilepath" class="form-control" type="text" value="{$picture[0].path}"></li>
 			  <li class="list-group-item">Place: <span id="place">{$picture[0].place}</span><input style="display: none;" id="inputPlace" class="form-control" type="text" value="{$picture[0].place}"></li>
 			  <li class="list-group-item">Date: <span id="date">{$picture[0].upload_date}</span><input style="display: none;" id="inputDate" class="form-control" type="text" value="{$picture[0].upload_date}"></li>
 			</ul>
