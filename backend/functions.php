@@ -1,6 +1,6 @@
 <?php
 function createThumbnail($filename) {
-    require("setup.php");
+    require("../setup.php");
     $path_to_image_directory = $local_project_dir . "images/";
     $path_to_thumbs_directory = $local_project_dir . "images/thumbs/";
     $final_width_of_image = 30;
