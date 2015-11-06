@@ -543,8 +543,8 @@
       $this.removeClass(CLASS_HIDDEN);
 
       $cropper.css((this.container = {
-        width: max($container.width(), num(options.minContainerWidth) || 200),
-        height: max($container.height(), num(options.minContainerHeight) || 100)
+        width: max($container.width(), num(options.minContainerWidth) || 800),
+        height: max($container.height(), num(options.minContainerHeight) || 500)
       }));
 
       $this.addClass(CLASS_HIDDEN);
@@ -2435,8 +2435,8 @@
     minCanvasHeight: 0,
     minCropBoxWidth: 0,
     minCropBoxHeight: 0,
-    minContainerWidth: 200,
-    minContainerHeight: 100,
+    minContainerWidth: 800,
+    minContainerHeight: 400,
 
     // Shortcuts of events
     build: null,

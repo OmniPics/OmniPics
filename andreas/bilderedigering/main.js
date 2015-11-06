@@ -13,9 +13,9 @@ $(function () {
 
     // Variabler 
   (function () {
-    var $image = $('.img-container > img'); // bilde
+    var $image = $('img'); // bilde
     var $actions = $('.docs-actions');
-    var $download = $('#download');  //
+  /*   var $download = $('#download');  // */
     var $dataX = $('#dataX');
     var $dataY = $('#dataY');
     var $dataHeight = $('#dataHeight'); 
@@ -39,25 +39,19 @@ $(function () {
     // for implementering av plugin og logging av data
     $image.on({
       'build.cropper': function (e) {
-        console.log(e.type);
       },
       'built.cropper': function (e) {
-        console.log(e.type);
       },
       'cropstart.cropper': function (e) {
-        console.log(e.type, e.action);
       },
       'cropmove.cropper': function (e) {
-        console.log(e.type, e.action);
       },
       'cropend.cropper': function (e) {
-        console.log(e.type, e.action);
       },
       'crop.cropper': function (e) {
         console.log(e.type, e.x, e.y, e.width, e.height, e.rotate, e.scaleX, e.scaleY);
       },
       'zoom.cropper': function (e) {
-        console.log(e.type, e.ratio);
       }
     }).cropper(options);
 
@@ -74,9 +68,9 @@ $(function () {
 
 
     // last ned
-    if (typeof $download[0].download === 'undefined') {
+   /*  if (typeof $download[0].download === 'undefined') {
       $download.addClass('disabled');
-    }
+    } */
 
 
     // altenativer
@@ -135,19 +129,19 @@ $(function () {
           case 'scaleY':
             $(this).data('option', -data.option);
             break;
- 
+ /* 
           case 'getCroppedCanvas':     // bruker har valgt å lagre bilde. Kan fjernes
             if (result) {
 
               // bootstrap modal. Popup for å lagre bilde til disk
-              $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);  
+              $('#getCroppedCanvasModal').find('.modal-body').html(result);  
 
               if (!$download.hasClass('disabled')) {
                 $download.attr('href', result.toDataURL());
               }
-            }
+            } */
 
-            break;
+            
         }
 
       }

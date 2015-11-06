@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<title>Pop up modal</title>
+	<title>Edit tags</title>
 			<!-- Bootstrap -->
 	
     <script src="js/jquery.min.js"></script> <!-- jquery for bootstrap -->
@@ -27,21 +27,25 @@
 	</script>
 	</head>
   <body>
-   
-   <button type="button" class="btn btn-pri" data-toggle="modal" data-target="#modal-1">Rediger tags</button> <!-- knapp for å åpne metadata edit -->
-   <div class="modal" id="modal-1">  <!--modal popup for redigering av metadata-->
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-				<h1>Rediger tags </h1>
-					<button type="button" class="close" data-dismiss="modal">X</button <!-- lukk popup -->
+  <button class="btn" data-toggle="modal" data-target="#modal-success">Edit tags</button>
+  
+  <div id="modal-success" class="modal modal-success fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">Edit tags
+                </div>
+             
+                <div class="modal-body">
+                <ul class="tagit ui-sortable" id="omnitag" name="omnitag"></ul>
 				</div>
-				<div class="modal-body">    <!-- body. content går her -->
-			     <ul class="tagit ui-sortable" id="omnitag" name="omnitag"></ul>  <!-- pluginen kan operere på lister. velg ol for ordnet liste.  targit ui-sortable er stylesheet for elementene i listen -->
-			   </div>
-		</div>
-   </div>
-   
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">OK</button>
+                </div>
+            </div> 
+        </div> 
+    </div>
+  
+
 
   </body>
 </html>
