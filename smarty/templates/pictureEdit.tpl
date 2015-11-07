@@ -42,7 +42,7 @@
 					Cropped  <!-- tekst på knapp--> </span>
 					</button> 
 					<button type="button" class="btn btn-default" data-method="clear" title="Clear"> 
-					<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)"> <!-- forklarende tekst over knapp. Endre title for å endre tekst -->
+					<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)"> 
 					<span class="fa fa-remove"></span>
 					</span>
 					</button>  <!-- clear button -->
@@ -51,15 +51,16 @@
 					<span class="fa fa-refresh"></span>
 					</span>
 					</button>
-					<button type="button" class="btn btn-default"  onclick="location.href='index.php?page=pictureViewer&&picsAscOrDesc=0&&orderPicsBy=upload_date&&picsIndexStart=1'""> 
+					
+					<button type="button" class="btn btn-default"  onclick="location.href='index.php?page=pictureViewer&&picsAscOrDesc=0&&orderPicsBy=upload_date&&picsIndexStart=1'" title="Clear"> 
+					<span> 
+					<span>quit</span>
 					</span>
-					</button>
-	
-				</div>
-				<div id ="topMenuLeft">
+					</button> 
 					
-					
+
 				</div>
+				
 				 <img id="img" class="container-fluid" src="{$picture_path}?">;
 		
               </div>

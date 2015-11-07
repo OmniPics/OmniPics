@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-11-06 22:39:34
+<?php /* Smarty version 3.1.27, created on 2015-11-07 11:05:09
          compiled from "c:\wamp\www\omnipics\smarty\templates\pictureEdit.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:10336563d1e16cc3691_21325790%%*/
+/*%%SmartyHeaderCode:2797563dccd59a1858_95189722%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8d42fef677191bedf3ff245dce2f005685322fd3' => 
     array (
       0 => 'c:\\wamp\\www\\omnipics\\smarty\\templates\\pictureEdit.tpl',
-      1 => 1446845969,
+      1 => 1446890705,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '10336563d1e16cc3691_21325790',
+  'nocache_hash' => '2797563dccd59a1858_95189722',
   'variables' => 
   array (
     'picture_path' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_563d1e16d09ba6_69446626',
+  'unifunc' => 'content_563dccd59e7d66_89786810',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_563d1e16d09ba6_69446626')) {
-function content_563d1e16d09ba6_69446626 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_563dccd59e7d66_89786810')) {
+function content_563dccd59e7d66_89786810 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '10336563d1e16cc3691_21325790';
+$_smarty_tpl->properties['nocache_hash'] = '2797563dccd59a1858_95189722';
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,7 +82,7 @@ $_smarty_tpl->properties['nocache_hash'] = '10336563d1e16cc3691_21325790';
 					Cropped  <!-- tekst på knapp--> </span>
 					</button> 
 					<button type="button" class="btn btn-default" data-method="clear" title="Clear"> 
-					<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)"> <!-- forklarende tekst over knapp. Endre title for å endre tekst -->
+					<span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)"> 
 					<span class="fa fa-remove"></span>
 					</span>
 					</button>  <!-- clear button -->
@@ -91,15 +91,16 @@ $_smarty_tpl->properties['nocache_hash'] = '10336563d1e16cc3691_21325790';
 					<span class="fa fa-refresh"></span>
 					</span>
 					</button>
-					<button type="button" class="btn btn-default"  onclick="location.href='index.php?page=pictureViewer&&picsAscOrDesc=0&&orderPicsBy=upload_date&&picsIndexStart=1'""> 
+					
+					<button type="button" class="btn btn-default"  onclick="location.href='index.php?page=pictureViewer&&picsAscOrDesc=0&&orderPicsBy=upload_date&&picsIndexStart=1'" title="Clear"> 
+					<span> 
+					<span>quit</span>
 					</span>
-					</button>
-	
-				</div>
-				<div id ="topMenuLeft">
+					</button> 
 					
-					
+
 				</div>
+				
 				 <img id="img" class="container-fluid" src="<?php echo $_smarty_tpl->tpl_vars['picture_path']->value;?>
 ?">;
 		
