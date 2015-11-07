@@ -1,15 +1,8 @@
 <?php
+	$info = array();
+	$size = getimagesize("./img.jpg",$info);
 
-
-	print("Hello world");
-
-	$size = getimagesize("./test.jpg",$info);
-	if(isset($info['APP13'])){
-		
-		$iptc = iptcparse($info['APP13']);
-		var_dump($iptc);
-
-	}
+	print("hello world");
 
 
 ?>
