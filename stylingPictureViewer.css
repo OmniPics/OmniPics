@@ -77,3 +77,10 @@ body {
 	opacity: 0.55;
 	max-height: 50px;
 }
+
+
+#metalist input{
+	  display: inline; 
+  width: 70%;
+}
+

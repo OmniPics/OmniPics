@@ -71,25 +71,36 @@ body {
     height:0;
 }
 #topArea {
-    padding-top: 30px;
+    padding-top: 10px;
     width: 900px;
     margin: 0 auto;
     padding-left: 15px;
     padding-right: 15px;
 }
 
+#searcharea {
+    position: relative;
+    margin:0 auto;
+     z-index: 0;
+     float: center;
+
+}
 #submit {
 
-    float: none;
+    padding-left: 0;
 }
 /*
     tomasz
 */
-#searcharea {
-    position: relative;
-    margin:0 auto;
-    width:40%;
-}
+
+
+#search {
+    padding-right: auto;
+     padding-left: auto;
+     width:40%;
+     float: center;
+}*/
+
 .media {
     display: inline-block;
     width: 100%;
@@ -127,8 +138,8 @@ body {
 }
 
 .container {
-
-    margin-top: 80px;
+/*
+    margin-top: 80px; skal vi ha denne?*/
     width: 900px;
 }
 
@@ -223,6 +234,10 @@ body {
 
     border: solid #80B2FF 2px;
     opacity: 0.6;
+}
+
+#filepath{
+    display: inline;
 }
 
 footer {
