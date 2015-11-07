@@ -27,10 +27,12 @@ $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 $nextPicExists = 1;
 $prevPicExists = 1;
 
-
-
+$picture_path = isset($_REQUEST["picture_path"]) ? $_REQUEST["picture_path"] : "";
 switch($page) {
-
+  	case 'pictureEdit':
+		$smarty->assign("picture_path", $picture_path);
+		$smarty->display('pictureEdit.tpl');
+		break;
 
 	case 'pictureViewer':
 		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);

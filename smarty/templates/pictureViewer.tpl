@@ -163,10 +163,10 @@
 		{/if}
 			
 				<div id ="topMenuRight">
-					<button type="button" class="btn btn-default">
+					<button type="button" class="btn btn-default" onclick="location.href='index.php?page=pictureEdit&&picture_path={$picture[0].path}'">
 		  					<span class="glyphicon glyphicon-pencil" ></span>
 					</button>
-					
+			
 					<button type="button" class="btn btn-default" onclick="rotate()"> 
 		  					<span class="glyphicon glyphicon-repeat" ></span>
 					</button>
@@ -201,7 +201,5 @@
 
 		</div>
 
-
-	
 
 {include file="footer.tpl"}
