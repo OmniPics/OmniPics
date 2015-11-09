@@ -21,10 +21,10 @@ $(document).ready(function() {
                 $('div#loadmoreajaxloader').show();
      			newIndexStart += 9;
                 $.ajax({
-                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPics+"",
+                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+3+"",
                     success: function(result){
                         if(result){
-                            $("#pictures").append(result);
+                            $(result).hide().appendTo('#pictures').fadeIn();
                             $('div#loadmoreajaxloader').hide();
                         }else{
                             $('div#loadmoreajaxloader').fadeOut();

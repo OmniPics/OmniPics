@@ -16,8 +16,5 @@ if($tagToDelete != "") {
 
 if($tag != "") {
 
-	
-	//foreach ($tags as $tag) {
-			$pictures->addTag($tag, $picture_id);
-		//}
+	$pictures->addTag($tag, $picture_id);
 }

@@ -44,8 +44,8 @@ for($i = 0; $i < count($pictureArray); $i+=3) {
 		if (isset($pictureArray[$i+$j])) {
 
 			echo '<div class="col-md-4 portfolio-item">';
-				echo '<div id="golink'.($i+$j).'" ondblclick="pictureLink'; echo "(".($i+$j).")"; echo '">';
-					echo '<img onclick="selected('; echo "'#frontPageImage".($i+$j)."',".$pictureArray[$i+$j]['picture_id']; echo ')" id="frontPageImage'.($i+$j).'" class="img-responsive img-frontPage" src="'.$pictureArray[$i+$j]["path"].'"> </a>'; //id="frontPageImage'.($i+$j)' src='.$pictureArray[$i+$j]["path"].'>
+				echo '<div id="golink'.($picsIndexStart+$i+$j).'" ondblclick="pictureLink'; echo "(".($picsIndexStart+$i+$j).")"; echo '">';
+					echo '<img onclick="selected('; echo "'#frontPageImage".($picsIndexStart+$i+$j)."',".$pictureArray[$i+$j]['picture_id']; echo ')" id="frontPageImage'.($picsIndexStart+$i+$j).'" class="img-responsive img-frontPage" src="'.$pictureArray[$i+$j]["path"].'"> </a>'; 
 					echo '<p id="pictureInfo">' . $pictureArray[$i+$j]['filename'] . '</p>';
 				echo '</div>';
 			echo '</div>';
