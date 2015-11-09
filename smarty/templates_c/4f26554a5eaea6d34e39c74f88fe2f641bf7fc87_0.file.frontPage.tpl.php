@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-11-09 19:20:42
+<?php /* Smarty version 3.1.27, created on 2015-11-09 23:10:09
          compiled from "C:\wamp\www\OmniPics\smarty\templates\frontPage.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:196085640e3fa844bb2_39079721%%*/
+/*%%SmartyHeaderCode:7409564119c1d8ec78_20644622%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,20 +9,20 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4f26554a5eaea6d34e39c74f88fe2f641bf7fc87' => 
     array (
       0 => 'C:\\wamp\\www\\OmniPics\\smarty\\templates\\frontPage.tpl',
-      1 => 1447093235,
+      1 => 1447107003,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '196085640e3fa844bb2_39079721',
+  'nocache_hash' => '7409564119c1d8ec78_20644622',
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5640e3fa87e149_77127248',
+  'unifunc' => 'content_564119c1dc33c1_62072032',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5640e3fa87e149_77127248')) {
-function content_5640e3fa87e149_77127248 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_564119c1dc33c1_62072032')) {
+function content_564119c1dc33c1_62072032 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '196085640e3fa844bb2_39079721';
+$_smarty_tpl->properties['nocache_hash'] = '7409564119c1d8ec78_20644622';
 echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -33,7 +33,7 @@ echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smart
 
     <div id="searcharea">
 
-     <form id="submit" class="col-md-4" action="bulkUpload.php" method="post" enctype="multipart/form-data">
+     <form id="submit" class="col-md-4" action="backend/bulkUpload.php" method="post" enctype="multipart/form-data">
     <span class="btn btn-default btn-file">
         <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Upload
         <input type="file" id="input" name="myPic[]" multiple="multiple">
