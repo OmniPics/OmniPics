@@ -555,7 +555,7 @@
     initCanvas: function () {
       var container = this.container;
       var containerWidth = container.width;
-      var containerHeight = container.height;
+      var containerHeight = container.height(600);
       var image = this.image;
       var aspectRatio = image.aspectRatio;
       var canvas = {
@@ -570,8 +570,8 @@
         canvas.width = containerHeight * aspectRatio;
       }
 
-      canvas.oldLeft = canvas.left = (containerWidth - canvas.width) / 2;
-      canvas.oldTop = canvas.top = (containerHeight - canvas.height) / 2;
+      canvas.oldLeft = canvas.left = (containerWidth - canvas.width) / 2  ;
+      canvas.oldTop = canvas.top = (containerHeight - canvas.height) / 20;
 
       this.canvas = canvas;
       this.limitCanvas(true, true);

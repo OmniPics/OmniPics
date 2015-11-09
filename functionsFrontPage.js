@@ -14,12 +14,32 @@ $(document).ready(function() {
     });
 
     sortBy(orderPicsBy);
+
+     $(window).scroll(function(){
+
+            if($(window).scrollTop() == $(document).height() - $(window).height()){
+                $('div#loadmoreajaxloader').show();
+     			newIndexStart += 9;
+                $.ajax({
+                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPics+"",
+                    success: function(result){
+                        if(result){
+                            $("#pictures").append(result);
+                            $('div#loadmoreajaxloader').hide();
+                        }else{
+                            $('div#loadmoreajaxloader').fadeOut();
+                        }
+                    }
+                });
+            }
+        });
 });
 
 var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
-var picsIndexStart = '0';
-var amountOfPics = '9';
+var picsIndexStart = 0;
+var amountOfPics = 9;
+var newIndexStart = 0;
 
 
 var selectedPicture_ids = {};
@@ -97,6 +117,8 @@ function selected(image_CSS_id, db_picture_id) {
 
 
 function sortBy(sortingType) {
+
+		newIndexStart = 0;
 
 		switch(sortingType) {
 

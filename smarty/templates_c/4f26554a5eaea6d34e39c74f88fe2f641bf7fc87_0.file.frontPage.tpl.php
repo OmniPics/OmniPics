@@ -1,4 +1,31 @@
-{include file="header.tpl"}
+<?php /* Smarty version 3.1.27, created on 2015-11-09 19:20:42
+         compiled from "C:\wamp\www\OmniPics\smarty\templates\frontPage.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:196085640e3fa844bb2_39079721%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4f26554a5eaea6d34e39c74f88fe2f641bf7fc87' => 
+    array (
+      0 => 'C:\\wamp\\www\\OmniPics\\smarty\\templates\\frontPage.tpl',
+      1 => 1447093235,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '196085640e3fa844bb2_39079721',
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_5640e3fa87e149_77127248',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_5640e3fa87e149_77127248')) {
+function content_5640e3fa87e149_77127248 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '196085640e3fa844bb2_39079721';
+echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+?>
+
 
 <div id="topArea">
 
@@ -54,4 +81,8 @@
 
 </div>
 
-{include file="footer.tpl"}
+<?php echo $_smarty_tpl->getSubTemplate ("footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+
+}
+}
+?>

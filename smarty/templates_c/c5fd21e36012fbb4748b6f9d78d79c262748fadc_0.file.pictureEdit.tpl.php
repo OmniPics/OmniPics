@@ -1,13 +1,53 @@
+<?php /* Smarty version 3.1.27, created on 2015-11-07 20:54:18
+         compiled from "C:\wamp\www\OmniPics\smarty\templates\pictureEdit.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:22780563e56eaa84429_38063274%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c5fd21e36012fbb4748b6f9d78d79c262748fadc' => 
+    array (
+      0 => 'C:\\wamp\\www\\OmniPics\\smarty\\templates\\pictureEdit.tpl',
+      1 => 1446926024,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '22780563e56eaa84429_38063274',
+  'variables' => 
+  array (
+    'picture_path' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_563e56eac06352_37252122',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_563e56eac06352_37252122')) {
+function content_563e56eac06352_37252122 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '22780563e56eaa84429_38063274';
+?>
 <!DOCTYPE html>
 <html>
 	<head>
 	<link rel="stylesheet" href="./andjoh/css/font-awesome.min.css">   <!-- Bruker font-awesome -->
 	 <link rel="stylesheet" href="./andjoh/css/bootstrap.min.css">    <!-- css fil for bootstrap -->
-	 <script src="./andjoh/assets/js/jquery.min.js"></script>  <!-- fulgte med pluginen. Skjønner bare delvis hva den gjør. Rotete formattering i kildefil -->
-	 <script src="./andjoh/assets/js/tooltip.min.js"></script>  <!-- javascript for tooltip. for å vise forklarende tekst over knapper.  -->
-	 <script src="./andjoh/assets/js/bootstrap.min.js"></script> <!-- javascript for bootstrap -->
-	 <script src="./andjoh/plugin/cropper.js"></script>  <!-- javascript for pluginen vi bruker -->
-	 <script src="./andjoh/main.js"></script>
+	 <?php echo '<script'; ?>
+ src="./andjoh/assets/js/jquery.min.js"><?php echo '</script'; ?>
+>  <!-- fulgte med pluginen. Skjønner bare delvis hva den gjør. Rotete formattering i kildefil -->
+	 <?php echo '<script'; ?>
+ src="./andjoh/assets/js/tooltip.min.js"><?php echo '</script'; ?>
+>  <!-- javascript for tooltip. for å vise forklarende tekst over knapper.  -->
+	 <?php echo '<script'; ?>
+ src="./andjoh/assets/js/bootstrap.min.js"><?php echo '</script'; ?>
+> <!-- javascript for bootstrap -->
+	 <?php echo '<script'; ?>
+ src="./andjoh/plugin/cropper.js"><?php echo '</script'; ?>
+>  <!-- javascript for pluginen vi bruker -->
+	 <?php echo '<script'; ?>
+ src="./andjoh/main.js"><?php echo '</script'; ?>
+>
 
 	</head>
 	<body>  
@@ -61,8 +101,14 @@
 
 				</div>
 				
-				 <img id="img" class="container-fluid" src="{$picture_path}">;
+				 <img id="img" class="container-fluid" src="<?php echo $_smarty_tpl->tpl_vars['picture_path']->value;?>
+?">;
 		
               </div>
 	
-{include file="footer.tpl"}
+<?php echo $_smarty_tpl->getSubTemplate ("footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+?>
+
+<?php }
+}
+?>
