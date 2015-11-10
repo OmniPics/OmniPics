@@ -30,7 +30,7 @@ $(document).ready(function() {
                     success: function(result){
                         $(result).hide().appendTo('#pictures').fadeIn('slow');
                         $('div#loadmoreajaxloader').fadeOut('slow');
-     					newIndexStart += 9;
+     					newIndexStart += 6;
                     }
                 });
 
@@ -63,7 +63,7 @@ function getAmountOfPicsInDB() {
        url: "amountOfPics.php",
        success: function(result){
             amountOfPicsInDB = result;
-            endOfPics = parseInt(amountOfPicsInDB) + 9;
+            endOfPics = parseInt(amountOfPicsInDB) + 6;
         }
     });
 }
