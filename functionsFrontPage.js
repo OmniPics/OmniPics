@@ -20,7 +20,6 @@ $(document).ready(function() {
 
         if($(window).scrollTop() == $(document).height() - $(window).height()){
 
-
     		if(newIndexStart < amountOfPicsInDB) {
      			 
                 $.ajax({
@@ -100,6 +99,8 @@ function deletePicsFromDB() {
     });
 
     selectedPicture_ids = {};
+    getAmountOfPicsInDB();
+    newIndexStart = 9;
 
 }
 
@@ -141,7 +142,7 @@ function selected(image_CSS_id, db_picture_id) {
 
 function sortBy(sortingType) {
 
-		newIndexStart = 0;
+    	newIndexStart = 9;
 
 		switch(sortingType) {
 
