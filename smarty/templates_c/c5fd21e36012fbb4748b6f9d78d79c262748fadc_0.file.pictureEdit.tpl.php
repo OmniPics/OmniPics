@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-11-07 20:54:18
+<?php /* Smarty version 3.1.27, created on 2015-11-10 10:58:10
          compiled from "C:\wamp\www\OmniPics\smarty\templates\pictureEdit.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:22780563e56eaa84429_38063274%%*/
+/*%%SmartyHeaderCode:225615641bfb244ec87_53278522%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c5fd21e36012fbb4748b6f9d78d79c262748fadc' => 
     array (
       0 => 'C:\\wamp\\www\\OmniPics\\smarty\\templates\\pictureEdit.tpl',
-      1 => 1446926024,
+      1 => 1447089859,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '22780563e56eaa84429_38063274',
+  'nocache_hash' => '225615641bfb244ec87_53278522',
   'variables' => 
   array (
     'picture_path' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_563e56eac06352_37252122',
+  'unifunc' => 'content_5641bfb260b357_26871501',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_563e56eac06352_37252122')) {
-function content_563e56eac06352_37252122 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5641bfb260b357_26871501')) {
+function content_5641bfb260b357_26871501 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '22780563e56eaa84429_38063274';
+$_smarty_tpl->properties['nocache_hash'] = '225615641bfb244ec87_53278522';
 ?>
 <!DOCTYPE html>
 <html>
@@ -102,7 +102,7 @@ $_smarty_tpl->properties['nocache_hash'] = '22780563e56eaa84429_38063274';
 				</div>
 				
 				 <img id="img" class="container-fluid" src="<?php echo $_smarty_tpl->tpl_vars['picture_path']->value;?>
-?">;
+">;
 		
               </div>
 	

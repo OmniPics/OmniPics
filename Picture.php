@@ -12,6 +12,13 @@ class Picture {
             echo "unable to get inside: " . mysqli_error();exit;
         }
     }
+
+    function getAmountOfPics() {
+        $sql = "SELECT picture_id FROM pictures";
+        $query = mysqli_query($this->connection,$sql);
+        $amount = mysqli_num_rows($query);
+        return $amount;
+    }
     function loadPicture($picture_id) {
         $picture = array();
         if ($picture_id > 0) {
