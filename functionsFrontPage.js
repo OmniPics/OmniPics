@@ -18,7 +18,6 @@ $(document).ready(function() {
 
      $(window).scroll(function(){
 
-     	console.log($(window).scrollTop());
         if($(window).scrollTop() == $(document).height() - $(window).height()){
 
 
@@ -89,14 +88,14 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics
     selectedPicture_ids = {};
 }
 
-function deletePicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad) {
+function deletePicsFromDB() {
 
 	$.ajax({
        type: "POST",
        url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
        data: { 	selectedPictures : selectedPicture_ids },
        success: function(result){
-            $(result).appendTo('#pictures').fadeIn('slow')
+            $('#pictures').html(result);
         }
     });
 
