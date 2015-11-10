@@ -22,13 +22,13 @@ $(document).ready(function() {
 
 
     		if(newIndexStart < amountOfPicsInDB) {
-     			newIndexStart += 9;
      			 
                 $.ajax({
                     url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+6+"",
                     success: function(result){
                         $(result).hide().appendTo('#pictures').fadeIn('slow');
                         $('div#loadmoreajaxloader').fadeOut('slow');
+     					newIndexStart += 9;
                     }
                 });
             }else {
@@ -46,7 +46,7 @@ var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
 var picsIndexStart = 0;
 var amountOfPicsToLoad = 9;
-var newIndexStart = 0;
+var newIndexStart = 9;
 
 var amountOfPicsInDB = 0;
 
