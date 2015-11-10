@@ -2,11 +2,37 @@ $(document).ready(function() {
 
 	getAmountOfPicsInDB();
 
-	$('#input').change(function() {
 
+	$('#submit').on('submit',(function(e) {
+    	e.preventDefault();
+    	var formData = new FormData(this);
 
-		document.getElementById("submit").submit();
-	});
+	    $.ajax({
+	        type:'POST',
+	        url: $(this).attr('action'),
+	        data:formData,
+	        cache:false,
+	        contentType: false,
+	        processData: false,
+		    success:function(data){
+	        	console.log("success");
+	        	console.log(data);
+	        	$('#pictures').hide();
+	       		listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+	       		$('#pictures').fadeIn();
+	       		getAmountOfPicsInDB();
+	       		newIndexStart = 9;
+	        },
+	       error: function(data){
+			console.log("error");
+		    console.log(data);
+	        }
+	    });
+	}));
+
+    $("#input").on("change", function() {
+        $("#submit").submit();
+    });
 
 	$('#golink').click(function() {
         return false;
@@ -20,9 +46,7 @@ $(document).ready(function() {
      $(window).scroll(function(){
 
         if($(window).scrollTop() == $(document).height() - $(window).height()){
-
-        	console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
-        	
+	
     		if(newIndexStart < endOfPics) {
      			 
                 $.ajax({
@@ -82,9 +106,9 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics
        type: "POST",
        url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
        success: function(result){
-       		$('#pictures').hide();
+       		//$('#pictures').hide();
             $("#pictures").html(result);
-            $('#pictures').fadeIn('slow');
+            //$('#pictures').fadeIn('fast');
             
         }
     });

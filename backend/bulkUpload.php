@@ -76,4 +76,4 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
 }
 
-header('Location: '.'../index.php');
+//header('Location: '.'../index.php');

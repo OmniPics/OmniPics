@@ -8,6 +8,7 @@
 		<script src="endlessScrolling/bsa_script.js" type="text/javascript"></script>
 		<script src="functionsFrontPage.js" type="text/javascript"></script>
 		<script src="frontend/searchAutoFill.js" type="text/javascript"></script>
+		<script src="http://malsup.github.com/jquery.form.js"></script> 
 	</head>
 
 
