@@ -27,12 +27,12 @@ function createThumbnail($filename) {
 
     if(!file_exists($path_to_thumbs_directory)) {
         if(!mkdir($path_to_thumbs_directory)) {
-            die("not working, maby prøv igjen ?!");
+            die(" not working, maby prøv igjen ?! ");
         }
     }
 
     imagejpeg($nm, $path_to_thumbs_directory . $filename);
     $tn = '<img src="' . $path_to_thumbs_directory . $filename . '" alt="image"/>';
-    $tn .= 'lolzerz it workeds meow';
-    echo $tn;
+    $tn .= ' lolzerz it workeds meow ';
+    echo " thumb: " . $tn . " : thumb ";
 }

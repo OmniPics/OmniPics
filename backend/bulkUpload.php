@@ -33,8 +33,10 @@ if(!empty($_FILES['myPic']['name'][0])) {
       if($file_error === 0) {
 
           $file_dir = "images/" . $filename . "." .$pieces[1];
-          while(file_exists("images/" . $filename . "." . $pieces[1])){
+          while(file_exists("../images/" . $filename . "." . $pieces[1])){
             $filename = $name_ext["filename"] . "_" . $i++;
+            //$filename = $pieces[0] . "_" . $i++;
+
           }
             $file_dir = "images/" . $filename . "." . $pieces[1];
             $uploaded[$position] = $file_dir;
@@ -58,7 +60,7 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
       echo "$filename has been successfully uploaded!.";
 
-
+      echo $filename;
       $picture->addPicture($filename, $extension, $file_dir);
 
     // set proper permissions on the new file
@@ -74,4 +76,4 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
 }
 
-header('Location: '.'../index.php');
+//header('Location: '.'../index.php');
