@@ -18,10 +18,9 @@ $(document).ready(function() {
 
      $(window).scroll(function(){
 
+     	console.log($(window).scrollTop());
         if($(window).scrollTop() == $(document).height() - $(window).height()){
-        	
-            $('div#loadmoreajaxloader').show();
-            getAmountOfPicsInDB();
+
 
     		if(newIndexStart < amountOfPicsInDB) {
      			newIndexStart += 9;
@@ -30,11 +29,16 @@ $(document).ready(function() {
                     url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+6+"",
                     success: function(result){
                         $(result).hide().appendTo('#pictures').fadeIn('slow');
+                        $('div#loadmoreajaxloader').fadeOut('slow');
                     }
                 });
+            }else {
+            	
+            	$('div#loadmoreajaxloader').show();
+            	$('div#loadmoreajaxloader').fadeOut('slow');
             }
 
-            $('div#loadmoreajaxloader').fadeOut('slow');
+            getAmountOfPicsInDB();
         }
     });
 });
