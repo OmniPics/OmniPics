@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	getAmountOfPicsInDB();
 
 	$('#input').change(function() {
 
@@ -20,7 +21,9 @@ $(document).ready(function() {
 
         if($(window).scrollTop() == $(document).height() - $(window).height()){
 
-    		if(newIndexStart < amountOfPicsInDB) {
+        	console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
+        	
+    		if(newIndexStart < endOfPics) {
      			 
                 $.ajax({
                     url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+6+"",
@@ -30,13 +33,13 @@ $(document).ready(function() {
      					newIndexStart += 9;
                     }
                 });
+
             }else {
             	
             	$('div#loadmoreajaxloader').show();
             	$('div#loadmoreajaxloader').fadeOut('slow');
             }
 
-            getAmountOfPicsInDB();
         }
     });
 });
@@ -48,6 +51,7 @@ var amountOfPicsToLoad = 9;
 var newIndexStart = 9;
 
 var amountOfPicsInDB = 0;
+var endOfPics = 0;
 
 
 var selectedPicture_ids = {};
@@ -59,6 +63,7 @@ function getAmountOfPicsInDB() {
        url: "amountOfPics.php",
        success: function(result){
             amountOfPicsInDB = result;
+            endOfPics = parseInt(amountOfPicsInDB) + 9;
         }
     });
 }
