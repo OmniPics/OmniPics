@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
 		<!--<script type="text/javascript" src="jQueryRotate.js"></script>-->
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
-		<script src="caman.full.min.js"></script>
+		<script src="caman.min.js"></script>
 
 	</head>
 	<body>
