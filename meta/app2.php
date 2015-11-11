@@ -1,42 +1,46 @@
 <?php
 
-	//TESTMETA("./sample
+	//TESTMETA("./samples/");
+
+	TESTMETA("./samples/",1,0);
 
 
-	starter();
+	$totalTags = array(
+		"width"=>"",
+		"height"=>"",
+		"FileDate"=>"",
+		"FileSize"=>"",
+		"Copyright"=>"",
+		"Keywords"=>array()
+	);
 
-	function starter() {
-		//getMeta("./samples/","1.jpg");
 
-		writeIPTC("./samples/1.jpg","./samples/1_1.jpg",1,1,1);
-		getMeta("./samples/","1_1.jpg");
+	function TESTMETA($path, $TESTexif, $TESTiptc) {
+		// get all the image in current .dir -> get all the meta from them
+		$files = scandir($path);
+		foreach($files as $file) {
+			if(strlen($file) >= 3) {
 
-		$iptc = array(
-			"2#120" =>"Hello world",
-			"2#025" => "Keywords",
-			"2#116" => "Copyright Thomas Darvik"
-		);
-
-		$data = "";
-		foreach($iptc as $tag => $string) {
-			$tag = substr($tag, 2);
-			$data .= IPTCmakeTag(2,$tag, $string);
+				if($TESTiptc) {
+					print_r("FILENAME IS: " . $file . "<br>");
+					getMeta($path . $file);
+					print_r("<br>");
+					print_r("--------------------------");
+					print_r("--------------------------");
+					print_r("--------------------------");
+					print_r("<br>");
+				} elseif ($TESTexif) {
+					print_r("FILENAME IS: " . $file . "<br>");
+					getEXIF($path . $file);
+					print_r("<br>");
+					print_r("--------------------------");
+					print_r("--------------------------");
+					print_r("--------------------------");
+					print_r("<br>");
+				}
+			}
 		}
-
-		$content = iptcembed($data,"./samples/1.jpg");
-		$file = fopen("./samples/1.jpg","wb");
-		fwrite($file, $content);
-		fclose($file);
 	}
-
-	function writeIPTC($currentFilename, $newFilename, $rec,$dat,$val) {
-		$caption_block = IPTCmakeTag(2,120, "Hello world");
-		$keyword_block = IPTCmakeTag(2,25, "keywords are here");
-		$imagestring = iptcembed($caption_block,$currentFilename);
-		$imagestring = iptcembed($keyword_block,$currentFilename);
-		file_put_contents($newFilename,$imagestring);
-	}
-
 
 	function getEXIF($path, $filename) {
 		$exif = exif_read_data($path . $filename);
@@ -84,8 +88,6 @@
 			print_r("<br>");
 		}
 	}
-
-
 
 	function getIPTC($iptc_raw) {
 		$iptc_tag_array = array(
@@ -136,24 +138,6 @@
 			}
 		}
 		return $iptc_tag_array;
-	}
-
-	# CREDIT TO Thies C. Arntzen
-	function IPTCmakeTag($rec,$dat,$val){
-	    $len = strlen($val);
-	    if ($len < 0x8000)
-	        return chr(0x1c).chr($rec).chr($dat).
-	        chr($len >> 8).
-	        chr($len & 0xff).
-	        $val;
-	    else
-	        return chr(0x1c).chr($rec).chr($dat).
-	        chr(0x80).chr(0x04).
-	        chr(($len >> 24) & 0xff).
-	        chr(($len >> 16) & 0xff).
-	        chr(($len >> 8 ) & 0xff).
-	        chr(($len ) & 0xff).
-	        $val;
 	}
 
 
