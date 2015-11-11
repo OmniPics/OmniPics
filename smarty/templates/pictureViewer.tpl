@@ -10,7 +10,8 @@
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
 		<!--<script type="text/javascript" src="jQueryRotate.js"></script>-->
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
-		
+		<script src="caman.full.min.js" type="text/javascript"></script>
+
 	</head>
 	<body>
 
@@ -38,7 +39,7 @@
 
 				$('#img').rotate(90);
 			});*/
-		
+
 			function rotate() {
 
 				$.ajax({
@@ -69,22 +70,22 @@
 			}
 
 			function pictureDelete() {
-				
-			      
+
+
 				$.ajax({
 			       type: "POST",
 			       url: "delete.php?picture_id="+picture_id+"",
 			       complete: function() {
-			       	
+
 					    if(nextPicExists == 1) {
 					    	window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
 						}else {
 
-					    	if(prevPicExists == 1) { 
+					    	if(prevPicExists == 1) {
 					    		previousPic();
 					    	}else {
 				    			window.location = "index.php";
-					    	}	    		
+					    	}
 						}
 			       }
 
@@ -112,22 +113,22 @@
 			$(document).keydown(function(e) {
 
 			    switch(e.which) {
-			        case 37: 
+			        case 37:
 			        	previousPic();
 			        break;
 
 			        case 39:
 			        	nextPic();
 			        break;
-			   
-			        default: return; 
+
+			        default: return;
 			    }
-			    e.preventDefault(); 
+			    e.preventDefault();
 			});
 
 
 
-			$(function(){ 
+			$(function(){
 
 				$('#myTags').tagit({
                 	availableTags: allExistingTags,
@@ -148,7 +149,43 @@
               	});
             });
 
-			
+						$(function() {
+Caman("img", img, function () {
+    this.render();
+});
+
+var filters = $('#filters li a');
+//    originalCanvas = $('#canvas'),
+//    photo = $('#photo');
+
+filters.click(function(e){
+
+    e.preventDefault();
+
+    var f = $(this);
+
+    if(f.is('.active')){
+        // Apply filters only once
+        return false;
+    }
+
+    filters.removeClass('active');
+    f.addClass('active');
+    // Listen for clicks on the filters
+    var effect = $.trim(f[0].id);
+
+    Caman("img", img, function () {
+        // If such an effect exists, use it:
+        if( effect in this){
+						this.revert();
+            this[effect]();
+            this.render();
+        }
+    });
+});
+});
+
+
 
 		{/literal}
 
@@ -161,13 +198,13 @@
 		{if $nextPicExists eq true}
 			<div id="rightChild" class="col-md-1" onclick="nextPic()"><span id="rightLogo" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
 		{/if}
-			
+
 				<div id ="topMenuRight">
 					<button type="button" class="btn btn-default" onclick="location.href='index.php?page=pictureEdit&&picture_path={$picture[0].path}'">
 		  					<span class="glyphicon glyphicon-pencil" ></span>
 					</button>
-			
-					<button type="button" class="btn btn-default" onclick="rotate()"> 
+
+					<button type="button" class="btn btn-default" onclick="rotate()">
 		  					<span class="glyphicon glyphicon-repeat" ></span>
 					</button>
 					<button  type="button" class="btn btn-default" onclick="pictureDelete()">
@@ -198,7 +235,22 @@
 			<h4>Tags</h4>
 				<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
 				<ul id="myTags"></ul>
-
+				<table>
+				        <tr>
+				            <td><div id="img">
+				                    <h4>Please select your photo effect.</h4>
+				                    <ul id="filters">
+				                        <li> <a href="#" id="normal">Normal</a> </li>
+				                        <li> <a href="#" id="vintage">Vintage</a> </li>
+				                        <li> <a href="#" id="lomo">Lomo</a> </li>
+				                        <li> <a href="#" id="clarity">Clarity</a> </li>
+				                        <li> <a href="#" id="sinCity">Sin City</a> </li>
+				                        <li> <a href="#" id="sunrise">Sunrise</a> </li>
+				                        <li> <a href="#" id="pinhole">Pinhole</a> </li>
+				                    </ul>
+				                </div></td>
+				        </tr>
+				    </table>
 		</div>
 
 
