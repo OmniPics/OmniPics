@@ -237,7 +237,7 @@ filters.click(function(e){
 				<ul id="myTags"></ul>
 				<table>
 				        <tr>
-				            <td><div id="img">
+				            <td><div id="filterContainer">
 				                    <h4>Please select your photo effect.</h4>
 				                    <ul id="filters">
 				                        <li> <a href="#" id="normal">Normal</a> </li>
