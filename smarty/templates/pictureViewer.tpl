@@ -150,7 +150,7 @@
             });
 
 						$(function() {
-Caman("img", img, function () {
+Caman("#img", img, function () {
     this.render();
 });
 
@@ -174,7 +174,7 @@ filters.click(function(e){
     // Listen for clicks on the filters
     var effect = $.trim(f[0].id);
 
-    Caman("img", img, function () {
+    Caman("#img", img, function () {
         // If such an effect exists, use it:
         if( effect in this){
 						this.revert();
