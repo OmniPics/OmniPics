@@ -247,6 +247,7 @@ filters.click(function(e){
 				                        <li> <a href="#" id="sinCity">Sin City</a> </li>
 				                        <li> <a href="#" id="sunrise">Sunrise</a> </li>
 				                        <li> <a href="#" id="pinhole">Pinhole</a> </li>
+																<li> <a href="#" id="radialBlur">RadialBlur</a> </li>
 				                    </ul>
 				                </div></td>
 				        </tr>
