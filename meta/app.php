@@ -1,4 +1,6 @@
 <?php
+	$info = array();
+	$size = getimagesize("./img.jpg",$info);
 
 	//TESTMETA("./sample
 
