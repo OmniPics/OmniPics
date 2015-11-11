@@ -49,6 +49,9 @@
     </ul>
 
     <div id="pictures"></div>
+    
+    <!--<div id="loadmoreajaxloader" style="height: 50px; width: 50px; display: none;"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></center></div>-->
+   
     <div id="loadmoreajaxloader" style="display:none;"><center><img src="endlessScrolling/ajax-loader.gif" /></center></div>
     
 

@@ -82,9 +82,8 @@ function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPics
        type: "POST",
        url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
        success: function(result){
-       		$('#pictures').hide();
             $("#pictures").html(result);
-            $('#pictures').fadeIn('slow');
+            
             
         }
     });
