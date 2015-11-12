@@ -47,7 +47,6 @@ body {
 }
 
 #wrapper  {
-   
     text-align: center;
     margin: auto;
     width: 60%;
@@ -69,37 +68,78 @@ body {
 
 .yeBoy {
 
-    height: ;
+    height:0;
 }
 #topArea {
-
-    padding-top: 30px;
+    padding-top: 10px;
     width: 900px;
     margin: 0 auto;
     padding-left: 15px;
     padding-right: 15px;
 }
 
+#searcharea {
+    position: relative;
+    margin:0 auto;
+     z-index: 0;
+     float: center;
+
+}
 #submit {
 
-    float: left;
+    padding-left: 0;
 }
+/*
+    tomasz
+*/
+
 
 #search {
+    padding-right: auto;
+     padding-left: auto;
+     width:40%;
+     float: center;
+}*/
+
+.media {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
     margin:0 auto;
-    width:40%;
-    float: none;
+    z-index: 2;
+    float:right;
 }
-
-
+.media-left {
+    /* reserved for future */
+    display: inline;
+}
+#livesearch {
+    display:block;
+}
+.media-object {
+    cursor: pointer;
+    background-color: white;
+    min-height: 30px;
+    padding: 3px 0px 3px;
+    font-size: 70%;
+}
+.media-object:hover {
+    background-color: #80B2FF;
+}
+.thumb-image {
+    background-color: #222222;
+}
+/*
+    end tomasz
+*/
 .toTheRight {
 
     float: right;
 }
 
 .container {
-
-    margin-top: 80px;
+/*
+    margin-top: 80px; skal vi ha denne?*/
     width: 900px;
 }
 
@@ -194,6 +234,10 @@ body {
 
     border: solid #80B2FF 2px;
     opacity: 0.6;
+}
+
+#filepath{
+    display: inline;
 }
 
 footer {

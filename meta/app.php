@@ -1,11 +1,35 @@
 <?php
-	$info = array();
-	$size = getimagesize("./img.jpg",$info);
 
-	//TESTMETA("./sample
+class Metaclass {
+	private $path;
+	private $filename;
+	public $meta;
+
+	public function __construct($path, $filename) {
+		$this->path = $path;
+		$this->filename = $filename;
+	}
 
 
-	starter();
+	public function getMeta() {
+		$info = array();
+		$size = getimagesize($this->path . $this->filename, $info);
+
+
+		if(isset($info['APP13'])) {
+			$app13 = $info['APP13'];
+			$iptcUnhandled = iptcparse($app13);
+			$returnIPTCarray = getIPTC($iptcUnhandled);
+
+			print_r($returnIPTCarray);
+
+		}
+	}
+
+}
+
+$me = new Metaclass("./","img.jpg");
+$me->getMeta();
 
 
 	function starter() {
@@ -31,25 +55,6 @@
 		fclose($file);
 
 		getMeta("./","img.jpg");
-	}
-
-
-
-	function getEXIF($path, $filename) {
-		$exif = exif_read_data($path . $filename);
-		//print_r($exif);
-
-		$array = array(
-			"FileDateTime"=>$exif['FileDateTime'],			// exif position 1
-			"FileSize"=>$exif['FileSize'],					// exif position 2
-			"FileType"=>$exif['FileType'],					// exif position 3
-			"MimeType"=>$exif['MimeType'],					// exif position 4
-			"ComputedWidth"=>$exif['COMPUTED']['Width'],			// exif position 5 => computed position 'Height'
-			"ComputedHeight"=>$exif['COMPUTED']['Height']			// exif position 5 => computed position "Width"
-		);
-
-		print_r($array);
-
 	}
 
 	function getMeta($path, $filename) {
@@ -86,13 +91,14 @@
 
 	function getIPTC($iptc_raw) {
 		$iptc_tag_array = array(
-			"2#105" => "FALSE",
-			"2#116" => "FALSE",
-			"2#120" => "FALSE",
-			"2#025" => "FALSE",
-			"2#055" => "FALSE",
-			"2#090" => "FALSE",
-			"2#095" => "FALSE"
+			//"2#105" => "",
+			"2#005" => "",
+			"2#116" => "",		// copyright
+			"2#120" => "",		// caption abstact
+			"2#025" => "",		// keywords
+			"2#055" => "",
+			"2#090" => "",
+			"2#095" => ""
 		);
 
 		foreach($iptc_raw as $tag=>$value) {

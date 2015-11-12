@@ -13,3 +13,5 @@
 	$smarty->setCompileDir(PROJECT_DIR . "smarty/templates_c");
 	$smarty->setCacheDir(PROJECT_DIR . "smarty/cache");
 	$smarty->setConfigDir(PROJECT_DIR . "smarty/config");
+	$smarty->assign('lbr', '{'); 
+	$smarty->assign('rbr', '}'); 

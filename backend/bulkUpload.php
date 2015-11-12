@@ -1,9 +1,16 @@
 <?php
+<<<<<<< HEAD:bulkUpload.php
 define("UPLOAD_DIR", "images/");
 require("setup.php");
 require("Picture.php");
 require("getImageMeta.php");
 
+=======
+require("../setup.php");
+require("../Picture.php");
+require("functions.php");
+define("UPLOAD_DIR", "../images/");
+>>>>>>> dev:backend/bulkUpload.php
 
 $picture = new Picture($local_database, $local_username, $local_password);
 
@@ -26,19 +33,23 @@ if(!empty($_FILES['myPic']['name'][0])) {
     $extension = explode('.', $filename);
     $extension = strtolower(end($extension));
     $i=1;
+    $pieces = explode('.',$name);
+    $filename= $pieces[0];
 
     if(in_array($extension, $allowed)) {
 
       if($file_error === 0) {
 
-          $file_dir = "images/" . $filename;
-          while(file_exists("images/" . $filename)){
-            $filename = $name_ext["filename"] . "_" . $i++ . "." . $name_ext["extension"];
-          }
-            $file_dir = "images/" . $filename;
-            $uploaded[$position] = $file_dir;
-          if(move_uploaded_file($file_tmp, $file_dir)) {
+          $file_dir = "images/" . $filename . "." .$pieces[1];
+          while(file_exists("../images/" . $filename . "." . $pieces[1])){
+            $filename = $name_ext["filename"] . "_" . $i++;
+            //$filename = $pieces[0] . "_" . $i++;
 
+          }
+            $file_dir = "images/" . $filename . "." . $pieces[1];
+            $uploaded[$position] = $file_dir;
+          if(move_uploaded_file($file_tmp, "../".$file_dir)) {
+            createThumbnail($filename.".".$pieces[1]);
             $uploaded[$position] = $file_dir;
           } else {
 
@@ -57,7 +68,7 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
       echo "$filename has been successfully uploaded!.";
 
-
+      echo $filename;
       $picture->addPicture($filename, $extension, $file_dir);
 
 
@@ -76,4 +87,4 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
 }
 
-  header('Location: '.'index.php');
+//header('Location: '.'../index.php');
