@@ -1,3 +1,4 @@
+use omnipicsdb;
 CREATE TABLE pictures
 (
 picture_id INT AUTO_INCREMENT,
@@ -19,6 +20,10 @@ PRIMARY KEY (album_id)
 CREATE TABLE meta
 (
 meta_id INT NOT NULL AUTO_INCREMENT,
+tittel VARCHAR(255),
+description VARCHAR(512),
+keywords VARCHAR(255),
+copywright VARCHAR(255),
 PRIMARY KEY (meta_id)
 );
 
