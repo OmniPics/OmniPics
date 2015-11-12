@@ -18,7 +18,9 @@ body {
 	padding: 0 0 0 0;
 	background-color: black;
 }
-
+#leftChild:hover {
+	cursor: pointer;
+}
 #leftChild {
 
 	position: absolute;
@@ -28,7 +30,7 @@ body {
 	float: left;
 	top: 35px;
 	text-align: center;
-	
+
 }
 
 #hidden {
@@ -40,6 +42,9 @@ body {
 	max-height: 30px;
 }
 
+#rightChild:hover {
+	cursor: pointer;
+}
 #rightChild {
 
 	position: absolute;
@@ -80,7 +85,6 @@ body {
 
 
 #metalist input{
-	  display: inline; 
+	  display: inline;
   width: 70%;
 }
-
