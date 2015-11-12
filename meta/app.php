@@ -7,16 +7,16 @@
 
 	starter();
 
+
 	function starter() {
 		//getMeta("./samples/","1.jpg");
 
-		writeIPTC("./samples/1.jpg","./samples/1_1.jpg",1,1,1);
-		getMeta("./samples/","1_1.jpg");
+		getMeta("./","img.jpg");
 
 		$iptc = array(
 			"2#120" =>"Hello world",
-			"2#025" => "Keywords",
-			"2#116" => "Copyright Thomas Darvik"
+			"2#025" => "Your keywords will be placed here",
+			"2#116" => "Thomas Darvik heter jeg"
 		);
 
 		$data = "";
@@ -25,19 +25,14 @@
 			$data .= IPTCmakeTag(2,$tag, $string);
 		}
 
-		$content = iptcembed($data,"./samples/1.jpg");
-		$file = fopen("./samples/1.jpg","wb");
+		$content = iptcembed($data,"./img.jpg");
+		$file = fopen("./img.jpg","wb");
 		fwrite($file, $content);
 		fclose($file);
+
+		getMeta("./","img.jpg");
 	}
 
-	function writeIPTC($currentFilename, $newFilename, $rec,$dat,$val) {
-		$caption_block = IPTCmakeTag(2,120, "Hello world");
-		$keyword_block = IPTCmakeTag(2,25, "keywords are here");
-		$imagestring = iptcembed($caption_block,$currentFilename);
-		$imagestring = iptcembed($keyword_block,$currentFilename);
-		file_put_contents($newFilename,$imagestring);
-	}
 
 
 	function getEXIF($path, $filename) {
@@ -133,7 +128,7 @@
 					break;
 
 				default:
-					print_r("======>  NOT HANDLED:  $tag<br>");
+				//	print_r("======>  NOT HANDLED:  $tag<br>");
 					break;
 			}
 		}
