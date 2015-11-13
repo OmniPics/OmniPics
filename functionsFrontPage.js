@@ -2,11 +2,34 @@ $(document).ready(function() {
 
 	getAmountOfPicsInDB();
 
-	$('#input').change(function() {
+	
+    $('#submit').on('submit',(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+	}));
 
 
-		document.getElementById("submit").submit();
-	});
+    $("#input").on("change", function() {
+        $("#submit").submit();
+    });
+	
 
 	$('#golink').click(function() {
         return false;
