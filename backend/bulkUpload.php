@@ -50,6 +50,7 @@ if(!empty($_FILES['myPic']['name'][0])) {
             $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, "../".$file_dir)) {
             createThumbnail($filename.".".$pieces[1]);
+            
             $uploaded[$position] = $file_dir;
           } else {
 
