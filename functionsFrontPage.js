@@ -52,26 +52,21 @@ $(document).ready(function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
 
   
-	        if(newIndexStart < endOfPics) {
-	           
-	        	console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
+			if(newIndexStart < endOfPics) {
 
-	    		if(newIndexStart < endOfPics) {
+    			console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
 
-
-	                $.ajax({
-	                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
-	                    success: function(result){
+                $.ajax({
+                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+                    success: function(result){
 	                        $(result).hide().appendTo('#pictures').fadeIn('slow');
 	                        $('div#loadmoreajaxloader').fadeOut('slow');
 	            			newIndexStart += amountOfPicsToLoad;
 	                    }
-	                });
-
-	            }else {
-	              $('div#loadmoreajaxloader').show();
-	              $('div#loadmoreajaxloader').fadeOut('slow');
-	            }
+	            });
+	        }else {
+	          	$('div#loadmoreajaxloader').show();
+	           	$('div#loadmoreajaxloader').fadeOut('slow');
 	        }
 	    }
     });
