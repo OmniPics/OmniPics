@@ -1,5 +1,38 @@
 {include file="header.tpl"}
 
+<script language="JavaScript" type="text/javascript">
+<!-- search funciton javascript jQuery-->
+{literal}
+
+
+function search() {
+  var allTags = JSON.stringify($('#myTags').tagit('assignedTags'));
+  searchPictures(allTags);
+}
+
+$(function(){
+
+  $('#myTags').tagit({
+            singleField: true,
+            singleFieldNode: $('#mySingleField'),
+            removeConfirmation: true,
+
+            afterTagAdded: function(evt, ui) {
+                if (!ui.duringInitialization) {
+                  var tag = $('#myTags').tagit('tagLabel', ui.tag);
+                    search();
+                }
+            },
+            afterTagRemoved: function(evt, ui) {
+                var tag = $('#myTags').tagit('tagLabel', ui.tag);
+                search();
+            },
+
+          });
+      });
+{/literal}
+</script>
+
 <div id="topArea">
 
 
@@ -14,11 +47,16 @@
     </form>
 
         <div id="search" class="input-group">
-            <input type="text" class="form-control" placeholder="Søk" onkeyup="showResult(this.value)" onblur="hideResult()">
+            <!--<input id="keysearchfield" type="text" class="form-control" placeholder="Søk" >-->
+
+            <input name="tags" id="mySingleField"  disabled="true" style="display: none;" placeholder="Søk etter alle dine favorittbilder her!">
+            <ul id="myTags"></ul>
+            <h5>Søk etter alle dine favorittbilder her!</h5>
+
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <!--<button class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            </button>
+            </button>-->
 	    </span>
         </div>
         <div class="media">
@@ -50,7 +88,7 @@
 
     <div id="pictures"></div>
     <div id="loadmoreajaxloader" style="display:none;"><center><img src="endlessScrolling/ajax-loader.gif" /></center></div>
-    
+
 
 </div>
 

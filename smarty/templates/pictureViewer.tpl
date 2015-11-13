@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
 		<!--<script type="text/javascript" src="jQueryRotate.js"></script>-->
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
-		
+
 	</head>
 	<body>
 
@@ -38,7 +38,7 @@
 
 				$('#img').rotate(90);
 			});*/
-		
+
 			function rotate() {
 
 				$.ajax({
@@ -69,22 +69,22 @@
 			}
 
 			function pictureDelete() {
-				
-			      
+
+
 				$.ajax({
 			       type: "POST",
 			       url: "delete.php?picture_id="+picture_id+"",
 			       complete: function() {
-			       	
+
 					    if(nextPicExists == 1) {
 					    	window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
 						}else {
 
-					    	if(prevPicExists == 1) { 
+					    	if(prevPicExists == 1) {
 					    		previousPic();
 					    	}else {
 				    			window.location = "index.php";
-					    	}	    		
+					    	}
 						}
 			       }
 
@@ -112,22 +112,20 @@
 			$(document).keydown(function(e) {
 
 			    switch(e.which) {
-			        case 37: 
+			        case 37:
 			        	previousPic();
 			        break;
 
 			        case 39:
 			        	nextPic();
 			        break;
-			   
-			        default: return; 
+
+			        default: return;
 			    }
-			    e.preventDefault(); 
+			    e.preventDefault();
 			});
 
-
-
-			$(function(){ 
+			$(function(){
 
 				$('#myTags').tagit({
                 	availableTags: allExistingTags,
@@ -148,7 +146,7 @@
               	});
             });
 
-			
+
 
 		{/literal}
 
@@ -161,13 +159,13 @@
 		{if $nextPicExists eq true}
 			<div id="rightChild" class="col-md-1" onclick="nextPic()"><span id="rightLogo" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
 		{/if}
-			
+
 				<div id ="topMenuRight">
 					<button type="button" class="btn btn-default" onclick="location.href='index.php?page=pictureEdit&&picture_path={$picture[0].path}'">
 		  					<span class="glyphicon glyphicon-pencil" ></span>
 					</button>
-			
-					<button type="button" class="btn btn-default" onclick="rotate()"> 
+
+					<button type="button" class="btn btn-default" onclick="rotate()">
 		  					<span class="glyphicon glyphicon-repeat" ></span>
 					</button>
 					<button  type="button" class="btn btn-default" onclick="pictureDelete()">
