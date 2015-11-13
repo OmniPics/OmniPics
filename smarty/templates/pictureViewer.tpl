@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+<<<<<<< HEAD
 		<link rel="stylesheet" href="stylingPictureViewer.css" style="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
@@ -9,6 +10,17 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
 	
+=======
+		   <link rel="stylesheet" type="text/css" href="Client/bootstrap/css/bootstrap.min.css"/>
+	    <script src="Client/bootstrap/js/bootstrap.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="Client/pictureViewer/stylingPictureViewer.css"/>
+	    <link rel="stylesheet" type="text/css" href="TagSystem/tagit.ui.css"/>
+		 <link rel="stylesheet" type="text/css" href="TagSystem/jQuery.tagit.css"/>
+		<script src="Client/bootstrap/js/jquery.min.js"></script>
+		<script src="Client/bootstrap/js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="Client/pictureViewer/functionsPictureViewer.js"></script>
+		<script type="text/javascript" src="Client/pictureViewer/QueryRotate.js"></script>
+>>>>>>> c6fc140da316a060521efa40243f5b0f56da3136
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>

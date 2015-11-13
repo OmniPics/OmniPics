@@ -1,0 +1,13 @@
+Cheatsheet til tag-making!
+Ikke slett!!
+
+[103] : origional transmission reference
+[105] : headline - (max 256) - f.eks "Lindberg in Paris" (small header)
+[110] : credit (max 32) - ikke nødvendigvis forfatter eller creator
+[115] : source (max 32) - origional owner
+[116] : copyright notice (max 128)
+[118] : Contact (max 128) - Hvem skal man kontakte for mer info
+[120] : Caption abstract (max 2000) - Ekstra beskrivelse (denne vi bruker??)
+[122] : Writer/editor (max 32)
+[125] : Rasterized caption (max 7360) - Binary data (ikke endre noen ting)
+[025] : Keywords (max 64) - "Auto", "Grand Prix", "Something else"

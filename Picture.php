@@ -40,7 +40,12 @@ class Picture {
             return $picture;
         }
     }
+<<<<<<< HEAD
     // $sql variable string needs to select from table with the same tuples as pictures table.
+=======
+
+
+>>>>>>> c6fc140da316a060521efa40243f5b0f56da3136
     function listPictures($sql = "SELECT * FROM pictures") {
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}

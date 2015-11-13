@@ -1,8 +1,16 @@
 <?php
+<<<<<<< HEAD:bulkUpload.php
+define("UPLOAD_DIR", "images/");
+require("setup.php");
+require("Picture.php");
+require("getImageMeta.php");
+
+=======
 require("../setup.php");
 require("../Picture.php");
 require("functions.php");
 define("UPLOAD_DIR", "../images/");
+>>>>>>> dev:backend/bulkUpload.php
 
 $picture = new Picture($local_database, $local_username, $local_password);
 
@@ -42,6 +50,7 @@ if(!empty($_FILES['myPic']['name'][0])) {
             $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, "../".$file_dir)) {
             createThumbnail($filename.".".$pieces[1]);
+            
             $uploaded[$position] = $file_dir;
           } else {
 
@@ -63,6 +72,9 @@ if(!empty($_FILES['myPic']['name'][0])) {
       echo $filename;
       $picture->addPicture($filename, $extension, $file_dir);
 
+
+
+
     // set proper permissions on the new file
 
       //chmod(UPLOAD.DIR . $filename, 0644);
@@ -76,4 +88,4 @@ if(!empty($_FILES['myPic']['name'][0])) {
 
 }
 
-header('Location: '.'../index.php');
+//header('Location: '.'../index.php');

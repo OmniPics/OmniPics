@@ -79,9 +79,12 @@ switch($page) {
 		break;
 
 	default:
+<<<<<<< HEAD
 	
 		$allExistingTags = $pictures->getAllTags();
 		$smarty->assign("allExistingTags", $allExistingTags);
+=======
+>>>>>>> c6fc140da316a060521efa40243f5b0f56da3136
 
 		$smarty->display('frontPage.tpl');
 		break;
