@@ -15,6 +15,7 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success:function(data){
+            	searchPictures(keysArray);
                 console.log("success");
                 console.log(data);
             },
