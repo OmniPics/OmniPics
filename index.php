@@ -24,17 +24,23 @@ $amountOfPics = intval($amountOfPicsString);
 
 $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
+$picture_path = isset($_REQUEST["picture_path"]) ? $_REQUEST["picture_path"] : "";
+
 $nextPicExists = 1;
 $prevPicExists = 1;
 
-$picture_path = isset($_REQUEST["picture_path"]) ? $_REQUEST["picture_path"] : "";
+
 switch($page) {
   	case 'pictureEdit':
+
 		$smarty->assign("picture_path", $picture_path);
 		$smarty->display('pictureEdit.tpl');
 		break;
 
 	case 'pictureViewer':
+
+		$tagsBoundToPic = "";
+
 		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
 		$picture_id = $picture[0]['picture_id'];
 
@@ -42,7 +48,7 @@ switch($page) {
 
 		$array = $pictures->getTags($picture_id);
 
-		$tagsBoundToPic = "";
+
 		for($i = 0; $i < count($array); $i++){
 		    if($i == 0) {
 		    	$tagsBoundToPic = $array[0];
@@ -74,6 +80,9 @@ switch($page) {
 
 	default:
 	
+		$allExistingTags = $pictures->getAllTags();
+		$smarty->assign("allExistingTags", $allExistingTags);
+
 		$smarty->display('frontPage.tpl');
 		break;
 }

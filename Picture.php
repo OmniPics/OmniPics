@@ -64,12 +64,12 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($order, $value, $startIndex, $amount) {
+    function sortedPictures($ascDesc, $value, $startIndex, $amount) {
         if ($amount == 0) {$limit = "";}
         else {$limit = "LIMIT $startIndex, $amount";}
-        if ($order == 0) {$order = "DESC";}
-        else if ($order > 0) {$order = "ASC";}
-        $sql = "SELECT * FROM pictures ORDER BY $value $order $limit";
+        if ($ascDesc == 0) {$ascDesc = "DESC";}
+        else if ($ascDesc > 0) {$ascDesc = "ASC";}
+        $sql = "SELECT * FROM pictures ORDER BY $value $ascDesc $limit";
         return $this->listPictures($sql);
     }
     function addPicture($filename, $extension, $path) {

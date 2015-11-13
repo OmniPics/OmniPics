@@ -53,6 +53,8 @@ var newIndexStart = 9;
 var amountOfPicsInDB = 0;
 var endOfPics = 0;
 
+var keysArray = {};
+
 
 var selectedPicture_ids = {};
 
@@ -73,38 +75,24 @@ function toggleAscDesc() {
 	if(picsAscOrDesc == '0') picsAscOrDesc = '1';
 	else picsAscOrDesc = '0';
 
-	listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+	searchPictures(keysArray);
 }
-
-function searchPictures(keysArray) {
+function searchPictures(keysArrayIn) {
+	keysArray = keysArrayIn;
+	console.log(keysArray);
 	$.ajax({
 			 type: "POST",
 			 url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
-			 data: { 	searchForKeys : keysArray },
+			 data: { searchForKeys : keysArray },
 			 success: function(result){
-					$('#pictures').hide();
-						$("#pictures").html(result);
-						$('#pictures').fadeIn('slow');
+					
+				$("#pictures").html(result);
+						
 
 				}
 		});
 
 		selectedPicture_ids = {};
-}
-
-function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad) {
-
-	$.ajax({
-       type: "POST",
-       url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
-			 data: { 	selectedPictures : selectedPicture_ids },
-       success: function(result){
-            $("#pictures").html(result);
-            $('#pictures').fadeIn('slow');
-        }
-    });
-
-    selectedPicture_ids = {};
 }
 
 function deletePicsFromDB() {
@@ -123,18 +111,6 @@ function deletePicsFromDB() {
     newIndexStart = 9;
 
 }
-
-function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad) {
-
-	$.ajax({
-       type: "POST",
-       url: "rotate.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
-       success: function(result){
-            $("#pictureViewer").html(result);
-        }
-    });
-}
-
 
 
 function pictureLink(startIndex) {
@@ -162,6 +138,8 @@ function selected(image_CSS_id, db_picture_id) {
 
 function sortBy(sortingType) {
 
+
+
     	newIndexStart = 9;
 
 		switch(sortingType) {
@@ -176,7 +154,7 @@ function sortBy(sortingType) {
 					$('#sted').removeClass('active');
 
 					orderPicsBy = 'upload_date';
-					listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+					searchPictures(keysArray);
 
 				}
 				break;
@@ -190,7 +168,7 @@ function sortBy(sortingType) {
 					$('#sted').removeClass('active');
 
 					orderPicsBy = 'filename';
-					listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+					searchPictures(keysArray);
 				}
 				break;
 
@@ -203,7 +181,7 @@ function sortBy(sortingType) {
 					$('#sted').addClass('active');
 
 					orderPicsBy = 'place';
-					listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+					searchPictures(keysArray);
 				}
 				break;
 		}

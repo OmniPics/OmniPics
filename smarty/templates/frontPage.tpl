@@ -1,8 +1,17 @@
 {include file="header.tpl"}
 
+
+
 <script language="JavaScript" type="text/javascript">
 <!-- search funciton javascript jQuery-->
 {literal}
+
+var allExistingTags = [];
+
+{/literal}
+{foreach from=$allExistingTags item=tag}
+    {literal} allExistingTags.push('{/literal}{$tag}{literal}');
+{/literal}{/foreach}{literal}
 
 
 function search() {
@@ -13,6 +22,7 @@ function search() {
 $(function(){
 
   $('#myTags').tagit({
+            availableTags: allExistingTags,
             singleField: true,
             singleFieldNode: $('#mySingleField'),
             removeConfirmation: true,
@@ -46,10 +56,11 @@ $(function(){
     </span>
     </form>
 
+
         <div id="search" class="input-group">
             <!--<input id="keysearchfield" type="text" class="form-control" placeholder="Søk" >-->
 
-            <input name="tags" id="mySingleField"  disabled="true" style="display: none;" placeholder="Søk etter alle dine favorittbilder her!">
+            <input name="tags" id="mySingleField" disabled="true" style="display: none;" placeholder="Søk etter alle dine favorittbilder her!">
             <ul id="myTags"></ul>
             <h5>Søk etter alle dine favorittbilder her!</h5>
 

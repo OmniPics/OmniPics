@@ -40,7 +40,7 @@ if($orderPicsBy=="") {
 } else {
 
 	if (!($keysArray=="") && !empty($keysArray)) {
-		$pictureArray = searchPictures($keysArray, $pictures);
+		$pictureArray = searchPictures($keysArray, $pictures, $picsAscDesc, $orderPicsBy, $picsIndexStart, $amountOfPics);
 	}else {
 		$pictureArray = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, $amountOfPics);
 	}

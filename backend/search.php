@@ -6,10 +6,16 @@
  */
 require_once("Picture.php");
 
-function searchPictures($keywordsArray,$con){
- $pictures = array();
- $orsDes = "";
- $orsTag = "";
+function searchPictures($keywordsArray,$con, $ascDesc, $value, $startIndex, $amount){
+  $pictures = array();
+  $orsDes = "";
+  $orsTag = "";
+
+  if ($amount == 0) {$limit = "";}
+  else {$limit = "LIMIT $startIndex, $amount";}
+  if ($ascDesc == 0) {$ascDesc = "DESC";}
+  else if ($ascDesc > 0) {$ascDesc = "ASC";}
+
  foreach ($keywordsArray as  $key) {
    $orsDes .= "OR description LIKE '%".$key."%' ";
  }
@@ -31,8 +37,8 @@ function searchPictures($keywordsArray,$con){
  WHERE tags LIKE '' ".
  //append OR's
  $orsTag //. $orsDes
- ."GROUP BY pictures.picture_id;
-  ";
+ ."GROUP BY pictures.picture_id
+   ORDER BY $value $ascDesc $limit";
 
   $result = mysqli_query($con->connection, $sql);
   $foundPictures = array();
