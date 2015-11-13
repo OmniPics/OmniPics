@@ -1,5 +1,6 @@
 <?php
 class Picture {
+    private $place;
     private $tags;
     private $picture_array;
     public $connection;
@@ -39,6 +40,7 @@ class Picture {
             return $picture;
         }
     }
+    // $sql variable string needs to select from table with the same tuples as pictures table.
     function listPictures($sql = "SELECT * FROM pictures") {
         $result = mysqli_query($this->connection,$sql);
         if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
@@ -72,7 +74,7 @@ class Picture {
     }
     function addPicture($filename, $extension, $path) {
         $sql = "INSERT INTO pictures (filename, extension, path, place, upload_date)
-                VALUES ('$filename', '$extension','$path','abc',NOW());";
+                VALUES ('$filename', '$extension','$path','$place',NOW());";
         if (mysqli_query($this->connection,$sql) === TRUE) {
             echo "picture is added to db";
         } else {
@@ -186,20 +188,20 @@ class Picture {
         $tags_id = $this->hasTag($tag);
         $sql = "DELETE FROM has_tags WHERE tags_id=$tags_id AND picture_id=$picture_id";
         if(mysqli_query($this->connection,$sql)!==TRUE){
-            echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection";
+            echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection " . mysqli_error();
         }
     }
     function removePictureTags($picture_id){
         $sql = "DELETE FROM has_tags WHERE picture_id=$picture_id";
         if(mysqli_query($this->connection,$sql)!==TRUE){
-            echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection";
+            echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection " . mysqli_error();
         }
     }
     function hasTag($tag){
         $sql = "SELECT tags_id AS ANS FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
         $ans = false;
-        while($row = mysqli_fetch_assoc($result)){$ans =$row['ANS'];}    
+        while($row = mysqli_fetch_assoc($result)){$ans =$row['ANS'];}
         return $ans;
     }
     function addTag($tag,$picture_id) {

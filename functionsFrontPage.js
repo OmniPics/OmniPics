@@ -22,9 +22,9 @@ $(document).ready(function() {
         if($(window).scrollTop() == $(document).height() - $(window).height()){
 
         	console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
-        	
+
     		if(newIndexStart < endOfPics) {
-     			 
+
                 $.ajax({
                     url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+6+"",
                     success: function(result){
@@ -35,7 +35,7 @@ $(document).ready(function() {
                 });
 
             }else {
-            	
+
             	$('div#loadmoreajaxloader').show();
             	$('div#loadmoreajaxloader').fadeOut('slow');
             }
@@ -76,15 +76,31 @@ function toggleAscDesc() {
 	listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
 }
 
+function searchPictures(keysArray) {
+	$.ajax({
+			 type: "POST",
+			 url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+			 data: { 	searchForKeys : keysArray },
+			 success: function(result){
+					$('#pictures').hide();
+						$("#pictures").html(result);
+						$('#pictures').fadeIn('slow');
+
+				}
+		});
+
+		selectedPicture_ids = {};
+}
+
 function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad) {
 
 	$.ajax({
        type: "POST",
        url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+			 data: { 	selectedPictures : selectedPicture_ids },
        success: function(result){
             $("#pictures").html(result);
-            
-            
+            $('#pictures').fadeIn('slow');
         }
     });
 
@@ -123,7 +139,7 @@ function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsT
 
 function pictureLink(startIndex) {
 
-		window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+""; 
+		window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
 	}
 
 function selected(image_CSS_id, db_picture_id) {

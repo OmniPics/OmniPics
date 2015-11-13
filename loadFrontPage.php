@@ -1,7 +1,8 @@
 <?php
 
 require("setup.php");
-require("Picture.php");	
+require("Picture.php");
+require("backend/search.php");
 
 $pictures = new Picture($local_database, $local_username, $local_password);
 
@@ -13,6 +14,13 @@ if($picturesToDelete != "") {
 		}
 }
 
+// toms frontend tags_ids
+
+$keysArray = isset($_REQUEST["searchForKeys"]) ? $_REQUEST["searchForKeys"] : "";
+$keysArray=json_decode($keysArray,true);
+
+
+// end toms frontendtags
 
 $picsAscDescString = isset($_REQUEST["picsAscOrDesc"]) ? $_REQUEST["picsAscOrDesc"] : "";
 $picsAscDesc = intval($picsAscDescString);
@@ -27,11 +35,15 @@ $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
 
 if($orderPicsBy=="") {
-	
-	$pictureArray = $pictures->listPictures('');	
+
+	$pictureArray = $pictures->listPictures('');
 } else {
 
-	$pictureArray = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, $amountOfPics);
+	if (!($keysArray=="") && !empty($keysArray)) {
+		$pictureArray = searchPictures($keysArray, $pictures);
+	}else {
+		$pictureArray = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, $amountOfPics);
+	}
 }
 
 
@@ -45,7 +57,7 @@ for($i = 0; $i < count($pictureArray); $i+=3) {
 
 			echo '<div class="col-md-4 portfolio-item">';
 				echo '<div id="golink'.($picsIndexStart+$i+$j).'" ondblclick="pictureLink'; echo "(".($picsIndexStart+$i+$j).")"; echo '">';
-					echo '<img onclick="selected('; echo "'#frontPageImage".($picsIndexStart+$i+$j)."',".$pictureArray[$i+$j]['picture_id']; echo ')" id="frontPageImage'.($picsIndexStart+$i+$j).'" class="img-responsive img-frontPage" src="'.$pictureArray[$i+$j]["path"].'"> </a>'; 
+					echo '<img onclick="selected('; echo "'#frontPageImage".($picsIndexStart+$i+$j)."',".$pictureArray[$i+$j]['picture_id']; echo ')" id="frontPageImage'.($picsIndexStart+$i+$j).'" class="img-responsive img-frontPage" src="'.$pictureArray[$i+$j]["path"].'"> </a>';
 					echo '<p id="pictureInfo">' . $pictureArray[$i+$j]['filename'] . '</p>';
 				echo '</div>';
 			echo '</div>';
