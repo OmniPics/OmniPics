@@ -58,11 +58,12 @@ $(document).ready(function() {
 
                 $.ajax({
                     url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+                    data: { searchForKeys : keysArray },
                     success: function(result){
-	                        $(result).hide().appendTo('#pictures').fadeIn('slow');
-	                        $('div#loadmoreajaxloader').fadeOut('slow');
-	            			newIndexStart += amountOfPicsToLoad;
-	                    }
+	                    $(result).hide().appendTo('#pictures').fadeIn('slow');
+	                    $('div#loadmoreajaxloader').fadeOut('slow');
+	           			newIndexStart += amountOfPicsToLoad;
+	                }
 	            });
 	        }else {
 	          	$('div#loadmoreajaxloader').show();
