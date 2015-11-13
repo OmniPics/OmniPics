@@ -15,6 +15,10 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success:function(data){
+            	getAmountOfPicsInDB();
+            	selectedPicture_ids = {};
+            	newIndexStart = 9;
+
             	searchPictures(keysArray);
                 console.log("success");
                 console.log(data);
