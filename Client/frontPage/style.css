@@ -1,0 +1,246 @@
+/*
+    style
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic);
+
+* {margin: 0; padding:0;}
+html {
+    background-color:#e5e5e5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+
+    background-color:#e5e5e5;
+    font-family: 'Open Sans', sans-serif;
+}
+
+ .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.img-frontPage {
+
+    max-height: 150px;
+}
+
+.img-pictureViewer {
+
+    max-height: 500px;
+}
+
+#wrapper  {
+    text-align: center;
+    margin: auto;
+    width: 60%;
+    border:3px solid #8AC007;
+    padding: 10px;
+}
+
+
+
+#sort {
+
+    float: right;
+}
+
+#trash {
+
+    float: right;
+} 
+
+.yeBoy {
+
+    height:0;
+}
+#topArea {
+    padding-top: 10px;
+    width: 900px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#searcharea {
+    position: relative;
+    margin:0 auto;
+     z-index: 0;
+     float: center;
+
+}
+#submit {
+
+    padding-left: 0;
+}
+/*
+    tomasz
+*/
+
+
+#search {
+    padding-right: auto;
+     padding-left: auto;
+     width:40%;
+     float: center;
+}*/
+
+.media {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    margin:0 auto;
+    z-index: 2;
+    float:right;
+}
+.media-left {
+    /* reserved for future */
+    display: inline;
+}
+#livesearch {
+    display:block;
+}
+.media-object {
+    cursor: pointer;
+    background-color: white;
+    min-height: 30px;
+    padding: 3px 0px 3px;
+    font-size: 70%;
+}
+.media-object:hover {
+    background-color: #80B2FF;
+}
+.thumb-image {
+    background-color: #222222;
+}
+/*
+    end tomasz
+*/
+.toTheRight {
+
+    float: right;
+}
+
+.container {
+/*
+    margin-top: 80px; skal vi ha denne?*/
+    width: 900px;
+}
+
+.wrapper {
+    margin:0 auto;
+    width:30%;
+    margin-top:20px;
+}
+.white {
+    margin:0 auto;
+    text-align: center;
+    padding:30px;
+    margin-bottom:20px;
+    background-color: #fff;
+    border-radius:5px;
+    box-shadow:1px 1px 1px rgba(0,0,0,0.1);
+
+    color:#222;
+}
+
+.white h2 {
+    margin-bottom:20px;
+}
+
+
+.white img {
+    width:400px;
+
+}
+
+#pictureViewer {
+
+    margin: 0 auto;
+}
+
+.img-responsive {
+
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+
+.visningsbilde {
+
+    margin-right: auto;
+    margin-left: auto;
+    position: absolute;
+    
+}
+
+#pictureInfo {
+
+    text-align: center;
+    vertical-align: bottom;
+}
+
+
+.viewerPic {
+    height: 400px;
+    background-color: gray;
+}
+
+.viewingPic {
+
+    margin: 0 0 0 0;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+#toFrontPageButton {
+
+    float: left;
+}
+#tilbakeBlokk{
+    background-color: blue;
+    opacity: 0.5;
+    height: 500px;
+}
+
+#nesteBlokk{
+    background-color: red;
+    opacity: 0.5;
+    height: 500px;
+    }
+
+#pictureViewerImg{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.selected {
+
+    border: solid #80B2FF 2px;
+    opacity: 0.6;
+}
+
+#filepath{
+    display: inline;
+}
+
+footer {
+
+    margin-bottom: 250px;
+}
