@@ -112,11 +112,8 @@ function searchPictures(keysArrayIn) {
 			 type: "POST",
 			 url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
 			 data: { searchForKeys : keysArray },
-			 success: function(result){
-					
+			 success: function(result){	
 				$("#pictures").html(result);
-						
-
 				}
 		});
 
@@ -130,7 +127,7 @@ function deletePicsFromDB() {
        url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
        data: { 	selectedPictures : selectedPicture_ids },
        success: function(result){
-            $('#pictures').html(result);
+            searchPictures(keysArray);
         }
     });
 
