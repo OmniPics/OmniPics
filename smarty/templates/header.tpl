@@ -8,6 +8,14 @@
 		<script src="endlessScrolling/bsa_script.js" type="text/javascript"></script>
 		<script src="functionsFrontPage.js" type="text/javascript"></script>
 		<script src="frontend/searchAutoFill.js" type="text/javascript"></script>
+
+		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
+			<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
+
+
 	</head>
 
 

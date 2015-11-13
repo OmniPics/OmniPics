@@ -38,8 +38,6 @@ $(document).ready(function() {
 		$('#img').css('top', centerVertically+'px');
 
 	}else {
-
-
 		
 		if(imgRatio > perfRatio) {
 			var centerVertically=(height- width/imgRatio)/2;
@@ -47,7 +45,6 @@ $(document).ready(function() {
 			$('#img').css('max-height', width/imgRatio);
 
 		}else {
-
 			
 			$('#img').css('max-width', height*imgRatio);
 		}

@@ -1,38 +1,42 @@
 $(document).ready(function() {
 
-  getAmountOfPicsInDB();
+
+	getAmountOfPicsInDB();
+
+	
+    $('#submit').on('submit',(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+            	getAmountOfPicsInDB();
+            	selectedPicture_ids = {};
+            	newIndexStart = 9;
+
+            	searchPictures(keysArray);
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+	}));
 
 
-  $('#submit').on('submit',(function(e) {
-      e.preventDefault();
-      var formData = new FormData(this);
-
-      $.ajax({
-          type:'POST',
-          url: $(this).attr('action'),
-          data:formData,
-          cache:false,
-          contentType: false,
-          processData: false,
-        success:function(data){
-            console.log("success");
-            console.log(data);
-            $('#pictures').hide();
-            listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
-            $('#pictures').fadeIn();
-            getAmountOfPicsInDB();
-            newIndexStart = 9;
-          },
-         error: function(data){
-      console.log("error");
-        console.log(data);
-          }
-      });
-  }));
 
     $("#input").on("change", function() {
         $("#submit").submit();
     });
+
 
   $('#golink').click(function() {
         return false;
@@ -43,28 +47,33 @@ $(document).ready(function() {
 
     sortBy(orderPicsBy);
 
-     $(window).scroll(function(){
+    $(window).scroll(function(){
 
-        if($(window).scrollTop() == $(document).height() - $(window).height()){
+        if($(window).scrollTop() == $(document).height() - $(window).height()) {
+
   
-        if(newIndexStart < endOfPics) {
-           
-                $.ajax({
-                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+6+"",
-                    success: function(result){
-                        $(result).hide().appendTo('#pictures').fadeIn('slow');
-                        $('div#loadmoreajaxloader').fadeOut('slow');
-              newIndexStart += 6;
-                    }
-                });
+	        if(newIndexStart < endOfPics) {
+	           
+	        	console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
 
-            }else {
-              
-              $('div#loadmoreajaxloader').show();
-              $('div#loadmoreajaxloader').fadeOut('slow');
-            }
+	    		if(newIndexStart < endOfPics) {
 
-        }
+
+	                $.ajax({
+	                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+	                    success: function(result){
+	                        $(result).hide().appendTo('#pictures').fadeIn('slow');
+	                        $('div#loadmoreajaxloader').fadeOut('slow');
+	            			newIndexStart += amountOfPicsToLoad;
+	                    }
+	                });
+
+	            }else {
+	              $('div#loadmoreajaxloader').show();
+	              $('div#loadmoreajaxloader').fadeOut('slow');
+	            }
+	        }
+	    }
     });
 });
 
@@ -77,6 +86,8 @@ var newIndexStart = 9;
 var amountOfPicsInDB = 0;
 var endOfPics = 0;
 
+var keysArray = {};
+
 
 var selectedPicture_ids = {};
 
@@ -87,7 +98,7 @@ function getAmountOfPicsInDB() {
        url: "amountOfPics.php",
        success: function(result){
             amountOfPicsInDB = result;
-            endOfPics = parseInt(amountOfPicsInDB) + 6;
+            endOfPics = parseInt(amountOfPicsInDB) + amountOfPicsToLoad;
         }
     });
 }
@@ -97,23 +108,23 @@ function toggleAscDesc() {
   if(picsAscOrDesc == '0') picsAscOrDesc = '1';
   else picsAscOrDesc = '0';
 
-  listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+  searchPictures(keysArray);
 }
 
-function listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad) {
+function searchPictures(keysArrayIn) {
+	keysArray = keysArrayIn;
+	console.log(keysArray);
+	$.ajax({
+		type: "POST",
+		url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+		data: { searchForKeys : keysArray },
+			success: function(result){
+			$("#pictures").html(result);
+			newIndexStart = 9;
+		}
+	});
 
-  $.ajax({
-       type: "POST",
-       url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
-       success: function(result){
-          //$('#pictures').hide();
-            $("#pictures").html(result);
-            //$('#pictures').fadeIn('fast');
-            
-        }
-    });
-
-    selectedPicture_ids = {};
+	selectedPicture_ids = {};
 }
 
 function deletePicsFromDB() {
@@ -123,7 +134,7 @@ function deletePicsFromDB() {
        url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
        data: {  selectedPictures : selectedPicture_ids },
        success: function(result){
-            $('#pictures').html(result);
+            searchPictures(keysArray);
         }
     });
 
@@ -133,23 +144,16 @@ function deletePicsFromDB() {
 
 }
 
-function pictureViewer(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad) {
 
-  $.ajax({
-       type: "POST",
-       url: "rotate.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
-       success: function(result){
-            $("#pictureViewer").html(result);
-        }
-    });
-}
+
 
 
 
 function pictureLink(startIndex) {
 
-    window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+""; 
-  }
+		window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+	}
+
 
 function selected(image_CSS_id, db_picture_id) {
 
@@ -171,7 +175,6 @@ function selected(image_CSS_id, db_picture_id) {
 
 function sortBy(sortingType) {
 
-      newIndexStart = 9;
 
     switch(sortingType) {
 
@@ -184,8 +187,10 @@ function sortBy(sortingType) {
           $('#navn').removeClass('active');
           $('#sted').removeClass('active');
 
-          orderPicsBy = 'upload_date';
-          listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
+
+			orderPicsBy = 'upload_date';
+			searchPictures(keysArray);
+
 
         }
         break;
@@ -198,22 +203,28 @@ function sortBy(sortingType) {
           $('#navn').addClass('active');
           $('#sted').removeClass('active');
 
-          orderPicsBy = 'filename';
-          listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
-        }
-        break;
+
+			orderPicsBy = 'filename';
+			searchPictures(keysArray);
+		}
+
+		break;
+
 
       case "place":
 
         if(!$('#sted').hasClass('active')) {
 
-          $('#dato').removeClass('active');
-          $('#navn').removeClass('active');
-          $('#sted').addClass('active');
+        	$('#dato').removeClass('active');
+        	$('#navn').removeClass('active');
+        	$('#sted').addClass('active');
 
-          orderPicsBy = 'place';
-          listPicsFromDB(picsAscOrDesc, orderPicsBy, picsIndexStart, amountOfPicsToLoad);
-        }
-        break;
-    }
-  }
+
+			orderPicsBy = 'place';
+			searchPictures(keysArray);
+		}
+				
+		break;
+	}
+}
+
