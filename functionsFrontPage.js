@@ -63,10 +63,9 @@ function deletePicsFromDB() {
 
 }
 
-
 function pictureLink(startIndex) {
-
-	window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+    var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+    $.redirect(link,{searchForKeys : keysArray});
 }
 
 
