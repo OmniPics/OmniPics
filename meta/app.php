@@ -31,12 +31,14 @@ class Metaclass {
 		$iptc_tag_array = array(
 			//"2#105" => "",
 			"2#005" => "",
-			"2#116" => "",		// copyright
-			"2#120" => "",		// caption abstact
 			"2#025" => "",		// keywords
 			"2#055" => "",
 			"2#090" => "",
-			"2#095" => ""
+			"2#095" => "",
+			"2#110" => "", 		// credit - not necessarirly the owner/creator
+			"2#115" => "",		// Source - Creator
+			"2#116" => "",		// copyright
+			"2#120" => ""		// caption abstact
 		);
 
 		foreach($iptc_raw as $tag=>$value) {
@@ -72,24 +74,45 @@ class Metaclass {
 					break;
 
 				default:
-				//	print_r("======>  NOT HANDLED:  $tag<br>");
 					break;
 			}
 		}
 		return $iptc_tag_array;
 	}
 
-
 	public function writeMeta($metaarray) {
-		$array = array(
-			"2#005" => "",		// title of the file
-			"2#116" => "",		// copyright
-			"2#120" => "",		// caption abstact
-			"2#025" => "",		// keywords
+		$definitions = array(
+			"title" => "2#005",
+			"keywords" => "2#025",
+			"credit" => "2#110",
+			"creator" => "2#115",
+			"copyright" => "2#216",
+			"description" => "2#220"
 		);
+
+		$foundtags = array();
+
+		foreach($metaarray as $row=>$value) {
+			foreach($definitions as $currentDef=>$tagValue) {
+				if($row == $currentDef) {
+					// keywords must be handled
+					// they are keywords as array and not string
+					if($row == "keywords") {
+						$totalString = "";
+						foreach($value as $currentKeyword) {
+							$totalString .= $currentKeyword;
+						}
+						$foundtags[$tagValue] = $totalString;
+					} else {
+						$foundtags[$tagValue] = $value;
+					}
+				}
+			}
+		}
 
 		/*
 		foreach($metaarray as $row=>$value) {
+
 			switch ($row) {
 				case "title":
 					$array["2#005"] = $value;
@@ -98,7 +121,11 @@ class Metaclass {
 					$array["2#120"] = $value;
 					break;
 				case "keywords":
-					$array["2#025"] = $value;
+					$string = "";
+					foreach($value as $currentTag) {
+						$string .= "[" . $currentTag . "]";
+					}
+					$array["2#025"] = $string;
 					break;
 				case "author":
 					# code...
@@ -114,12 +141,7 @@ class Metaclass {
 
 		$data = "";
 
-		$iptc = array(
-			"2#120" => "test image",
-			"2#116" => "copyright"
-		);
-
-		foreach($iptc as $tag=>$string) {
+		foreach($foundtags as $tag=>$string) {
 			$tag = substr($tag, 2);
 			$data .= $this->IPTCmakeTag(2,$tag, $string);
 		}
@@ -156,7 +178,17 @@ $me = new Metaclass("./","img.jpg");
 
 $me->getMeta();
 print_r("<br>-----------------------------------<br>");
-$me->writeMeta();
+
+$array = array(
+	"title" => "this is the title of the image",
+	"keywords" => array("Hello;","World;", "This shit;", "Some tags;"),
+	"credit" => "Thomas Darvik",
+	"creator" => "Thomas Darvik is the creator",
+	"copyright" => "THOMAS DARVIK @ DARVIK.NET",
+	"description" => "This is a short description of the image"
+);
+
+$me->writeMeta($array);
 print_r("<br>-----------------------------------<br>");
 $me->getMeta();
 /*
