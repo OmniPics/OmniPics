@@ -4,7 +4,7 @@ body {
 	margin: 0 0 0 0;
 }
 
-#img {
+#img{
 	float: none;
 	display: block;
 	z-index: 1;
@@ -58,11 +58,8 @@ body {
 }
 
 #metadata {
-	
-	background-color: #e5e5e5;
-	column-fill: auto;
-	-moz-column-fill: auto;
 
+	background-color: #e5e5e5;
 
 }
 
@@ -88,6 +85,6 @@ body {
 
 
 #metalist input{
-	  display: inline;
-  width: 70%;
+	display: inline;
+  	width: 70%;
 }
