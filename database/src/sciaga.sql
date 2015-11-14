@@ -51,4 +51,5 @@ FROM has_tags
 	#INNER JOIN meta
 	#	ON meta.meta_id=has_meta.meta_id
 WHERE tags LIKE '%lol%' OR tags LIKE '%lol%'
-GROUP BY pictures.picture_id;
+GROUP BY pictures.picture_id
+ORDER BY pictures.picture_id DESC;
