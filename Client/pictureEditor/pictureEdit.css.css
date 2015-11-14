@@ -1,0 +1,43 @@
+#sidebarright{
+	
+	background-color: #e5e5e5;
+
+
+
+}
+
+
+#img {
+	float: none;
+	display: block;
+	z-index: 1;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#imagecontainer {
+	position: relative;
+	padding: 0 0 0 0;
+	background-color: blue;
+}
+
+#EditLeft {
+	position: absolute;
+	z-index: 1;
+	float: right;
+	top: 0px;
+	right: 0px;
+	opacity: 0.55;
+	max-height: 50px;
+
+}
+#EditRight{
+	position: absolute;
+	z-index: 1;
+	float: left;
+	top: 0px;
+	left: 0px;
+	opacity: 0.55;
+	max-height: 50px;
+}

@@ -173,7 +173,8 @@
 		</div>
 		<div id="metadata" class="col-md-4">
 
-		<h3>{$picture[0].filename}</h3>
+			<h3>{$picture[0].filename}</h3>
+
 			<ul class="list-group" id="metalist">
 			  <li class="list-group-item">Filepath: <span id="filepath">{$picture[0].path}</span>
 			  <input style="display: none;" id="inputFilepath" class="form-control" type="text" value="{$picture[0].path}"></li>
@@ -188,9 +189,10 @@
 			</button>
 
 			<h4>Tags</h4>
-				<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
-				<ul id="myTags"></ul>
+			<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
+			<ul id="myTags"></ul>
 
+			<div id="loadmoreajaxloader" style="display: none;"><img src="endlessScrolling/ajax-loader.gif"/></center></div>
 		</div>
 
 

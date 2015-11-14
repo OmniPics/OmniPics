@@ -58,8 +58,11 @@ body {
 }
 
 #metadata {
-
+	
 	background-color: #e5e5e5;
+	column-fill: auto;
+	-moz-column-fill: auto;
+
 
 }
 
