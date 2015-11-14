@@ -50,9 +50,9 @@
 		</button>
          </div>
 		 
+
 		 
-		 
-		  <img id="img"  class="parent" src="{$picture_path}?">
+		  <img id="img"   src="{$picture_path}?">
 
     </div>
     
