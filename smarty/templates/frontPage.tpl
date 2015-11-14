@@ -19,6 +19,11 @@ function search() {
   searchPictures(allTags);
 }
 
+function pictureLink(startIndex) {
+    var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+    $.redirect(link,{searchForKeys : keysArray});
+}
+
 $(function(){
 
   $('#myTags').tagit({

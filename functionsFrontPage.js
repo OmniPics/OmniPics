@@ -1,4 +1,5 @@
 
+
 var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
 var picsIndexStart = 0;
@@ -9,6 +10,7 @@ var endOfPics = 0;
 
 var keysArray = {};
 var selectedPicture_ids = {};
+var newReloadAllowed = true;
 
 function getAmountOfPicsInDB() {
 
@@ -33,6 +35,7 @@ function toggleAscDesc() {
 function searchPictures(keysArrayIn) {
 	keysArray = keysArrayIn;
 	console.log(keysArray);
+
 	$.ajax({
 		type: "POST",
 		url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
@@ -43,7 +46,6 @@ function searchPictures(keysArrayIn) {
 		}
 	});
 
-	selectedPicture_ids = {};
 }
 
 function deletePicsFromDB() {
@@ -63,10 +65,9 @@ function deletePicsFromDB() {
 
 }
 
-
 function pictureLink(startIndex) {
-
-	window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+    var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+    $.redirect(link,{searchForKeys : keysArray});
 }
 
 
@@ -102,7 +103,7 @@ function sortBy(sortingType) {
 
 				orderPicsBy = 'upload_date';
 				searchPictures(keysArray);
-        	} 
+        	}
         break;
 
     	case "filename":
@@ -136,7 +137,7 @@ function sortBy(sortingType) {
 $(document).ready(function() {
 
 	getAmountOfPicsInDB();
-	
+
     $('#submit').on('submit',(function(e) {
         e.preventDefault();
         var formData = new FormData(this);
