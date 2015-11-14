@@ -1,4 +1,79 @@
 
+$(document).ready(function() {
+
+	getAmountOfPicsInDB();
+
+
+    $('#submit').on('submit',(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+            	getAmountOfPicsInDB();
+            	selectedPicture_ids = {};
+            	newIndexStart = 9;
+
+            	searchPictures(keysArray);
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+	}));
+
+
+    $("#input").on("change", function() {
+        $("#submit").submit();
+    });
+
+
+	$('#golink').click(function() {
+        return false;
+    	}).dblclick(function() {
+        	window.location = this.href;
+        	return false;
+    });
+
+    sortBy(orderPicsBy);
+
+     $(window).scroll(function(){
+
+        if($(window).scrollTop() == $(document).height() - $(window).height()){
+
+        	console.log('indexStart: '+newIndexStart+' endOfPics: '+ endOfPics);
+
+    		if(newIndexStart < endOfPics) {
+
+                $.ajax({
+                    url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+newIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
+                    data: { searchForKeys : keysArray },
+                    success: function(result){
+                        $(result).hide().appendTo('#pictures').fadeIn('slow');
+                        $('div#loadmoreajaxloader').fadeOut('slow');
+     					newIndexStart += amountOfPicsToLoad;
+                    }
+                });
+
+            }else {
+
+            	$('div#loadmoreajaxloader').show();
+            	$('div#loadmoreajaxloader').fadeOut('slow');
+            }
+
+        }
+    });
+});
+
 var picsAscOrDesc = '0';
 var orderPicsBy = "upload_date";
 var picsIndexStart = 0;
@@ -33,6 +108,7 @@ function toggleAscDesc() {
 function searchPictures(keysArrayIn) {
 	keysArray = keysArrayIn;
 	console.log(keysArray);
+
 	$.ajax({
 		type: "POST",
 		url: "loadFrontPage.php?picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"&&amountOfPics="+amountOfPicsToLoad+"",
@@ -43,7 +119,6 @@ function searchPictures(keysArrayIn) {
 		}
 	});
 
-	selectedPicture_ids = {};
 }
 
 function deletePicsFromDB() {
@@ -102,7 +177,7 @@ function sortBy(sortingType) {
 
 				orderPicsBy = 'upload_date';
 				searchPictures(keysArray);
-        	} 
+        	}
         break;
 
     	case "filename":
@@ -136,7 +211,7 @@ function sortBy(sortingType) {
 $(document).ready(function() {
 
 	getAmountOfPicsInDB();
-	
+
     $('#submit').on('submit',(function(e) {
         e.preventDefault();
         var formData = new FormData(this);
