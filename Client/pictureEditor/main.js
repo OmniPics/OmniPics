@@ -3,7 +3,7 @@ $(function () {
   'use strict';
 
   var console = window.console || { log: function () {} };
-  var $image = $('#image');
+  var $image = $('#img');
   var $dataX = $('#dataX');
   var $dataY = $('#dataY');
   var $dataHeight = $('#dataHeight');
@@ -24,7 +24,7 @@ $(function () {
           $dataScaleY.val(e.scaleY);
         }
       };
-  $('[data-toggle="tooltip"]').tooltip();
+ 
 
   $image.on({
     'build.cropper': function (e) {
