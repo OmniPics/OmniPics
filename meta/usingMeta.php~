@@ -10,21 +10,21 @@
 
 
     include("app.php");
-    include("./../setup.php");
 
-    $meta = new Metaclass($local_project_dir . "meta/samples/test.jpg","");
+    $meta = new Metaclass("./samples/1.jpg","");
+    $meta->getMeta();
 
     $array = array(
         "title" => "Title of the new image",
         "description" => "This is a description of the image",
         "credit" => "CREDIT: Thomas Darvik",
-        "creator" => "Bullshit bullshit",
+        "creator" => "CREATOR: Thomas Darvik",
         "copyright" => "COPYRIGHT: Thomas Darvik",
         "keywords" => array("Drunk","Power","Stuff","Other tags")
     );
 
     $meta->writeMeta($array);
-$meta->getMeta();
+
 
 
 ?>

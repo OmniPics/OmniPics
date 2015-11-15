@@ -1,15 +1,16 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 class Metaclass {
-	private $path;
-	private $filename;
-	public $meta;
+	public $fullpath;
 
-	public function __construct($path, $filename) {
-		$this->path = $path;
-		$this->filename = $filename;
+	public function __construct($fullpath) {
+		$this->fullpath = $fullpath;
 	}
-
 
 	public $definitions = array(
 		"title" => "2#005",
@@ -23,7 +24,7 @@ class Metaclass {
 
 	public function getMeta() {
 		$info = array();
-		$size = getimagesize($this->path . $this->filename, $info);
+		$size = getimagesize($this->fullpath, $info);
 
 
 		if(isset($info['APP13'])) {
@@ -68,8 +69,6 @@ class Metaclass {
 	}
 
 	public function writeMeta($metaarray) {
-
-
 		$foundtags = array();
 
 		foreach($metaarray as $row=>$value) {
@@ -90,7 +89,6 @@ class Metaclass {
 			}
 		}
 
-
 		$data = "";
 
 		foreach($foundtags as $tag=>$string) {
@@ -98,9 +96,9 @@ class Metaclass {
 			$data .= $this->IPTCmakeTag(2,$tag, $string);
 		}
 
-		$newContent = iptcembed($data, $this->path . $this->filename);
+		$newContent = iptcembed($data, $this->fullpath);
 
-		$file = fopen($this->path . $this->filename, "wb");
+		$file = fopen($this->fullpath, "wb");
 		fwrite($file, $newContent);
 		fclose($file);
 
