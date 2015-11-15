@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="stylingPictureViewer.css" style="text/css">
+		 <link rel="stylesheet" type="text/css" href="Client/pictureViewer/stylingPictureViewer.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
     	<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">

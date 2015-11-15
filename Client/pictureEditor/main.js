@@ -86,7 +86,7 @@ $(function () {
     $image.cropper('destroy').cropper(options);
   });
   
-  $('.docs-buttons').on('click', '[data-method]', function () {
+  $('#parent').on('click', '[data-method]', function () {
     var $this = $(this);
     var data = $this.data();
     var $target;
