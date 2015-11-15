@@ -1,5 +1,6 @@
 {include file="headerPictureEdit.tpl"}
 
+
       <div id="parent" class="col-md-8">
 	  
          
@@ -50,24 +51,22 @@
 		</button>
          </div>
 		 
-
-		 
+       <div  class="col-md-8">
+      <div class="imgbox"> 
 		  <img id="img"   src="{$picture_path}?">
-
+	   </div>
+	 </div>
+					
     </div>
     
 		
-		
-   
 
 	
 
       <div id="metadata" class="col-md-4">
 
-			
-	  	
-	
-			
+			<div class="container-fluid"</div>
+
 	  </div>
         
   

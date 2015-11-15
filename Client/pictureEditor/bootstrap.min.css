@@ -1448,9 +1448,9 @@ pre code {
   }
   .col-md-8 {
     width: 66.66666667%;
-	height: auto;
-	  background-color: black;
-	  
+	height: 100%;
+	background-color: black;
+	   
   }
   .col-md-7 {
     width: 58.33333333%;
@@ -1463,7 +1463,8 @@ pre code {
   }
   .col-md-4 {
 	  background-color: grey;
-    width: 33.33333333%;
+    height:100%;
+width: 33.33333333%;
   }
   .col-md-3 {
     width: 25%;
@@ -6298,23 +6299,18 @@ button.close {
     display: none !important;
   }
 }
-[class*="span"].centred {
-  margin-left: auto;
-  margin-right: auto;
-  float: none;
+.imgbox {
+  float:none;
+  margin:0 auto;
+  position: absolute;
+ 
+margin-left: 28%;
+margin-top:25%;
 }
+  
 .container, .row { text-align: center; }
-.left-side {
-    background-color: black;
-    float: none;
-    display: table-cell;
-    border: 1px solid;
-}
 
-.right-side {
-    background-color: gray;
-    float: none;
-    display: table-cell;
-    border: 1px solid;
+html,body{
+height:100% !important;
 }
 /*# sourceMappingURL=bootstrap.css.map */
