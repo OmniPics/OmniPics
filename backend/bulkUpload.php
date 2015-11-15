@@ -9,6 +9,7 @@ require("getImageMeta.php");
 require("../setup.php");
 require("../Picture.php");
 require("functions.php");
+require("../meta/app.php");
 define("UPLOAD_DIR", "../images/");
 >>>>>>> dev:backend/bulkUpload.php
 
@@ -49,6 +50,7 @@ if(!empty($_FILES['myPic']['name'][0])) {
             $file_dir = "images/" . $filename . "." . $pieces[1];
             $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, "../".$file_dir)) {
+
             createThumbnail($filename.".".$pieces[1]);
             
             $uploaded[$position] = $file_dir;
@@ -78,6 +80,13 @@ if(!empty($_FILES['myPic']['name'][0])) {
     // set proper permissions on the new file
 
       //chmod(UPLOAD.DIR . $filename, 0644);
+
+
+
+
+      $metahandler = new Meta($picture, $file_dir);
+      
+
 
 
     } else if(!empty($failed)) {

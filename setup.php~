@@ -1,0 +1,7 @@
+<?php
+
+	$local_username = "root";
+	$local_password = "root";
+	$local_database = "omnipicsdb";
+	$local_project_dir = "/var/www/html/Omnipics/";
+?>
