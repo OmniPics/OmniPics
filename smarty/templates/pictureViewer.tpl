@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="stylingPictureViewer.css" style="text/css">
+		 <link rel="stylesheet" type="text/css" href="Client/pictureViewer/stylingPictureViewer.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
     	<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
-	
+		<script src="Client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>
@@ -22,15 +22,21 @@
 			var picsAscOrDesc = {/literal}{$picsAscDesc}{literal};
 			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
-			var amountOfPics = 3; //Need two pictures to check if the next pic exists
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
 			var picture_id = {/literal}{$picture[0].picture_id}{literal};
+			var keysArray = [];
 			var allExistingTags = [];
-
+			var amountOfPics = 3; //Need two pictures to check if the next pic exists
+			var count = {/literal}{$keysArray|@count}{literal};
 			{/literal}
 			{foreach from=$allExistingTags item=tag}
     			{literal} allExistingTags.push('{/literal}{$tag}{literal}');
+			{/literal}{/foreach}{literal}
+
+			{/literal}
+			{foreach from=$keysArray item=key}
+    			{literal} keysArray.push('{/literal}{$key}{literal}');
 			{/literal}{/foreach}{literal}
 
 			function rotate() {
@@ -48,9 +54,10 @@
 
 			function nextPic() {
 
-				if(nextPicExists == 1){
+				if(nextPicExists == 1) {
 					picsIndexStart++;
-					window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+    				$.redirect(link,{searchForKeys : keysArray});
 				}
 			}
 
@@ -58,7 +65,8 @@
 
 				if(prevPicExists == 1) {
 					picsIndexStart--;
-					window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+    				$.redirect(link,{searchForKeys : keysArray});
 				}
 			}
 
@@ -80,10 +88,8 @@
 				    			window.location = "index.php";
 					    	}
 						}
-			       }
-
+			        }
 			    });
-
 			}
 
 
@@ -135,11 +141,9 @@
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
                     	deleteTag(tag);
-                	},
-
+                	}
               	});
             });
-
 
 
 		{/literal}

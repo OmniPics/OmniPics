@@ -1,3 +1,13 @@
+function loadMyJs(scriptName) {
+
+	var docHeadObj = document.getElementsByTagName("head")[0];
+	var dynamicScript = document.createElement("script");
+	dynamicScript.type = "text/javascript";
+	dynamicScript.src = scriptName;
+	docHeadObj.appendChild(dynamicScript);
+}
+
+
 $(document).ready(function() {
 
 	$('#topMenuRight').hide();
@@ -111,7 +121,8 @@ $(document).ready(function() {
 	
 	$(window).resize(function() {
 
-		window.location = this.location;
+		loadMyJs("functionsPictureViewer.js");
+		//$.getScript("functionPictureViewer.js");
 	});
 
 	$('#leftChild').hover(function() {
