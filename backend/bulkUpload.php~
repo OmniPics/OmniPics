@@ -43,6 +43,8 @@ if(!empty($_FILES['myPic']['name'][0])) {
             $uploaded[$position] = $file_dir;
           if(move_uploaded_file($file_tmp, "../".$file_dir)) {
 
+            $metaSystem = new Metaclass($file_dir, $picture);
+
             createThumbnail($filename.".".$pieces[1]);
             $uploaded[$position] = $file_dir;
           } else {
@@ -68,13 +70,6 @@ if(!empty($_FILES['myPic']['name'][0])) {
     // set proper permissions on the new file
 
       //chmod(UPLOAD.DIR . $filename, 0644);
-
-
-
-
-      $metahandler = new Meta($picture, $file_dir);
-      
-
 
 
     } else if(!empty($failed)) {
