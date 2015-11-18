@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 	var x;
 	var y;
-	
+
 	$('#topMenuRight').hide();
 	$('#topMenuLeft').hide();
 
@@ -46,14 +46,14 @@ $(document).ready(function() {
 			$('#img').css('max-width', x);
 			$('#img').css('max-height', y);
 
-			var centerVertically=(height- y)/2;
-			$('#img').css('top', centerVertically+'px');
+			var centerVertically=(height-y)/2;
+			$('#img').css('top', centerVertically +'px');
 
 		}else {
 			if(imgRatio > perfRatio) {
 
-				var centerVertically=(height- width/imgRatio)/2;
-				$('#img').css('top', centerVertically+'px');
+				var centerVertically=(height-width/imgRatio)/2;
+				$('#img').css('top', centerVertically +'px');
 				$('#img').css('max-height', width/imgRatio);
 			}else {
 
@@ -66,14 +66,14 @@ $(document).ready(function() {
 
 
 	//Alignment of next/prev buttons
-	$('#rightChild').css('height', (height-38)+'px');
-	$('#leftChild').css('height', (height-38)+'px');
+	$('#rightChild').css('height', (height-38) +'px');
+	$('#leftChild').css('height', (height-38) +'px');
 
-	console.log('height:' +height);
-	console.log('width:' +width);
+	console.log('height:' + height);
+	console.log('width:' + width);
 
-	console.log('nat-height:' +y);
-	console.log('nat-width:' +x);
+	console.log('nat-height:' + y);
+	console.log('nat-width:' + x);
 
 	var rightHoyden = $('#rightChild').height();
 	var leftHoyden = $('#leftChild').height();
@@ -96,6 +96,11 @@ $(document).ready(function() {
 	$('#rightLogo').css('top', rightTop+'px');
 	$('#leftLogo').css('top', leftTop+'px');
 
+	$(window).resize(function() {
+
+		loadMyJs("functionsPictureViewer.js");
+	});
+
 	$('#parent').hover(function() {
 
 		$('#topMenuRight').fadeIn();
@@ -108,10 +113,6 @@ $(document).ready(function() {
 		$('#topMenuLeft').fadeOut();
 	});
 	
-	$(window).resize(function() {
-
-		loadMyJs("functionsPictureViewer.js");
-	});
 
 	$('#leftChild').hover(function() {
 			$(this).css('opacity', '0.5');
