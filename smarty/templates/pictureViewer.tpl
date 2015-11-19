@@ -18,7 +18,7 @@
 
 		<script language="JavaScript" type="text/javascript">
 		{literal} //In order to write javascript in smarty
-
+			var existsInPicsSearchedFor = true;
 			var picsAscOrDesc = {/literal}{$picsAscDesc}{literal};
 			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
@@ -28,16 +28,17 @@
 			var keysArray = [];
 			var allExistingTags = [];
 			var amountOfPics = 3; //Need two pictures to check if the next pic exists
-			var count = {/literal}{$keysArray|@count}{literal};
+
 			{/literal}
 			{foreach from=$allExistingTags item=tag}
     			{literal} allExistingTags.push('{/literal}{$tag}{literal}');
-			{/literal}{/foreach}{literal}
+			{/literal}{/foreach}
 
-			{/literal}
 			{foreach from=$keysArray item=key}
     			{literal} keysArray.push('{/literal}{$key}{literal}');
 			{/literal}{/foreach}{literal}
+
+			var amountOftagsSearchedFor = keysArray.length; 
 
 			function rotate() {
 
@@ -54,8 +55,10 @@
 
 			function nextPic() {
 
-				if(nextPicExists == 1) {
+				if(existsInPicsSearchedFor) {
 					picsIndexStart++;
+				}
+				if(nextPicExists == 1) {
 					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
     				$.redirect(link,{searchForKeys : keysArray});
 				}
@@ -71,7 +74,6 @@
 			}
 
 			function pictureDelete() {
-
 
 				$.ajax({
 			       type: "POST",
@@ -136,11 +138,18 @@
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
                         	addTag(tag);
+                    		if( $.inArray(tag, keysArray) > -1 ) {
+                    			existsInPicsSearchedFor = true;
+                    		}
                     	}
                 	},
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
                     	deleteTag(tag);
+                    	if( $.inArray(tag, keysArray) > -1 && existsInPicsSearchedFor ) {
+                    		console.log('success');
+                    		existsInPicsSearchedFor = false;
+                    	}
                 	}
               	});
             });
