@@ -2,14 +2,14 @@
 <html>
 	<head>
 	<meta charset="utf-8"/>
-	 <link rel="stylesheet" type="text/css" href="Client/pictureViewer/stylingPictureViewer.css"/>
-	<link rel="stylesheet" href="Client/bootstrap/css/font-awesome.min.css">   <!-- Bruker font-awesome -->
-	 <link rel="stylesheet" href="Client/pictureEditor/bootstrap.min.css">    <!-- css fil for bootstrap -->
-	 <script src="Client/bootstrap/js/jquery.min.js"></script>  
-	  <script src="Client/bootstrap/js/bootstrap.min.js"></script> <!-- javascript for bootstrap -->
-	 <script src="Client/pictureEditor/tooltip.min.js"></script>  <!-- javascript for tooltip. for å vise forklarende tekst over knapper.  -->
-	 <script src="Client/pictureEditor/cropper.js"></script>  <!-- javascript for pluginen vi bruker -->
-	 <script src="Client/pictureEditor/main.js"></script>
+	 <link rel="stylesheet" type="text/css" href="client/pictureViewer/stylingPictureViewer.css"/>
+	<link rel="stylesheet" href="client/bootstrap/css/font-awesome.min.css">   <!-- Bruker font-awesome -->
+	 <link rel="stylesheet" href="client/pictureEditor/bootstrap.min.css">    <!-- css fil for bootstrap -->
+	 <script src="client/bootstrap/js/jquery.min.js"></script>  
+	  <script src="client/bootstrap/js/bootstrap.min.js"></script> <!-- javascript for bootstrap -->
+	 <script src="client/pictureEditor/tooltip.min.js"></script>  <!-- javascript for tooltip. for å vise forklarende tekst over knapper.  -->
+	 <script src="client/pictureEditor/cropper.js"></script>  <!-- javascript for pluginen vi bruker -->
+	 <script src="client/pictureEditor/main.js"></script>
 
 	</head>
 	<body>  
