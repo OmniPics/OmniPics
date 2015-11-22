@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require('Picture.php');
 require("smartyStarter.php");
@@ -10,5 +10,3 @@ $amountOfPicsInDB = $pictures->getAmountOfPics();
 
 
 echo $amountOfPicsInDB;
-
-

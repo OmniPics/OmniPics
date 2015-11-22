@@ -8,9 +8,9 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="endlessScrolling/bsa_script.js" type="text/javascript"></script>
-		<script src="Client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
-		<script src="Client/frontPage/functionsFrontPage.js" type="text/javascript"></script>
-		<script src="frontend/searchAutoFill.js" type="text/javascript"></script>
+		<script src="client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
+		<script src="client/frontPage/functionsFrontPage.js" type="text/javascript"></script>
+		<script src="client/frontPage/searchAutoFill.js" type="text/javascript"></script>
 
 		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
 		<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">

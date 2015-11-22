@@ -1,8 +1,24 @@
 # OmniPics
 # README
 
-setup.php ->
+1.  create a file in projecet root:
+    setup.php
 
- $local_username = ""; 
- $local_password = ""; 
- $local_project_dir = ""; 
+2.   create variables in .php file :
+
+       $local_username = "";
+       $local_password = "";
+       $local_database = "";
+       $local_project_dir = "";
+
+  example:
+  $local_username = "root";
+  $local_password = "root";
+
+  $local_database = "omnipicsdb";
+
+  # linux type:
+  $local_project_dir = "/var/www/html/omnipics/";
+
+  # windows type:
+  $local_project_dir = "c:/Programs/wamp/www/omnipics/";
