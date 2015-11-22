@@ -1,11 +1,13 @@
 <?php
-class Picture {
+class Picture
+{
     private $place;
     private $tags;
     private $picture_array;
     public $connection;
-    function __construct($local_database, $local_username, $local_password) {
-        $this->connection = mysqli_connect("localhost",$local_username,$local_password,$local_database);
+    function __construct($local_database, $local_username, $local_password) 
+    {
+        $this->connection = mysqli_connect("localhost", $local_username, $local_password, $local_database);
         if (!mysqli_select_db($this->connection, $local_database)) {
             echo "unable to select pics: " . mysqli_error();exit;
         }
@@ -14,19 +16,21 @@ class Picture {
         }
     }
 
-    function getAmountOfPics() {
+    function getAmountOfPics() 
+    {
         $sql = "SELECT picture_id FROM pictures";
-        $query = mysqli_query($this->connection,$sql);
+        $query = mysqli_query($this->connection, $sql);
         $amount = mysqli_num_rows($query);
         return $amount;
     }
-    function loadPicture($picture_id) {
+    function loadPicture($picture_id) 
+    {
         $picture = array();
         if ($picture_id > 0) {
             $sql = "SELECT *
                     FROM pictures
                     WHERE picture_id='$picture_id'";
-            $result = mysqli_query($this->connection,$sql);
+            $result = mysqli_query($this->connection, $sql);
             if ($row = mysqli_fetch_assoc($result)) {
                 $picture = array(
                     "picture_id" => $row["picture_id"],
@@ -41,9 +45,11 @@ class Picture {
         }
     }
     // $sql variable string needs to select from table with the same tuples as pictures table.
-    function listPictures($sql = "SELECT * FROM pictures") {
-        $result = mysqli_query($this->connection,$sql);
-        if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;}
+    function listPictures($sql = "SELECT * FROM pictures") 
+    {
+        $result = mysqli_query($this->connection, $sql);
+        if (!$result) {echo "this shit here ($sql) didn't work" . mysqli_error($this->connection); exit;
+        }
         while($row = mysqli_fetch_assoc($result))
         {
             $this->picture_array[$row["picture_id"]] =  array(
@@ -64,60 +70,75 @@ class Picture {
         mysqli_free_result($result);
         return $new_array;
     }
-    function sortedPictures($ascDesc, $value, $startIndex, $amount) {
-        if ($amount == 0) {$limit = "";}
-        else {$limit = "LIMIT $startIndex, $amount";}
-        if ($ascDesc == 0) {$ascDesc = "DESC";}
-        else if ($ascDesc > 0) {$ascDesc = "ASC";}
+    function sortedPictures($ascDesc, $value, $startIndex, $amount) 
+    {
+        if ($amount == 0) {$limit = "";
+        }
+        else {$limit = "LIMIT $startIndex, $amount";
+        }
+        if ($ascDesc == 0) {$ascDesc = "DESC";
+        }
+        else if ($ascDesc > 0) {$ascDesc = "ASC";
+        }
         $sql = "SELECT * FROM pictures ORDER BY $value $ascDesc $limit";
         return $this->listPictures($sql);
     }
-    function addPicture($filename, $extension, $path) {
+    function addPicture($filename, $extension, $path) 
+    {
         $sql = "INSERT INTO pictures (filename, extension, path, place, upload_date)
                 VALUES ('$filename', '$extension','$path','$place',NOW());";
-        if (mysqli_query($this->connection,$sql) === TRUE) {
+        if (mysqli_query($this->connection, $sql) === true) {
             echo "picture is added to db";
         } else {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
     }
-    function updateFilepath($picture_id, $newFilepath) {
+    function updateFilepath($picture_id, $newFilepath) 
+    {
         $sql = "UPDATE pictures SET path ='" . $newFilepath . "' WHERE picture_id = $picture_id";
 
 
-        if (mysqli_query($this->connection,$sql) === TRUE) {
+        if (mysqli_query($this->connection, $sql) === true) {
             //echo "picture filepath changed successfully";
         } else {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
 
     }
-     function updatePicName($picture_id, $coreName) {
+    function updatePicName($picture_id, $coreName) 
+    {
         $sql = "UPDATE pictures SET filename ='" . $coreName . "' WHERE picture_id = $picture_id";
 
 
-        if (mysqli_query($this->connection,$sql) === TRUE) {
+        if (mysqli_query($this->connection, $sql) === true) {
             //echo "picture filepath changed successfully";
         } else {
             echo "err: " . $sql . "<br>" . $this->connection->error;
         }
 
     }
-    function dumpDatabase(){
+    function dumpDatabase()
+    {
         $sql = "TRUNCATE TABLE ";
-        if (mysqli_query($this->connection, $sql . "pictures;")!==TRUE) {echo "all WRONGED" ."pictures";}
-        if (mysqli_query($this->connection, $sql . "meta;")!==TRUE) {echo "all WRONGED"."meta";}
-        if (mysqli_query($this->connection, $sql . "has_meta;")!==TRUE) {echo "all WRONGED"."has_meta";}
-        if (mysqli_query($this->connection, $sql . "has_album;")!==TRUE) {echo "all WRONGED"."has_album";}
-        if (mysqli_query($this->connection, $sql . "album;")!==TRUE) {echo "all WRONGED"."album";}
+        if (mysqli_query($this->connection, $sql . "pictures;")!==true) {echo "all WRONGED" ."pictures";
+        }
+        if (mysqli_query($this->connection, $sql . "meta;")!==true) {echo "all WRONGED"."meta";
+        }
+        if (mysqli_query($this->connection, $sql . "has_meta;")!==true) {echo "all WRONGED"."has_meta";
+        }
+        if (mysqli_query($this->connection, $sql . "has_album;")!==true) {echo "all WRONGED"."has_album";
+        }
+        if (mysqli_query($this->connection, $sql . "album;")!==true) {echo "all WRONGED"."album";
+        }
     }
-    function removePicture($picture_id){
-        mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 0;");
-        mysqli_query($this->connection,"DELETE FROM has_tags WHERE picture_id=$picture_id");
-        mysqli_query($this->connection,"SET SQL_SAFE_UPDATES = 1;");
+    function removePicture($picture_id)
+    {
+        mysqli_query($this->connection, "SET SQL_SAFE_UPDATES = 0;");
+        mysqli_query($this->connection, "DELETE FROM has_tags WHERE picture_id=$picture_id");
+        mysqli_query($this->connection, "SET SQL_SAFE_UPDATES = 1;");
         $sql = "DELETE FROM pictures WHERE picture_id=$picture_id";
         $tmp_array = $this->loadPicture($picture_id);
-        if (mysqli_query($this->connection, $sql)!==TRUE) {
+        if (mysqli_query($this->connection, $sql)!==true) {
             echo "failed at removing file" . $sql;
         }else {
             unlink("images/".$tmp_array["filename"].".".$tmp_array["extension"]);
@@ -125,12 +146,14 @@ class Picture {
         }
     }
 
-    function searchTags(){
+    function searchTags()
+    {
         $tagid = $this->hasTag(func_get_args()[0]);
         if (func_num_args() > 0) {
             $wheretag = "tags_id=$tagid";
             for ($i=1;$i<func_num_args();$i++){
-                if (!$this->hasTag(func_get_args()[$i])){continue;}
+                if (!$this->hasTag(func_get_args()[$i])) {continue;
+                }
                 $tagid = $this->hasTag(func_get_args()[$i]);
                 $wheretag .= " OR tags_id=$tagid";
             }
@@ -156,7 +179,8 @@ class Picture {
         mysqli_query($this->connection, "DROP VIEW tags_ids");
         return $this->listPictures($sql_pics);
     }
-    function getAllTags() {
+    function getAllTags() 
+    {
         $sql = "SELECT * FROM tags";
         $result = mysqli_query($this->connection, $sql);
         $tag_array = array();
@@ -166,7 +190,8 @@ class Picture {
         return $tag_array;
     }
 
-    function getTags($picture_id){
+    function getTags($picture_id)
+    {
         $temp = "CREATE VIEW temp AS SELECT * FROM pictures WHERE picture_id=$picture_id";
         mysqli_query($this->connection, $temp);//temp view to select from JOIN
         $sql = "SELECT *
@@ -175,7 +200,7 @@ class Picture {
                   ON has_tags.picture_id = temp.picture_id
                 INNER JOIN tags
                   ON has_tags.tags_id = tags.tags_id";
-        $result = mysqli_query($this->connection,$sql);
+        $result = mysqli_query($this->connection, $sql);
         $this->tags = array();
         while($row = mysqli_fetch_assoc($result)){
             $this->tags[] = $row['tags'];
@@ -184,45 +209,52 @@ class Picture {
         mysqli_free_result($result);
         return $this->tags;
     }
-    function removeTag($tag,$picture_id){
+    function removeTag($tag,$picture_id)
+    {
         $tags_id = $this->hasTag($tag);
         $sql = "DELETE FROM has_tags WHERE tags_id=$tags_id AND picture_id=$picture_id";
-        if(mysqli_query($this->connection,$sql)!==TRUE){
+        if(mysqli_query($this->connection, $sql)!==true) {
             echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection " . mysqli_error();
         }
     }
-    function removePictureTags($picture_id){
+    function removePictureTags($picture_id)
+    {
         $sql = "DELETE FROM has_tags WHERE picture_id=$picture_id";
-        if(mysqli_query($this->connection,$sql)!==TRUE){
+        if(mysqli_query($this->connection, $sql)!==true) {
             echo "couldnt remove tag >> " . $tag . " i dont know why, maybe check connection " . mysqli_error();
         }
     }
-    function hasTag($tag){
+    function hasTag($tag)
+    {
         $sql = "SELECT tags_id AS ANS FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
         $ans = false;
-        while($row = mysqli_fetch_assoc($result)){$ans =$row['ANS'];}
+        while($row = mysqli_fetch_assoc($result)){$ans =$row['ANS'];
+        }
         return $ans;
     }
-    function addTag($tag,$picture_id) {
-        if(!$this->hasTag($tag)){
+    function addTag($tag,$picture_id) 
+    {
+        if(!$this->hasTag($tag)) {
             $sql = "INSERT INTO tags (tags) VALUES ('$tag')";
-            if (mysqli_query($this->connection, $sql)!==TRUE){
+            if (mysqli_query($this->connection, $sql)!==true) {
                 echo "failed at inserting tag " . $sql;
             }
         }
         $sql = "SELECT tags_id FROM tags WHERE tags LIKE '$tag'";
         $result = mysqli_query($this->connection, $sql);
-        if ($result!=TRUE){
+        if ($result!=true) {
             echo "failed at getting tagID wtf " . $sql;
         }
-        while($row = mysqli_fetch_assoc($result)){$tags_id = $row['tags_id'];}
+        while($row = mysqli_fetch_assoc($result)){$tags_id = $row['tags_id'];
+        }
 
         $insert = "INSERT INTO has_tags (picture_id, tags_id)
                    VALUES ($picture_id,$tags_id)";
-        mysqli_query($this->connection,$insert);
+        mysqli_query($this->connection, $insert);
     }
-    function closeConnection() {
+    function closeConnection() 
+    {
         mysqli_close($this->connection);
     }
 }
