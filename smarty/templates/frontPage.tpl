@@ -1,5 +1,53 @@
 {include file="header.tpl"}
 
+
+
+<script language="JavaScript" type="text/javascript">
+<!-- search funciton javascript jQuery-->
+{literal}
+
+var allExistingTags = [];
+
+{/literal}
+{foreach from=$allExistingTags item=tag}
+    {literal} allExistingTags.push('{/literal}{$tag}{literal}');
+{/literal}{/foreach}{literal}
+
+
+function search() {
+  var allTags = JSON.stringify($('#myTags').tagit('assignedTags'));
+  searchPictures(allTags);
+}
+
+function pictureLink(startIndex) {
+    var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+startIndex+"";
+    $.redirect(link,{searchForKeys : keysArray});
+}
+
+$(function(){
+
+  $('#myTags').tagit({
+            availableTags: allExistingTags,
+            singleField: true,
+            singleFieldNode: $('#mySingleField'),
+            removeConfirmation: true,
+
+            afterTagAdded: function(evt, ui) {
+                if (!ui.duringInitialization) {
+                  var tag = $('#myTags').tagit('tagLabel', ui.tag);
+                    search();
+                }
+            },
+            afterTagRemoved: function(evt, ui) {
+                var tag = $('#myTags').tagit('tagLabel', ui.tag);
+                search();
+            },
+
+          });
+      });
+{/literal}
+</script>
+
 <div id="topArea">
 
 
@@ -13,12 +61,18 @@
     </span>
     </form>
 
+
         <div id="search" class="input-group">
-            <input type="text" class="form-control" placeholder="Søk" onkeyup="showResult(this.value)" onblur="hideResult()">
+            <!--<input id="keysearchfield" type="text" class="form-control" placeholder="Søk" >-->
+
+            <input name="tags" id="mySingleField" disabled="true" style="display: none;" placeholder="Søk etter alle dine favorittbilder her!">
+            <ul id="myTags"></ul>
+            <h5>Søk etter alle dine favorittbilder her!</h5>
+
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <!--<button class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            </button>
+            </button>-->
 	    </span>
         </div>
         <div class="media">
@@ -49,8 +103,11 @@
     </ul>
 
     <div id="pictures"></div>
-    <div id="loadmoreajaxloader" style="display:none;"><center><img src="endlessScrolling/ajax-loader.gif" /></center></div>
     
+    <!--<div id="loadmoreajaxloader" style="height: 50px; width: 50px; display: none;"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></center></div>-->
+   
+    <div id="loadmoreajaxloader" style="display:none;"><center><img src="endlessScrolling/ajax-loader.gif" /></center></div>
+
 
 </div>
 

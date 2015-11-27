@@ -1,11 +1,26 @@
 <?php
+
 require("setup.php");
 require("smartyStarter.php");
 require("Picture.php");
+require("backend/search.php");
 
 session_start();
+/*
+function isJson($array) {
+	json_decode($array);
+	return (json_last_error() == JSON_ERROR_NONE);
+}*/
 
 $pictures = new Picture($local_database, $local_username, $local_password);
+
+$keysArray = isset($_REQUEST["searchForKeys"]) ? $_REQUEST["searchForKeys"] : "";
+
+
+if(!is_array($keysArray)) {
+
+	$keysArray=json_decode($keysArray,true);
+}
 
 $page = isset($_REQUEST["page"]) ? $_REQUEST["page"] : "";
 
@@ -24,34 +39,52 @@ $amountOfPics = intval($amountOfPicsString);
 
 $orderPicsBy = isset($_REQUEST["orderPicsBy"]) ? $_REQUEST["orderPicsBy"] : "";
 
+$picture_path = isset($_REQUEST["picture_path"]) ? $_REQUEST["picture_path"] : "";
+
 $nextPicExists = 1;
 $prevPicExists = 1;
 
-$picture_path = isset($_REQUEST["picture_path"]) ? $_REQUEST["picture_path"] : "";
+
 switch($page) {
   	case 'pictureEdit':
+
 		$smarty->assign("picture_path", $picture_path);
 		$smarty->display('pictureEdit.tpl');
 		break;
 
 	case 'pictureViewer':
-		$picture = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
-		$picture_id = $picture[0]['picture_id'];
+
+		$tagsBoundToPic = "";
+
+		
+		if($orderPicsBy=="") {
+
+			$pictureArray = $pictures->listPictures('');
+		} else {
+
+			if (!($keysArray=="") && !empty($keysArray)) {
+				$pictureArray = searchPictures($keysArray, $pictures, $picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
+			}else {
+				$pictureArray = $pictures->sortedPictures($picsAscDesc, $orderPicsBy, $picsIndexStart, 2);
+			}
+		}
+
+		$picture_id = $pictureArray[0]['picture_id'];
 
 		$allExistingTags = $pictures->getAllTags();
 
-		$array = $pictures->getTags($picture_id);
+		$picTags = $pictures->getTags($picture_id);
 
-		$tagsBoundToPic = "";
-		for($i = 0; $i < count($array); $i++){
+
+		for($i = 0; $i < count($picTags); $i++){
 		    if($i == 0) {
-		    	$tagsBoundToPic = $array[0];
+		    	$tagsBoundToPic = $picTags[0];
 		    }else {
-		    	$tagsBoundToPic = $tagsBoundToPic . ', ' . $array[$i];
+		    	$tagsBoundToPic = $tagsBoundToPic . ', ' . $picTags[$i];
 		    }
 		}
 
-		if (!isset($picture[1])) {
+		if (!isset($pictureArray[1])) {
 
 			$nextPicExists = 0;
 		}
@@ -60,11 +93,12 @@ switch($page) {
 			$prevPicExists = 0;
 		}
 
+		$smarty->assign("keysArray", $keysArray);
 		$smarty->assign("allExistingTags", $allExistingTags);
 		$smarty->assign("tagsBoundToPic", $tagsBoundToPic);
 		$smarty->assign("nextPicExists", $nextPicExists);
 		$smarty->assign("prevPicExists", $prevPicExists);
-		$smarty->assign("picture", $picture);
+		$smarty->assign("picture", $pictureArray);
 		$smarty->assign("picsAscDesc", $picsAscDesc);
 		$smarty->assign("orderPicsBy", $orderPicsBy);
 		$smarty->assign("picsIndexStart", $picsIndexStart);
@@ -74,6 +108,9 @@ switch($page) {
 
 	default:
 	
+		$allExistingTags = $pictures->getAllTags();
+		$smarty->assign("allExistingTags", $allExistingTags);
+
 		$smarty->display('frontPage.tpl');
 		break;
 }

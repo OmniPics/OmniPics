@@ -34,5 +34,5 @@ function createThumbnail($filename) {
     imagejpeg($nm, $path_to_thumbs_directory . $filename);
     $tn = '<img src="' . $path_to_thumbs_directory . $filename . '" alt="image"/>';
     $tn .= ' lolzerz it workeds meow ';
-    echo " thumb: " . $tn . " : thumb ";
+    echo " thumb: " . $tn . " : thumb ".$path_to_thumbs_directory;
 }

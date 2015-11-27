@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="stylingPictureViewer.css" style="text/css">
+		 <link rel="stylesheet" type="text/css" href="Client/pictureViewer/stylingPictureViewer.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
     	<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
-		<!--<script type="text/javascript" src="jQueryRotate.js"></script>-->
+		<script src="Client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
 		<script src="caman.full.min.js"></script>
 
@@ -19,26 +19,29 @@
 
 		<script language="JavaScript" type="text/javascript">
 		{literal} //In order to write javascript in smarty
-
+			var existsInPicsSearchedFor = true;
 			var picsAscOrDesc = {/literal}{$picsAscDesc}{literal};
 			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
-			var amountOfPics = 3; //Need two pictures to check if the next pic exists
 			var nextPicExists = {/literal}{$nextPicExists}{literal};
 			var prevPicExists = {/literal}{$prevPicExists}{literal};
 			var picture_id = {/literal}{$picture[0].picture_id}{literal};
+			var keysArray = [];
 			var allExistingTags = [];
+			var amountOfPics = 3; //Need two pictures to check if the next pic exists
 
 			{/literal}
 			{foreach from=$allExistingTags item=tag}
     			{literal} allExistingTags.push('{/literal}{$tag}{literal}');
+			{/literal}{/foreach}
+
+			{foreach from=$keysArray item=key}
+    			{literal} keysArray.push('{/literal}{$key}{literal}');
 			{/literal}{/foreach}{literal}
 
-			/*$(function() {
+			var amountOftagsSearchedFor = keysArray.length;
 
 
-				$('#img').rotate(90);
-			});*/
 
 			function rotate() {
 
@@ -55,9 +58,12 @@
 
 			function nextPic() {
 
-				if(nextPicExists == 1){
+				if(existsInPicsSearchedFor) {
 					picsIndexStart++;
-					window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+				}
+				if(nextPicExists == 1) {
+					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+    				$.redirect(link,{searchForKeys : keysArray});
 				}
 			}
 
@@ -65,7 +71,8 @@
 
 				if(prevPicExists == 1) {
 					picsIndexStart--;
-					window.location = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
+    				$.redirect(link,{searchForKeys : keysArray});
 				}
 			}
 
@@ -87,10 +94,8 @@
 				    			window.location = "index.php";
 					    	}
 						}
-			       }
-
+			        }
 			    });
-
 			}
 
 
@@ -127,7 +132,6 @@
 			});
 
 
-
 			$(function(){
 
 				$('#myTags').tagit({
@@ -139,13 +143,19 @@
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
                         	addTag(tag);
+                    		if( $.inArray(tag, keysArray) > -1 ) {
+                    			existsInPicsSearchedFor = true;
+                    		}
                     	}
                 	},
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
                     	deleteTag(tag);
-                	},
-
+                    	if( $.inArray(tag, keysArray) > -1 && existsInPicsSearchedFor ) {
+                    		console.log('success');
+                    		existsInPicsSearchedFor = false;
+                    	}
+                	}
               	});
             });
 
@@ -394,7 +404,8 @@
 		</div>
 		<div id="metadata" class="col-md-4">
 
-		<h3>{$picture[0].filename}</h3>
+			<h3>{$picture[0].filename}</h3>
+
 			<ul class="list-group" id="metalist">
 			  <li class="list-group-item">Filepath: <span id="filepath">{$picture[0].path}</span>
 			  <input style="display: none;" id="inputFilepath" class="form-control" type="text" value="{$picture[0].path}"></li>
@@ -409,8 +420,8 @@
 			</button>
 
 			<h4>Tags</h4>
-				<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
-				<ul id="myTags"></ul>
+			<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
+			<ul id="myTags"></ul>
 
 				    <label for="hue">Hue</label>
 				    <input id="hue" name="hue" type="range" min="0" max="300" value="0">
@@ -462,6 +473,8 @@
 				    <button id="pleasantbtn" class="btn btn-warning">Pleasant</button>
 				    <button id="savebtn" class="btn btn-success">Save Image</button>
 				  </nav>
+
+			<div id="loadmoreajaxloader" style="display: none;"><img src="endlessScrolling/ajax-loader.gif"/></center></div>
 
 		</div>
 
