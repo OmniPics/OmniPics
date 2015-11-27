@@ -431,7 +431,6 @@
 				    <button id="contrastbtn" class="btn btn-primary">Contrast</button>
 				    <button id="colorbtn" class="btn btn-primary">Colorize</button>
 				  </nav>
-</br>
 				  <nav class="filters">
 				    <button id="vintagebtn" class="btn btn-primary">Vintage</button>
 				    <button id="lomobtn" class="btn btn-primary">Lomo</button>
@@ -440,7 +439,6 @@
 				    <button id="radialblurbtn" class="btn btn-primary">Radial Blur</button>
 				    <button id="edgeenhancebtn" class="btn btn-primary">Edge Enhance</button>
 				  </nav>
-</br>
 				  <nav class="filters">
 				    <button id="posterizebtn" class="btn btn-primary">Posterize</button>
 				    <button id="claritybtn" class="btn btn-primary">Clarity</button>
@@ -449,7 +447,6 @@
 				    <button id="sunrisebtn" class="btn btn-primary">Sun Rise</button>
 				    <button id="crossprocessbtn" class="btn btn-primary">Cross Process</button>
 				  </nav>
-</br>
 				  <nav class="filters">
 				    <button id="hazydaysbtn" class="btn btn-primary">Hazy</button>
 				    <button id="lovebtn" class="btn btn-primary">Love</button>
@@ -459,7 +456,6 @@
 				    <button id="oldbootbtn" class="btn btn-primary">Old Boot</button>
 				    <button id="glowingsunbtn" class="btn btn-primary">Glow Sun</button>
 				  </nav>
-</br>
 				  <nav class="filters">
 				    <button id="hdrbtn" class="btn btn-warning">HDR Effect</button>
 				    <button id="oldpaperbtn" class="btn btn-warning">Old Paper</button>
