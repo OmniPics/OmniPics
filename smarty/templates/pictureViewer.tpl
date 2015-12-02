@@ -14,8 +14,6 @@
 	</head>
 	<body>
 
-
-
 		<script language="JavaScript" type="text/javascript">
 		{literal} //In order to write javascript in smarty
 			var existsInPicsSearchedFor = true;
@@ -55,13 +53,16 @@
 
 			function nextPic() {
 
-				if(existsInPicsSearchedFor) {
-					picsIndexStart++;
-				}
 				if(nextPicExists == 1) {
+
+					if(existsInPicsSearchedFor) {
+						picsIndexStart++;
+					}
+				
 					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
     				$.redirect(link,{searchForKeys : keysArray});
 				}
+			
 			}
 
 			function previousPic() {
