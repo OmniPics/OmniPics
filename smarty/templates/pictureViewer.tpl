@@ -164,16 +164,14 @@
 							var $reset = $('#resetbtn');
 					    var $brightness = $('#brightnessbtn');
 					    var $noise = $('#noisebtn');
-					    var $sepia = $('#sepiabtn');
+
 					    $('input[type=range]').change(applyFilters);
 					    function applyFilters() {
 					        var hue = parseInt($('#hue').val());
 					        var cntrst = parseInt($('#contrast').val());
-					        var vibr = parseInt($('#vibrance').val());
-					        var sep = parseInt($('#sepia').val());
 					        Caman('#img', img, function () {
 					            this.revert(false);
-					            this.hue(hue).contrast(cntrst).vibrance(vibr).sepia(sep).render();
+					            this.hue(hue).contrast(cntrst).render();
 					        });
 					    }
 					    Caman.Filter.register('oldpaper', function () {
@@ -211,11 +209,7 @@
 					            this.contrast(10).render();
 					        });
 					    });
-					    $sepia.on('click', function (e) {
-					        Caman('#img', img, function () {
-					            this.sepia(20).render();
-					        });
-					    });
+
 					});
 
 		{/literal}
