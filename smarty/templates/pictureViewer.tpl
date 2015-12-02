@@ -274,10 +274,6 @@
 				    <input id="contrast" name="contrast" type="range" min="-20" max="20" value="0">
 
 
-				    <label for="vibrance">Vibrance</label>
-				    <input id="vibrance" name="vibrance" type="range" min="0" max="400" value="0">
-				    <label for="sepia">Sepia</label>
-				    <input id="sepia" name="sepia" type="range" min="0" max="100" value="0">
 				  </br></br>
 				  <nav class="filters">
 				    <button id="resetbtn" class="btn btn-success">Reset Photo</button>
