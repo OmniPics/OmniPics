@@ -11,6 +11,7 @@
 		<script src="client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
 		<script src="client/frontPage/functionsFrontPage.js" type="text/javascript"></script>
 		<script src="client/frontPage/searchAutoFill.js" type="text/javascript"></script>
+		<script src="http://malsup.github.com/jquery.form.js"></script>
 
 		<link href="TagSystem/jQuery.tagit.css" rel="stylesheet" type="text/css">
 		<link href="TagSystem/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">

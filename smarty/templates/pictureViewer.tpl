@@ -10,15 +10,14 @@
 		<script type="text/javascript" src="client/pictureViewer/functionsPictureViewer.js"></script>
 		<script src="client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
+		<script src="caman.full.min.js"></script>
 
 	</head>
 	<body>
 
-
-
 		<script language="JavaScript" type="text/javascript">
 		{literal} //In order to write javascript in smarty
-
+			var existsInPicsSearchedFor = true;
 			var picsAscOrDesc = {/literal}{$picsAscDesc}{literal};
 			var orderPicsBy = "{/literal}{$orderPicsBy}{literal}";
 			var picsIndexStart = {/literal}{$picsIndexStart}{literal};
@@ -28,16 +27,19 @@
 			var keysArray = [];
 			var allExistingTags = [];
 			var amountOfPics = 3; //Need two pictures to check if the next pic exists
-			var count = {/literal}{$keysArray|@count}{literal};
+
 			{/literal}
 			{foreach from=$allExistingTags item=tag}
     			{literal} allExistingTags.push('{/literal}{$tag}{literal}');
-			{/literal}{/foreach}{literal}
+			{/literal}{/foreach}
 
-			{/literal}
 			{foreach from=$keysArray item=key}
     			{literal} keysArray.push('{/literal}{$key}{literal}');
 			{/literal}{/foreach}{literal}
+
+			var amountOftagsSearchedFor = keysArray.length;
+
+
 
 			function rotate() {
 
@@ -55,10 +57,15 @@
 			function nextPic() {
 
 				if(nextPicExists == 1) {
-					picsIndexStart++;
+
+					if(existsInPicsSearchedFor) {
+						picsIndexStart++;
+					}
+
 					var link = "index.php?page=pictureViewer&&picsAscOrDesc="+picsAscOrDesc+"&&orderPicsBy="+orderPicsBy+"&&picsIndexStart="+picsIndexStart+"";
     				$.redirect(link,{searchForKeys : keysArray});
 				}
+
 			}
 
 			function previousPic() {
@@ -125,6 +132,7 @@
 			    e.preventDefault();
 			});
 
+
 			$(function(){
 
 				$('#myTags').tagit({
@@ -136,15 +144,79 @@
                     	if (!ui.duringInitialization) {
                     		var tag = $('#myTags').tagit('tagLabel', ui.tag);
                         	addTag(tag);
+                    		if( $.inArray(tag, keysArray) > -1 ) {
+                    			existsInPicsSearchedFor = true;
+                    		}
                     	}
                 	},
                 	afterTagRemoved: function(evt, ui) {
                     	var tag = $('#myTags').tagit('tagLabel', ui.tag);
                     	deleteTag(tag);
+                    	if( $.inArray(tag, keysArray) > -1 && existsInPicsSearchedFor ) {
+                    		console.log('success');
+                    		existsInPicsSearchedFor = false;
+                    	}
                 	}
               	});
             });
 
+						$(function() {
+							var $reset = $('#resetbtn');
+					    var $brightness = $('#brightnessbtn');
+					    var $noise = $('#noisebtn');
+					    var $sepia = $('#sepiabtn');
+					    $('input[type=range]').change(applyFilters);
+					    function applyFilters() {
+					        var hue = parseInt($('#hue').val());
+					        var cntrst = parseInt($('#contrast').val());
+					        var vibr = parseInt($('#vibrance').val());
+					        var sep = parseInt($('#sepia').val());
+					        Caman('#img', img, function () {
+					            this.revert(false);
+					            this.hue(hue).contrast(cntrst).vibrance(vibr).sepia(sep).render();
+					        });
+					    }
+					    Caman.Filter.register('oldpaper', function () {
+					        this.pinhole();
+					        this.noise(10);
+					        this.orangePeel();
+					        this.render();
+					    });
+					    Caman.Filter.register('pleasant', function () {
+					        this.colorize(60, 105, 218, 10);
+					        this.contrast(10);
+					        this.sunrise();
+					        this.hazyDays();
+					        this.render();
+					    });
+					    $reset.on('click', function (e) {
+					        $('input[type=range]').val(0);
+					        Caman('#img', img, function () {
+					            this.revert(false);
+					            this.render();
+					        });
+					    });
+					    $brightness.on('click', function (e) {
+					        Caman('#img', function () {
+					            this.brightness(30).render();
+					        });
+					    });
+					    $noise.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.noise(10).render();
+					        });
+					    });
+					    $contrast.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.contrast(10).render();
+					        });
+					    });
+					    $sepia.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.sepia(20).render();
+					        });
+					    });
+					});
 
 		{/literal}
 
@@ -196,7 +268,26 @@
 			<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
 			<ul id="myTags"></ul>
 
+				    <label for="hue">Hue</label>
+				    <input id="hue" name="hue" type="range" min="0" max="300" value="0">
+				    <label for="contrast">Contrast</label>
+				    <input id="contrast" name="contrast" type="range" min="-20" max="20" value="0">
+
+
+				    <label for="vibrance">Vibrance</label>
+				    <input id="vibrance" name="vibrance" type="range" min="0" max="400" value="0">
+				    <label for="sepia">Sepia</label>
+				    <input id="sepia" name="sepia" type="range" min="0" max="100" value="0">
+				  </br></br>
+				  <nav class="filters">
+				    <button id="resetbtn" class="btn btn-success">Reset Photo</button>
+				    <button id="brightnessbtn" class="btn btn-primary">Brightness</button>
+				    <button id="noisebtn" class="btn btn-primary">Noise</button>
+				  </nav>
+
+
 			<div id="loadmoreajaxloader" style="display: none;"><img src="endlessScrolling/ajax-loader.gif"/></center></div>
+
 		</div>
 
 
