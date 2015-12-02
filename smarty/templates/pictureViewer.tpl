@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="functionsPictureViewer.js"></script>
 		<script src="Client/frontPage/jquery.redirect.js" type="text/javascript" charset="utf-8"></script>
 		<script src="TagSystem/tag-it.js" type="text/javascript" charset="utf-8"></script>
+		<script src="caman.full.min.js"></script>
 
 	</head>
 	<body>
@@ -36,7 +37,9 @@
     			{literal} keysArray.push('{/literal}{$key}{literal}');
 			{/literal}{/foreach}{literal}
 
-			var amountOftagsSearchedFor = keysArray.length; 
+			var amountOftagsSearchedFor = keysArray.length;
+
+
 
 			function rotate() {
 
@@ -75,6 +78,7 @@
 			}
 
 			function pictureDelete() {
+
 
 				$.ajax({
 			       type: "POST",
@@ -128,6 +132,7 @@
 			    e.preventDefault();
 			});
 
+
 			$(function(){
 
 				$('#myTags').tagit({
@@ -155,6 +160,219 @@
               	});
             });
 
+						$(function() {
+							var $reset = $('#resetbtn');
+					    var $brightness = $('#brightnessbtn');
+					    var $noise = $('#noisebtn');
+					    var $sepia = $('#sepiabtn');
+					    var $contrast = $('#contrastbtn');
+					    var $color = $('#colorbtn');
+					    var $vintage = $('#vintagebtn');
+					    var $lomo = $('#lomobtn');
+					    var $emboss = $('#embossbtn');
+					    var $tiltshift = $('#tiltshiftbtn');
+					    var $radialblur = $('#radialblurbtn');
+					    var $edgeenhance = $('#edgeenhancebtn');
+					    var $posterize = $('#posterizebtn');
+					    var $clarity = $('#claritybtn');
+					    var $orangepeel = $('#orangepeelbtn');
+					    var $sincity = $('#sincitybtn');
+					    var $sunrise = $('#sunrisebtn');
+					    var $crossprocess = $('#crossprocessbtn');
+					    var $hazydays = $('#hazydaysbtn');
+					    var $love = $('#lovebtn');
+					    var $grungy = $('#grungybtn');
+					    var $jarques = $('#jarquesbtn');
+					    var $pinhole = $('#pinholebtn');
+					    var $oldboot = $('#oldbootbtn');
+					    var $glowingsun = $('#glowingsunbtn');
+					    var $hdr = $('#hdrbtn');
+					    var $oldpaper = $('#oldpaperbtn');
+					    var $pleasant = $('#pleasantbtn');
+					    var $save = $('#savebtn');
+					    $('input[type=range]').change(applyFilters);
+					    function applyFilters() {
+					        var hue = parseInt($('#hue').val());
+					        var cntrst = parseInt($('#contrast').val());
+					        var vibr = parseInt($('#vibrance').val());
+					        var sep = parseInt($('#sepia').val());
+					        Caman('#img', img, function () {
+					            this.revert(false);
+					            this.hue(hue).contrast(cntrst).vibrance(vibr).sepia(sep).render();
+					        });
+					    }
+					    Caman.Filter.register('oldpaper', function () {
+					        this.pinhole();
+					        this.noise(10);
+					        this.orangePeel();
+					        this.render();
+					    });
+					    Caman.Filter.register('pleasant', function () {
+					        this.colorize(60, 105, 218, 10);
+					        this.contrast(10);
+					        this.sunrise();
+					        this.hazyDays();
+					        this.render();
+					    });
+					    $reset.on('click', function (e) {
+					        $('input[type=range]').val(0);
+					        Caman('#img', img, function () {
+					            this.revert(false);
+					            this.render();
+					        });
+					    });
+					    $brightness.on('click', function (e) {
+					        Caman('#img', function () {
+					            this.brightness(30).render();
+					        });
+					    });
+					    $noise.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.noise(10).render();
+					        });
+					    });
+					    $contrast.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.contrast(10).render();
+					        });
+					    });
+					    $sepia.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.sepia(20).render();
+					        });
+					    });
+					    $color.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.colorize(60, 105, 218, 10).render();
+					        });
+					    });
+					    $vintage.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.vintage().render();
+					        });
+					    });
+					    $lomo.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.lomo().render();
+					        });
+					    });
+					    $emboss.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.emboss().render();
+					        });
+					    });
+					    $tiltshift.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.tiltShift({
+					                angle: 90,
+					                focusWidth: 600
+					            }).render();
+					        });
+					    });
+					    $radialblur.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.radialBlur().render();
+					        });
+					    });
+					    $edgeenhance.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.edgeEnhance().render();
+					        });
+					    });
+					    $posterize.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.posterize(8, 8).render();
+					        });
+					    });
+					    $clarity.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.clarity().render();
+					        });
+					    });
+					    $orangepeel.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.orangePeel().render();
+					        });
+					    });
+					    $sincity.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.sinCity().render();
+					        });
+					    });
+					    $sunrise.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.sunrise().render();
+					        });
+					    });
+					    $crossprocess.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.crossProcess().render();
+					        });
+					    });
+					    $love.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.love().render();
+					        });
+					    });
+					    $grungy.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.grungy().render();
+					        });
+					    });
+					    $jarques.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.jarques().render();
+					        });
+					    });
+					    $pinhole.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.pinhole().render();
+					        });
+					    });
+					    $oldboot.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.oldBoot().render();
+					        });
+					    });
+					    $glowingsun.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.glowingSun().render();
+					        });
+					    });
+					    $hazydays.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.hazyDays().render();
+					        });
+					    });
+					    $hdr.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.contrast(10);
+					            this.contrast(10);
+					            this.jarques();
+					            this.render();
+					        });
+					    });
+					    $oldpaper.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.oldpaper();
+					            this.render();
+					        });
+					    });
+					    $pleasant.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.pleasant();
+					            this.render();
+					        });
+					    });
+					    $save.on('click', function (e) {
+					        Caman('#img', img, function () {
+					            this.render(function () {
+											this.save('png');
+					            });
+
+					        });
+					    });
+					});
 
 		{/literal}
 
@@ -206,7 +424,59 @@
 			<input name="tags" id="mySingleField" value="{$tagsBoundToPic}" disabled="true" style="display: none;">
 			<ul id="myTags"></ul>
 
+				    <label for="hue">Hue</label>
+				    <input id="hue" name="hue" type="range" min="0" max="300" value="0">
+				    <label for="contrast">Contrast</label>
+				    <input id="contrast" name="contrast" type="range" min="-20" max="20" value="0">
+
+
+				    <label for="vibrance">Vibrance</label>
+				    <input id="vibrance" name="vibrance" type="range" min="0" max="400" value="0">
+				    <label for="sepia">Sepia</label>
+				    <input id="sepia" name="sepia" type="range" min="0" max="100" value="0">
+				  </br></br>
+				  <nav class="filters">
+				    <button id="resetbtn" class="btn btn-success">Reset Photo</button>
+				    <button id="brightnessbtn" class="btn btn-primary">Brightness</button>
+				    <button id="noisebtn" class="btn btn-primary">Noise</button>
+				    <button id="sepiabtn" class="btn btn-primary">Sepia</button>
+				    <button id="contrastbtn" class="btn btn-primary">Contrast</button>
+				    <button id="colorbtn" class="btn btn-primary">Colorize</button>
+				  </nav>
+				  <nav class="filters">
+				    <button id="vintagebtn" class="btn btn-primary">Vintage</button>
+				    <button id="lomobtn" class="btn btn-primary">Lomo</button>
+				    <button id="embossbtn" class="btn btn-primary">Emboss</button>
+				    <button id="tiltshiftbtn" class="btn btn-primary">Tilt Shift</button>
+				    <button id="radialblurbtn" class="btn btn-primary">Radial Blur</button>
+				    <button id="edgeenhancebtn" class="btn btn-primary">Edge Enhance</button>
+				  </nav>
+				  <nav class="filters">
+				    <button id="posterizebtn" class="btn btn-primary">Posterize</button>
+				    <button id="claritybtn" class="btn btn-primary">Clarity</button>
+				    <button id="orangepeelbtn" class="btn btn-primary">Orange Peel</button>
+				    <button id="sincitybtn" class="btn btn-primary">Sin City</button>
+				    <button id="sunrisebtn" class="btn btn-primary">Sun Rise</button>
+				    <button id="crossprocessbtn" class="btn btn-primary">Cross Process</button>
+				  </nav>
+				  <nav class="filters">
+				    <button id="hazydaysbtn" class="btn btn-primary">Hazy</button>
+				    <button id="lovebtn" class="btn btn-primary">Love</button>
+				    <button id="grungybtn" class="btn btn-primary">Grungy</button>
+				    <button id="jarquesbtn" class="btn btn-primary">Jarques</button>
+				    <button id="pinholebtn" class="btn btn-primary">Pin Hole</button>
+				    <button id="oldbootbtn" class="btn btn-primary">Old Boot</button>
+				    <button id="glowingsunbtn" class="btn btn-primary">Glow Sun</button>
+				  </nav>
+				  <nav class="filters">
+				    <button id="hdrbtn" class="btn btn-warning">HDR Effect</button>
+				    <button id="oldpaperbtn" class="btn btn-warning">Old Paper</button>
+				    <button id="pleasantbtn" class="btn btn-warning">Pleasant</button>
+				    <button id="savebtn" class="btn btn-success">Save Image</button>
+				  </nav>
+
 			<div id="loadmoreajaxloader" style="display: none;"><img src="endlessScrolling/ajax-loader.gif"/></center></div>
+
 		</div>
 
 
