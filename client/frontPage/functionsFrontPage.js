@@ -60,6 +60,8 @@ function deletePicsFromDB() {
             selectedPicture_ids = {};
             getAmountOfPicsInDB();
             newIndexStart = 9;
+            picturesAreSelected = false;
+            $('#myTags').removeClass('taggingActive');
         }
     });
 }
