@@ -1,3 +1,6 @@
+.taggingActive {
+    border: solid #80B2FF 2px;
+}
 ul.tagit {
     padding: 1px 5px;
     overflow: auto;
