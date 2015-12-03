@@ -62,6 +62,7 @@ function deletePicsFromDB() {
             newIndexStart = 9;
             picturesAreSelected = false;
             $('#myTags').removeClass('taggingActive');
+            $('#searchBarInfo').html('Søk etter bildene dine her!');
         }
     });
 }
